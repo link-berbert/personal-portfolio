@@ -5,8 +5,8 @@ function Contact() {
   const pm = 'clamp(20px, 5vw, 80px)';
 
   const categories = [
-            { id: 'ai', label: 'AI / LightWrk', desc: 'Evaluation infrastructure, partnerships, frontier AI.' },
-    { id: 'creative', label: 'Creative', desc: 'Music, worldbuilding, identity, direction.' },
+    { id: 'ai', label: 'AI / LightWrk', desc: 'Partnerships, evaluation work, frontier AI collaboration.' },
+    { id: 'creative', label: 'Creative', desc: 'Music, direction, worldbuilding, identity systems.' },
     { id: 'other', label: 'Something else', desc: 'Speaking, ideas, introductions.' },
   ];
 
@@ -31,10 +31,10 @@ function Contact() {
           </span>
         </h1>
         <p className="t-body-l" style={{
-          marginTop: 36, maxWidth: '48ch',
+          marginTop: 36, maxWidth: '52ch',
           color: 'var(--fg-secondary)', lineHeight: 1.65,
         }}>
-          A sentence is enough context. I respond to most things within a few days.
+          A sentence is usually enough context. I respond to most things within a few days.
         </p>
       </section>
 

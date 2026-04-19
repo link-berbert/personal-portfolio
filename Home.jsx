@@ -100,9 +100,9 @@ function Home({ setRoute }) {
         <h1 data-reveal className="t-display-xl" style={{
           maxWidth: '16ch', marginBottom: 0,
         }}>
-          Working at the edge of music, intelligence,{' '}
+          Building worlds, systems, and infrastructure for{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            and myth.
+            machine intelligence.
           </span>
         </h1>
 
@@ -114,7 +114,8 @@ function Home({ setRoute }) {
           maxWidth: 900,
         }}>
           <p className="t-body-l" style={{ color: 'var(--fg-secondary)', lineHeight: 1.6 }}>
-            Founder of LightWrk. Artist as Berby. Building the evaluation infrastructure physical AI is missing — and the worlds worth building toward.
+            A multidisciplinary practice spanning music, creative direction, and physical AI.
+            One point of view operating at the intersection of culture and infrastructure.
           </p>
           <button
             onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
@@ -147,9 +148,9 @@ function Home({ setRoute }) {
           lineHeight: 1.2, letterSpacing: '-0.025em',
           maxWidth: '26ch',
         }}>
-          The division between art and engineering is a convenient fiction.{' '}
+          I don't believe the division between art and engineering is real.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            The interesting work lives past it.
+            I believe the interesting work lives past the point where the categories stop working.
           </span>
         </div>
       </section>
@@ -290,8 +291,9 @@ function Home({ setRoute }) {
               color: 'var(--bg-canvas)',
             }}>
               Physical AI systems fail in ways that are hard to label and harder to fix.
-              LightWrk builds the ontologies, rubrics, and judgment pipelines
-              that make human expertise trainable — the evaluation layer frontier robotics is missing.
+              LightWrk is building the ontologies, rubrics, and judgment pipelines
+              that turn human expertise into training signal — the evaluation layer
+              that frontier robotics is still missing.
             </p>
             <div style={{
               marginTop: 40, display: 'flex', gap: 48,
@@ -340,8 +342,9 @@ function Home({ setRoute }) {
           <p className="t-body" style={{
             color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65,
           }}>
-            Under the name Berby, and through characters like James Judas and the prophet.
-            Worlds with their own logic, sound, and time horizon.
+            Under the name Berby, and through characters like James Judas and the prophet,
+            Lincoln builds worlds — aesthetic systems with internal logic, narrative structure,
+            and a sound. Creative work that takes the long view.
           </p>
           <button
             onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
@@ -376,9 +379,6 @@ function Home({ setRoute }) {
             I read everything.
           </span>
         </div>
-        <p className="t-body" style={{ color: 'var(--fg-secondary)', maxWidth: '36ch', lineHeight: 1.6, marginTop: 16 }}>
-          AI / LightWrk, creative work, or something else — a sentence is enough context.
-        </p>
         <button
           onClick={() => { setRoute('contact'); window.scrollTo(0,0); }}
           style={{

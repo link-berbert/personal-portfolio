@@ -16,9 +16,9 @@ function About({ setRoute }) {
           About
         </div>
         <h1 className="t-display-l" style={{ maxWidth: '18ch' }}>
-          A practice.{' '}
+          One practice.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            Not a portfolio.
+            Several disciplines.
           </span>
         </h1>
       </section>
@@ -33,21 +33,27 @@ function About({ setRoute }) {
         <div className="t-caption" style={{ paddingTop: 4 }}>§ I · Bio</div>
         <div style={{ maxWidth: '60ch' }}>
           <p className="t-body-l" style={{ marginBottom: 28, lineHeight: 1.7 }}>
-            Lincoln Berbert builds across music, physical AI, and long-form worldbuilding.
+            Lincoln Berbert is a multidisciplinary builder. He works on music,
+            physical AI, and long-form worldbuilding — often at the same time.
           </p>
           <p className="t-body" style={{ marginBottom: 22, color: 'var(--fg-secondary)', lineHeight: 1.7 }}>
-            The disciplines are different. The questions are not: how does something
-            develop a coherent identity? How do you build systems that compound over time?
-            These run through music, brand thinking, company building, and AI evaluation alike.
+            The disciplines are different. The underlying questions are not. How does
+            something develop a coherent identity? How do you build systems that
+            get better over time? What does it mean to build something that lasts?
+            These questions run through music, through brand thinking, through company
+            building, through AI evaluation work.
           </p>
           <p className="t-body" style={{ marginBottom: 22, color: 'var(--fg-secondary)', lineHeight: 1.7 }}>
-            He is the founder of LightWrk — building structured human feedback infrastructure
-            for physical AI model improvement. He records under the name Berby. Years of
-            work on narrative identity systems: characters, mythologies, aesthetic grammars.
+            He is the founder of LightWrk, a company building structured human feedback
+            infrastructure for physical AI model improvement. He records and performs
+            under the name Berby. He has spent years building narrative worlds and
+            identity systems — characters, aesthetics, mythologies — as a form of
+            long-horizon creative practice.
           </p>
           <p className="t-body" style={{ color: 'var(--fg-tertiary)', lineHeight: 1.7 }}>
-            The connection is not positioning. Worldbuilding is a methodology.
-            It works whether you are making a record or designing an evaluation rubric for a robot arm.
+            The connection between these things is not a brand positioning. It is a genuine
+            point of view: worldbuilding is useful whether you are making a record or
+            designing an evaluation rubric for a robot arm.
           </p>
         </div>
       </section>
@@ -67,9 +73,9 @@ function About({ setRoute }) {
             lineHeight: 1.2, letterSpacing: '-0.022em',
             maxWidth: '28ch', marginBottom: 48,
           }}>
-            Worldbuilding is the method.{' '}
+            Worldbuilding is a unifying thread.{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-              The medium changes.
+              In music and in systems.
             </span>
           </div>
 
@@ -115,11 +121,11 @@ function About({ setRoute }) {
         <div>
           <ol style={{ padding: 0, margin: 0, listStyle: 'none' }}>
             {[
-              ['01', 'Start with the world, not the deliverable.'],
-              ['02', 'The interesting work sits at the seam between disciplines.'],
-              ['03', 'Restraint is a feature. The best systems are specific about what they do and ruthless about what they don\'t.'],
-              ['04', 'Long time horizons. Taste compounds.'],
-              ['05', 'The gap between art and engineering is a bureaucratic fiction.'],
+              ['01', 'Start with the world, not the deliverable. Everything coherent comes from a set of rules decided before the work begins.'],
+              ['02', 'The interesting work is at the seam between disciplines. If it fits cleanly into one category, it probably isn\'t finished.'],
+              ['03', 'Restraint is productive. The best systems are specific about what they do and ruthless about what they don\'t.'],
+              ['04', 'Long time horizons. Projects worth doing take years. Taste compounds.'],
+              ['05', 'The gap between art and engineering is a bureaucratic fiction. Both are about understanding a system well enough to change it.'],
             ].map(([n, s]) => (
               <li key={n} style={{
                 display: 'grid', gridTemplateColumns: '48px 1fr',

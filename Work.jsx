@@ -57,8 +57,9 @@ function Work({ setRoute }) {
           }}>
             <div className="t-caption" style={{ paddingTop: 4 }}>§ I · Overview</div>
             <p className="t-body-l" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-              Music, identity systems, and long-form worldbuilding. Projects built over years,
-              resistant to easy categorization, committed to internal logic.
+              Music, identity systems, and long-form worldbuilding. Projects that take years
+              to develop, resist easy categorization, and share a commitment to internal logic
+              and atmospheric coherence.
             </p>
           </div>
 
@@ -78,8 +79,9 @@ function Work({ setRoute }) {
           }}>
             <div className="t-caption" style={{ paddingTop: 4 }}>§ I · Overview</div>
             <p className="t-body-l" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-              Company building at the frontier of physical AI. The goal is infrastructure —
-              the evaluation layer that makes intelligent machines genuinely trainable.
+              Company building and systems thinking at the frontier of physical AI.
+              The goal is infrastructure — the evaluation and feedback layer that makes
+              intelligent machines genuinely trainable.
             </p>
           </div>
 

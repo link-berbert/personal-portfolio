@@ -68,7 +68,7 @@ function Footer({ setRoute }) {
             fontSize: 13, color: 'var(--fg-secondary)',
             lineHeight: 1.6, maxWidth: 200,
           }}>
-            Set in Newsreader and Geist. Built at the edge of things.
+            Set in Newsreader and Geist. Built for the edge of things.
           </div>
         </div>
       </div>

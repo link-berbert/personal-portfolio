@@ -64,7 +64,17 @@ function TopBar({ route, setRoute, theme, setTheme }) {
             {label}
           </a>
         ))}
-
+        <button
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          style={{
+            marginLeft: 8,
+            fontFamily: 'var(--font-mono)', fontSize: 10,
+            letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: 'var(--fg-tertiary)', padding: '4px 8px',
+            border: '1px solid var(--rule)', background: 'none', cursor: 'pointer',
+          }}>
+          {theme === 'dark' ? 'Dark' : 'Light'}
+        </button>
       </nav>
     </header>
   );
