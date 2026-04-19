@@ -198,12 +198,16 @@ export default function Work({ setRoute }) {
             boxSizing: 'border-box',
           }}
           >
-            <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)', paddingTop: 6 }}>01</span>
+            <div className="work-entry__rail">
+              <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)' }}>01</span>
+              <div className="work-entry__brand">
+                <WorkPageLogo projectId="lightwrk" />
+                <h2 className="sr-only">LightWrk.</h2>
+              </div>
+            </div>
             <div className="work-entry__body min-w-0">
-              <WorkPageLogo projectId="lightwrk" />
-              <h2 className="sr-only">LightWrk.</h2>
               <div className="work-entry__main-text">
-                <div style={{ marginBottom: 14 }}>
+                <div className="work-entry__tags" style={{ marginBottom: 14 }}>
                   {[AI_WORK[0].discipline, AI_WORK[0].role].map((t, i) => (
                     <span key={i} className="t-mono" style={{
                       fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -220,14 +224,17 @@ export default function Work({ setRoute }) {
                   {AI_WORK[0].extended}
                 </p>
               </div>
-              <div style={{
+              <div
+                className="work-entry__tail"
+                style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                 gap: 24,
                 paddingTop: 24,
                 marginTop: 24,
                 borderTop: '1px solid var(--rule)',
-              }}>
+              }}
+              >
                 {AI_WORK[0].capabilities.map(([label, desc]) => (
                   <div key={label}>
                     <div className="t-caption" style={{ marginBottom: 8 }}>{label}</div>
@@ -239,7 +246,7 @@ export default function Work({ setRoute }) {
               </div>
             </div>
             <span className="t-mono work-entry__year" style={{
-              color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap', paddingTop: 6,
+              color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
             }}>{AI_WORK[0].year}</span>
           </div>
 
@@ -273,24 +280,28 @@ function CreativeRow({ item, isLast }) {
         transition: 'opacity var(--dur-micro) var(--ease)',
         opacity: hovered ? 1 : 0.88,
       }}>
-      <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)', paddingTop: 6 }}>
-        {item.num}
-      </span>
+      <div className="work-entry__rail">
+        <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)' }}>
+          {item.num}
+        </span>
+        <div className="work-entry__brand">
+          <WorkPageLogo projectId={item.id} />
+          <h2
+            className={hasLogo ? "sr-only" : undefined}
+            style={hasLogo ? undefined : {
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(22px, 3vw, 42px)',
+              letterSpacing: '-0.02em', lineHeight: 1.15,
+              marginBottom: 0,
+            }}
+          >
+            {item.title}
+          </h2>
+        </div>
+      </div>
       <div className="work-entry__body min-w-0">
-        <WorkPageLogo projectId={item.id} />
-        <h2
-          className={hasLogo ? "sr-only" : undefined}
-          style={hasLogo ? undefined : {
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(22px, 3vw, 42px)',
-            letterSpacing: '-0.02em', lineHeight: 1.15,
-            marginBottom: 12,
-          }}
-        >
-          {item.title}
-        </h2>
         <div className="work-entry__main-text">
-          <div style={{ marginBottom: 14 }}>
+          <div className="work-entry__tags" style={{ marginBottom: 14 }}>
             {item.tags && item.tags.map(t => (
               <span key={t} className="t-mono" style={{
                 fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -307,7 +318,7 @@ function CreativeRow({ item, isLast }) {
         </div>
       </div>
       <span className="t-mono work-entry__year" style={{
-        color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap', paddingTop: 6,
+        color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
       }}>{item.year}</span>
     </div>
   );

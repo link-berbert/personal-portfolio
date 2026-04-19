@@ -44,6 +44,13 @@
   --accent-bg: var(--paper-10);
   --selection-bg: var(--paper-70);
   --selection-fg: var(--paper-00);
+  /* Text selection on ink / inverted surfaces (e.g. home § II band) — global
+     selection uses ink as the highlight, which matches this surface and disappears.
+     Fixed ramp colors so highlight reads the same for every line; do not use
+     semantic fg/bg here (they track theme) and keep opaque so parent opacity
+     on muted type does not wash the highlight. */
+  --selection-on-ink-bg: var(--paper-10);
+  --selection-on-ink-fg: var(--paper-70);
 }
 
 [data-theme="dark"] {
@@ -59,6 +66,9 @@
   --accent: #ECEAE4;                 /* ink inverts to paper */
   --accent-hover: #FFFFFF;
   --accent-bg: #2A2A27;
+  /* Ink band is a light surface in dark mode — invert the selection pair. */
+  --selection-on-ink-bg: var(--paper-60);
+  --selection-on-ink-fg: var(--paper-00);
 }
 
 /* ============================================================
@@ -308,6 +318,11 @@ html, body {
 }
 
 ::selection { background: var(--selection-bg); color: var(--selection-fg); }
+
+.home-surface-ink ::selection {
+  background: var(--selection-on-ink-bg);
+  color: var(--selection-on-ink-fg);
+}
 
 h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: inherit; }
 p { margin: 0; }

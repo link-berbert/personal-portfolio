@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import TopBar from "./TopBar.jsx";
 import Home from "./Home.jsx";
 import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
@@ -15,6 +15,23 @@ const TWEAK_DEFAULTS = {
 
 const ROUTES = new Set(["home", "work", "about", "contact"]);
 
+function readStoredTheme() {
+  try {
+    const raw = localStorage.getItem("lb-portfolio-theme");
+    if (!raw) return "light";
+    try {
+      const v = JSON.parse(raw);
+      if (v === "dark") return "dark";
+      if (v === "light") return "light";
+    } catch {
+      if (raw === "dark") return "dark";
+    }
+  } catch {
+    /* ignore */
+  }
+  return "light";
+}
+
 function readStoredRoute() {
   try {
     const raw = localStorage.getItem("lb-portfolio-route");
@@ -29,6 +46,7 @@ function readStoredRoute() {
 
 export default function App() {
   const [route, setRoute] = useState(readStoredRoute);
+  const [theme, setTheme] = useState(readStoredTheme);
   const [type, setType] = useState(TWEAK_DEFAULTS.typeVariation);
   const [grain, setGrain] = useState(TWEAK_DEFAULTS.grain);
   const [editOpen, setEditOpen] = useState(false);
@@ -36,6 +54,16 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("lb-portfolio-route", JSON.stringify(route));
   }, [route]);
+
+  useEffect(() => {
+    localStorage.setItem("lb-portfolio-theme", JSON.stringify(theme));
+  }, [theme]);
+
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    if (theme === "dark") root.setAttribute("data-theme", "dark");
+    else root.removeAttribute("data-theme");
+  }, [theme]);
 
   /* Warm the hero portrait in the HTTP cache while the user is on Work /
      About / Contact so returning to Home reuses it instantly. `index.html`
@@ -56,7 +84,6 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.dataset.type = type === "default" ? "" : type;
-    document.documentElement.removeAttribute("data-theme");
   }, [type]);
 
   useEffect(() => {
@@ -137,7 +164,7 @@ export default function App() {
       >
         {screen}
       </div>
-      <Footer setRoute={navigate} />
+      <Footer setRoute={navigate} theme={theme} setTheme={setTheme} />
 
       <Tweaks
         open={editOpen}

@@ -193,12 +193,15 @@ export default function Home({ setRoute }) {
       </section>
 
       {/* LightWrk feature */}
-      <section style={{
+      <section
+        className="home-surface-ink"
+        style={{
         padding: 'clamp(64px, 8vw, 120px) clamp(20px, 5vw, 80px)',
         background: 'var(--fg-primary)',
         color: 'var(--bg-canvas)',
         marginTop: 0,
-      }}>
+      }}
+      >
         <div
           className="page-section--split"
           style={{
@@ -209,14 +212,21 @@ export default function Home({ setRoute }) {
           boxSizing: 'border-box',
         }}
         >
-          <div className="t-caption page-section__label" style={{ paddingTop: 6, color: 'var(--fg-inverse)', opacity: 0.5 }}>
+          <div
+            className="t-caption page-section__label"
+            style={{
+              paddingTop: 6,
+              color: 'color-mix(in srgb, var(--fg-inverse) 50%, transparent)',
+            }}
+          >
             § II · Company
           </div>
           <div className="min-w-0">
             <div style={{
               fontFamily: 'var(--font-mono)', fontSize: 11,
               letterSpacing: '0.12em', textTransform: 'uppercase',
-              opacity: 0.5, marginBottom: 20,
+              marginBottom: 20,
+              color: 'color-mix(in srgb, var(--bg-canvas) 50%, transparent)',
             }}>
               LightWrk · Founded 2024
             </div>
@@ -231,8 +241,8 @@ export default function Home({ setRoute }) {
             </h2>
             <p style={{
               fontSize: 17, lineHeight: 1.65,
-              maxWidth: '56ch', opacity: 0.75,
-              color: 'var(--bg-canvas)',
+              maxWidth: '56ch',
+              color: 'color-mix(in srgb, var(--bg-canvas) 75%, transparent)',
             }}>
               Physical AI systems fail in ways that are hard to label and harder to fix.
               LightWrk is building the ontologies, rubrics, and judgment pipelines
@@ -254,9 +264,13 @@ export default function Home({ setRoute }) {
                   <div style={{
                     fontFamily: 'var(--font-mono)', fontSize: 11,
                     letterSpacing: '0.06em', textTransform: 'uppercase',
-                    opacity: 0.5, marginBottom: 8,
+                    marginBottom: 8,
+                    color: 'color-mix(in srgb, var(--bg-canvas) 50%, transparent)',
                   }}>{label}</div>
-                  <div style={{ fontSize: 14, lineHeight: 1.55, opacity: 0.75, color: 'var(--bg-canvas)' }}>
+                  <div style={{
+                    fontSize: 14, lineHeight: 1.55,
+                    color: 'color-mix(in srgb, var(--bg-canvas) 75%, transparent)',
+                  }}>
                     {desc}
                   </div>
                 </div>
