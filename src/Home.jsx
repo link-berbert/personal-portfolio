@@ -31,6 +31,7 @@ function WorkRow({ item, onClick }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       data-reveal
+      className="work-entry-row"
       style={{
         display: 'grid',
         gridTemplateColumns: '56px 1fr auto',
@@ -40,10 +41,10 @@ function WorkRow({ item, onClick }) {
         cursor: onClick ? 'pointer' : 'default',
         transition: 'background var(--dur-micro) var(--ease)',
       }}>
-      <span className="t-mono" style={{ color: 'var(--fg-tertiary)' }}>
+      <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)' }}>
         {item.num}
       </span>
-      <div>
+      <div className="work-entry__body min-w-0">
         <div style={{
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(20px, 2.5vw, 30px)',
@@ -66,7 +67,7 @@ function WorkRow({ item, onClick }) {
           ))}
         </div>
       </div>
-      <div className="t-mono" style={{
+      <div className="t-mono work-entry__year" style={{
         color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
         opacity: hovered ? 1 : 0.6,
         transition: 'opacity var(--dur-micro) var(--ease)',
@@ -82,10 +83,13 @@ export default function Home({ setRoute }) {
 
   return (
     <main>
-      {/* Hero */}
+      {/* Hero — content width matches all sections (see --max-content) */}
       <section style={{
         padding: 'clamp(80px, 12vw, 200px) clamp(20px, 5vw, 80px) clamp(60px, 8vw, 140px)',
-        maxWidth: 1440,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
         <div data-reveal className="t-caption" style={{
           color: 'var(--fg-secondary)', marginBottom: 48,
@@ -98,8 +102,8 @@ export default function Home({ setRoute }) {
           Lincoln Berbert · 2026
         </div>
 
-        <h1 data-reveal className="t-display-xl" style={{
-          maxWidth: '16ch', marginBottom: 0,
+        <h1 data-reveal className="t-display-l headline-measure" style={{
+          maxWidth: '18ch', marginBottom: 0,
         }}>
           Building worlds, systems, and infrastructure for{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
@@ -107,18 +111,27 @@ export default function Home({ setRoute }) {
           </span>
         </h1>
 
-        <div data-reveal style={{
-          marginTop: 56,
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0,56ch) auto',
-          gap: 48, alignItems: 'end',
-          maxWidth: 900,
-        }}>
-          <p className="t-body-l" style={{ color: 'var(--fg-secondary)', lineHeight: 1.6 }}>
+        <div
+          data-reveal
+          className="hero-cta"
+          style={{
+            marginTop: 56,
+            width: '100%',
+          }}
+        >
+          <p
+            className="t-body-l min-w-0"
+            style={{
+              color: 'var(--fg-secondary)',
+              lineHeight: 1.6,
+              maxWidth: '56ch',
+            }}
+          >
             A multidisciplinary practice spanning music, creative direction, and physical AI.
             One point of view operating at the intersection of culture and infrastructure.
           </p>
           <button
+            type="button"
             onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
             className="nav-item"
             style={{
@@ -127,23 +140,31 @@ export default function Home({ setRoute }) {
               whiteSpace: 'nowrap', paddingBottom: 4,
               background: 'none', border: 0, cursor: 'pointer',
               color: 'var(--fg-primary)',
-            }}>
+              alignSelf: 'end',
+              flexShrink: 0,
+            }}
+          >
             See the work ↓
           </button>
         </div>
       </section>
 
       {/* Thesis */}
-      <section style={{
+      <section
+        className="page-section--split"
+        style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',
         display: 'grid',
         gridTemplateColumns: '120px 1fr',
         gap: 48,
-        maxWidth: 1200,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
-        <div className="t-caption" style={{ paddingTop: 6 }}>§ I · Practice</div>
-        <div data-reveal style={{
+        <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ I · Practice</div>
+        <div data-reveal className="min-w-0" style={{
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(26px, 3.5vw, 46px)',
           lineHeight: 1.2, letterSpacing: '-0.025em',
@@ -157,11 +178,20 @@ export default function Home({ setRoute }) {
       </section>
 
       {/* Selected Work preview — split */}
-      <section style={{ borderTop: '1px solid var(--fg-primary)', maxWidth: 1440 }}>
-        <div style={{
+      <section style={{
+        borderTop: '1px solid var(--fg-primary)',
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
+        <div
+          className="home-sw-header"
+          style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
           padding: '20px clamp(20px, 5vw, 80px)',
-        }}>
+        }}
+        >
           <div className="t-caption" style={{ color: 'var(--fg-primary)' }}>
             Selected work · Ongoing
           </div>
@@ -178,10 +208,13 @@ export default function Home({ setRoute }) {
           </button>
         </div>
 
-        <div style={{
+        <div
+          className="home-sw-cols"
+          style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr',
           borderTop: '1px solid var(--rule)',
-        }}>
+        }}
+        >
           {/* Creative column */}
           <div style={{
             padding: 'clamp(32px, 4vw, 64px) clamp(20px, 5vw, 80px)',
@@ -261,15 +294,22 @@ export default function Home({ setRoute }) {
         color: 'var(--bg-canvas)',
         marginTop: 96,
       }}>
-        <div style={{
+        <div
+          className="page-section--split"
+          style={{
           display: 'grid',
           gridTemplateColumns: '120px 1fr',
-          gap: 48, maxWidth: 1200,
-        }}>
-          <div className="t-caption" style={{ paddingTop: 6, color: 'var(--fg-inverse)', opacity: 0.5 }}>
+          gap: 48,
+          maxWidth: 'var(--max-content)',
+          margin: '0 auto',
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+        >
+          <div className="t-caption page-section__label" style={{ paddingTop: 6, color: 'var(--fg-inverse)', opacity: 0.5 }}>
             § II · Company
           </div>
-          <div>
+          <div className="min-w-0">
             <div style={{
               fontFamily: 'var(--font-mono)', fontSize: 11,
               letterSpacing: '0.12em', textTransform: 'uppercase',
@@ -277,7 +317,7 @@ export default function Home({ setRoute }) {
             }}>
               LightWrk · Founded 2024
             </div>
-            <h2 data-reveal style={{
+            <h2 data-reveal className="headline-measure" style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(32px, 5vw, 72px)',
               lineHeight: 1.0, letterSpacing: '-0.03em',
@@ -296,9 +336,12 @@ export default function Home({ setRoute }) {
               that turn human expertise into training signal — the evaluation layer
               that frontier robotics is still missing.
             </p>
-            <div style={{
+            <div
+              className="lightwrk-cards"
+              style={{
               marginTop: 40, display: 'flex', gap: 48,
-            }}>
+            }}
+            >
               {[
                 ['Ontology design', 'Structured failure taxonomies for embodied systems'],
                 ['Rubric development', 'Scored, repeatable human judgment at scale'],
@@ -321,15 +364,21 @@ export default function Home({ setRoute }) {
       </section>
 
       {/* Creative feature */}
-      <section style={{
+      <section
+        className="page-section--split"
+        style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',
         display: 'grid', gridTemplateColumns: '120px 1fr',
-        gap: 48, maxWidth: 1200,
+        gap: 48,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
-        <div className="t-caption" style={{ paddingTop: 6 }}>§ III · Creative</div>
-        <div>
-          <h2 data-reveal style={{
+        <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ III · Creative</div>
+        <div className="min-w-0">
+          <h2 data-reveal className="headline-measure" style={{
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(28px, 4vw, 56px)',
             lineHeight: 1.1, letterSpacing: '-0.025em',
@@ -343,7 +392,7 @@ export default function Home({ setRoute }) {
           <p className="t-body" style={{
             color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65,
           }}>
-            Under the name Berby, and through characters like James Judas and the prophet,
+            Under the name Berby, and through characters like James Judas,
             Lincoln builds worlds — aesthetic systems with internal logic, narrative structure,
             and a sound. Creative work that takes the long view.
           </p>
@@ -363,13 +412,20 @@ export default function Home({ setRoute }) {
       </section>
 
       {/* Closing CTA */}
-      <section style={{
+      <section
+        className="home-closing-cta"
+        style={{
         padding: 'clamp(64px, 8vw, 120px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--fg-primary)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
         flexWrap: 'wrap', gap: 32,
-      }}>
-        <div data-reveal style={{
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+      >
+        <div data-reveal className="headline-measure min-w-0" style={{
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(28px, 4vw, 60px)',
           lineHeight: 1.05, letterSpacing: '-0.025em',

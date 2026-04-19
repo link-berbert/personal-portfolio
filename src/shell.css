@@ -48,3 +48,153 @@ body {
   background: var(--selection-bg);
   color: var(--selection-fg);
 }
+
+/* Hero intro row: body + “See the work” span the same content column as sections (--max-content) */
+.hero-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: end;
+}
+
+@media (max-width: 640px) {
+  .hero-cta {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .hero-cta button {
+    justify-self: start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile — max-width 640px only (narrow phones / small portrait).
+   Fixes wrapping, overflow, and sidebar-label grids that squash content.
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  main {
+    overflow-x: clip;
+  }
+
+  main p,
+  main li,
+  main h1,
+  main h2,
+  main h3 {
+    overflow-wrap: break-word;
+  }
+
+  main .min-w-0 {
+    min-width: 0;
+  }
+
+  /* ch-based headline caps can clip on narrow screens */
+  .headline-measure {
+    max-width: 100% !important;
+  }
+
+  /* § label + body → label on its own row, body full width */
+  .page-section--split {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .page-section--split .page-section__label {
+    padding-top: 0 !important;
+  }
+
+  /* Home: Creative | AI columns */
+  .home-sw-cols {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-sw-cols > div:first-child {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .home-sw-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .lightwrk-cards {
+    flex-direction: column !important;
+    gap: 28px !important;
+  }
+
+  .lightwrk-cards > div {
+    max-width: none !important;
+  }
+
+  .home-closing-cta,
+  .page-cta-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .home-sw-cols > div {
+    min-width: 0;
+  }
+
+  /* Work list rows: num → body → year (DOM order) */
+  .work-entry-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .work-entry-row .work-entry__year {
+    white-space: normal !important;
+    justify-self: start;
+    padding-top: 0 !important;
+  }
+
+  .work-entry-row .work-entry__num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .work-entry-row .work-entry__body {
+    min-width: 0;
+  }
+
+  /* About: 2×2 cards + background columns */
+  .about-connection-grid,
+  .about-bg-grid {
+    grid-template-columns: 1fr !important;
+    max-width: none !important;
+  }
+
+  .about-philo-row {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    align-items: start !important;
+  }
+
+  .about-philo-row .about-philo__num {
+    margin-bottom: -4px;
+  }
+
+  /* Contact: form fields stack */
+  .contact-form {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer-grid .footer-brand {
+    grid-column: auto !important;
+  }
+
+  .footer-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+}

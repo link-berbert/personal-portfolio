@@ -5,13 +5,19 @@ export default function Footer({ setRoute }) {
       padding: 'clamp(48px, 6vw, 96px) clamp(20px, 5vw, 80px) 32px',
       borderTop: '1px solid var(--rule)',
     }}>
-      <div style={{
+      <div
+        className="footer-grid"
+        style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
         gap: 48, alignItems: 'start',
-        maxWidth: 1200,
-      }}>
-        <div style={{ gridColumn: 'span 2' }}>
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+      >
+        <div className="footer-brand" style={{ gridColumn: 'span 2' }}>
           <div style={{
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(28px, 4vw, 44px)',
@@ -73,14 +79,17 @@ export default function Footer({ setRoute }) {
         </div>
       </div>
 
-      <div style={{
+      <div
+        className="footer-bar"
+        style={{
         marginTop: 64, paddingTop: 20,
         borderTop: '1px solid var(--rule)',
         display: 'flex', justifyContent: 'space-between',
         fontFamily: 'var(--font-mono)', fontSize: 11,
         letterSpacing: '0.06em', textTransform: 'uppercase',
         color: 'var(--fg-tertiary)',
-      }}>
+      }}
+      >
         <span>© 2026 Lincoln Berbert</span>
         <span>v1 · Apr 2026</span>
       </div>

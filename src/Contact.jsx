@@ -17,7 +17,10 @@ export default function Contact() {
       {/* Header */}
       <section style={{
         padding: `clamp(80px, 10vw, 160px) ${pm} clamp(40px, 5vw, 64px)`,
-        maxWidth: 900,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
         <div className="t-caption" style={{
           marginBottom: 32, display: 'flex', alignItems: 'center', gap: 12,
@@ -26,13 +29,13 @@ export default function Contact() {
           <span style={{ display: 'inline-block', width: 28, height: 1, background: 'var(--fg-tertiary)', verticalAlign: 'middle' }}></span>
           Contact
         </div>
-        <h1 className="t-display-l" style={{ maxWidth: '16ch' }}>
+        <h1 className="t-display-l headline-measure" style={{ maxWidth: '16ch' }}>
           Write.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
             I read everything.
           </span>
         </h1>
-        <p className="t-body-l" style={{
+        <p className="t-body-l min-w-0" style={{
           marginTop: 36, maxWidth: '52ch',
           color: 'var(--fg-secondary)', lineHeight: 1.65,
         }}>
@@ -95,12 +98,17 @@ export default function Contact() {
 
           {/* Form */}
           <form
+            className="contact-form"
             onSubmit={e => { e.preventDefault(); setSent(true); }}
             style={{
               padding: `0 ${pm} clamp(48px, 6vw, 96px)`,
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gap: '32px 48px', maxWidth: 900,
+              gap: '32px 48px',
+              maxWidth: 'var(--max-content)',
+              margin: '0 auto',
+              width: '100%',
+              boxSizing: 'border-box',
               borderTop: '1px solid var(--rule)',
               paddingTop: 40,
             }}>

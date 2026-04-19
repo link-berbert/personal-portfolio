@@ -371,11 +371,18 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
   backdrop-filter: blur(20px) saturate(1.15);
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
   border-bottom: 1px solid var(--rule);
-  transition: transform var(--dur-ui) var(--ease);
+  /* Reveal (scroll up): animated. Hide is scroll-linked in JS with .top-bar--instant */
+  transition: transform 340ms var(--ease-out);
 }
 
-.top-bar--hidden {
-  transform: translateY(-100%);
+.top-bar--instant {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-bar {
+    transition: none;
+  }
 }
 
 .top-bar__brand {

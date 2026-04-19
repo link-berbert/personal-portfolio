@@ -6,7 +6,10 @@ export default function About({ setRoute }) {
       {/* Header */}
       <section style={{
         padding: `clamp(80px, 10vw, 160px) ${pm} clamp(40px, 5vw, 80px)`,
-        maxWidth: 1000,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
         <div className="t-caption" style={{
           marginBottom: 32, display: 'flex', alignItems: 'center', gap: 12,
@@ -15,7 +18,7 @@ export default function About({ setRoute }) {
           <span style={{ display: 'inline-block', width: 28, height: 1, background: 'var(--fg-tertiary)', verticalAlign: 'middle' }}></span>
           About
         </div>
-        <h1 className="t-display-l" style={{ maxWidth: '18ch' }}>
+        <h1 className="t-display-l headline-measure" style={{ maxWidth: '18ch' }}>
           One practice.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
             Several disciplines.
@@ -24,14 +27,20 @@ export default function About({ setRoute }) {
       </section>
 
       {/* Bio */}
-      <section style={{
+      <section
+        className="page-section--split"
+        style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
         display: 'grid', gridTemplateColumns: '120px 1fr',
-        gap: 48, maxWidth: 1200,
+        gap: 48,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
-        <div className="t-caption" style={{ paddingTop: 4 }}>§ I · Bio</div>
-        <div style={{ maxWidth: '60ch' }}>
+        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ I · Bio</div>
+        <div className="min-w-0" style={{ maxWidth: '60ch' }}>
           <p className="t-body-l" style={{ marginBottom: 28, lineHeight: 1.7 }}>
             Lincoln Berbert is a multidisciplinary builder. He works on music,
             physical AI, and long-form worldbuilding — often at the same time.
@@ -59,15 +68,21 @@ export default function About({ setRoute }) {
       </section>
 
       {/* How disciplines connect */}
-      <section style={{
+      <section
+        className="page-section--split"
+        style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
         display: 'grid', gridTemplateColumns: '120px 1fr',
-        gap: 48, maxWidth: 1200,
+        gap: 48,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
-        <div className="t-caption" style={{ paddingTop: 4 }}>§ II · Connection</div>
-        <div>
-          <div style={{
+        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ II · Connection</div>
+        <div className="min-w-0">
+          <div className="headline-measure min-w-0" style={{
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(24px, 3vw, 40px)',
             lineHeight: 1.2, letterSpacing: '-0.022em',
@@ -79,10 +94,13 @@ export default function About({ setRoute }) {
             </span>
           </div>
 
-          <div style={{
+          <div
+            className="about-connection-grid"
+            style={{
             display: 'grid', gridTemplateColumns: '1fr 1fr',
             gap: 40, maxWidth: 900,
-          }}>
+          }}
+          >
             {[
               {
                 label: 'Music · Berby',
@@ -111,14 +129,20 @@ export default function About({ setRoute }) {
       </section>
 
       {/* Philosophy */}
-      <section style={{
+      <section
+        className="page-section--split"
+        style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
         display: 'grid', gridTemplateColumns: '120px 1fr',
-        gap: 48, maxWidth: 1200,
+        gap: 48,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
-        <div className="t-caption" style={{ paddingTop: 4 }}>§ III · How I work</div>
-        <div>
+        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ III · How I work</div>
+        <div className="min-w-0">
           <ol style={{ padding: 0, margin: 0, listStyle: 'none' }}>
             {[
               ['01', 'Start with the world, not the deliverable. Everything coherent comes from a set of rules decided before the work begins.'],
@@ -127,13 +151,13 @@ export default function About({ setRoute }) {
               ['04', 'Long time horizons. Projects worth doing take years. Taste compounds.'],
               ['05', 'The gap between art and engineering is a bureaucratic fiction. Both are about understanding a system well enough to change it.'],
             ].map(([n, s]) => (
-              <li key={n} style={{
+              <li key={n} className="about-philo-row" style={{
                 display: 'grid', gridTemplateColumns: '48px 1fr',
                 padding: '24px 0', borderTop: '1px solid var(--rule)',
                 alignItems: 'baseline',
               }}>
-                <span className="t-mono" style={{ color: 'var(--fg-tertiary)' }}>{n}</span>
-                <span style={{
+                <span className="t-mono about-philo__num" style={{ color: 'var(--fg-tertiary)' }}>{n}</span>
+                <span className="min-w-0" style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(18px, 2.2vw, 26px)',
                   letterSpacing: '-0.015em', lineHeight: 1.35,
@@ -145,20 +169,29 @@ export default function About({ setRoute }) {
       </section>
 
       {/* Background */}
-      <section style={{
+      <section
+        className="page-section--split"
+        style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
         display: 'grid', gridTemplateColumns: '120px 1fr',
-        gap: 48, maxWidth: 1200,
+        gap: 48,
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
-        <div className="t-caption" style={{ paddingTop: 4 }}>§ IV · Background</div>
-        <div style={{
+        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ IV · Background</div>
+        <div
+          className="about-bg-grid min-w-0"
+          style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr',
           gap: 32, maxWidth: 800,
-        }}>
+        }}
+        >
           {[
             ['Companies', ['LightWrk (founder) · 2024 —']],
-            ['Creative', ['Berby (artist) · 2021 —', 'James Judas · 2023 —', 'The Future is Bright · 2024']],
+            ['Creative', ['Berby (artist) · 2021 —', 'James Judas · 2023 —']],
             ['Focus areas', ['Physical AI evaluation', 'Structured human feedback', 'Creative direction', 'Worldbuilding · narrative identity']],
             ['Interests', ['World models', 'Embodied AI', 'Frontier systems', 'Long-form narrative', 'Aesthetic systems']],
           ].map(([k, items]) => (
@@ -177,13 +210,20 @@ export default function About({ setRoute }) {
       </section>
 
       {/* CTA */}
-      <section style={{
+      <section
+        className="page-cta-row"
+        style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--fg-primary)',
         display: 'flex', justifyContent: 'space-between',
         alignItems: 'center', flexWrap: 'wrap', gap: 24,
-      }}>
-        <div style={{
+        maxWidth: 'var(--max-content)',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+      >
+        <div className="headline-measure min-w-0" style={{
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(22px, 3vw, 40px)',
           letterSpacing: '-0.02em', lineHeight: 1.15,
