@@ -140,7 +140,7 @@ export default function Home({ setRoute }) {
                     src={logo.src}
                     alt={logo.alt}
                     className="logo-marquee__img"
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                   />
                 </div>
@@ -156,7 +156,7 @@ export default function Home({ setRoute }) {
                     src={logo.src}
                     alt=""
                     className="logo-marquee__img"
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                   />
                 </div>

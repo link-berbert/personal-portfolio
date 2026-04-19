@@ -86,25 +86,26 @@ html.is-resizing .grain {
    anchored right and sized from the hero container so it scales consistently
    at every non-mobile width.
 
-   `contain: layout paint` isolates the hero's layout and paint from the rest
-   of the page — without it, every resize frame recomputed the whole document
-   because the hero's size depends on 100vh. */
+   `contain: layout` keeps resize work scoped (hero height uses 100vh) without
+   `paint` containment, which sat right against the next section and made fast
+   scrolls across the fold feel like a tiny hitch in some browsers. */
 .home-hero {
   min-height: calc(100vh - 64px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  contain: layout paint;
+  contain: layout;
 }
 
 .home-hero__text {
   position: relative;
   z-index: 1;
-  /* Legibility only — no layout impact where type crosses the portrait */
+  /* Legibility over the portrait — slightly tighter blurs than before so
+     scrolling past this block does less shadow work without changing the look much. */
   text-shadow:
     0 0 1px var(--bg-canvas),
-    0 0 24px var(--bg-canvas),
-    0 0 48px color-mix(in srgb, var(--bg-canvas) 55%, transparent);
+    0 0 16px var(--bg-canvas),
+    0 0 32px color-mix(in srgb, var(--bg-canvas) 55%, transparent);
 }
 
 @keyframes home-hero-reveal {
@@ -171,8 +172,8 @@ html.is-resizing .grain {
     gap: clamp(24px, 6vw, 36px);
     padding: clamp(20px, 6vw, 40px) clamp(20px, 5vw, 32px)
       clamp(48px, 12vw, 80px) !important;
-    /* Desktop hero uses `contain: layout paint` for resize perf; on mobile
-       the portrait is now in normal flow, not absolute, so containment isn't
+    /* Desktop hero uses `contain: layout` for resize perf; on mobile the
+       portrait is now in normal flow, not absolute, so containment isn't
        needed and would fight the content-driven height. */
     contain: none;
   }
@@ -276,6 +277,20 @@ html.is-resizing .grain {
   width: max-content;
   will-change: transform;
   animation: logo-marquee-scroll 50s linear infinite;
+  backface-visibility: hidden;
+}
+
+/* One grayscale + opacity on the animated strip instead of one filter stack
+   per <img> — keeps the marquee visually identical, cheaper while the viewport
+   scrolls over this region (Chromium especially). */
+.logo-marquee .logo-marquee__track {
+  filter: grayscale(100%);
+  opacity: 0.76;
+}
+
+.logo-marquee .logo-marquee__img {
+  filter: none;
+  opacity: 1;
 }
 
 .logo-marquee__group {
@@ -318,8 +333,6 @@ html.is-resizing .grain {
   height: 100%;
   object-fit: contain;
   object-position: center;
-  filter: grayscale(100%);
-  opacity: 0.76;
 }
 
 /* Visually hidden heading — keeps section structure for a11y when logo replaces title */

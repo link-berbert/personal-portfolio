@@ -10,7 +10,7 @@ const RAW = [
   { id: "ghost-project-ix", file: "6.png", alt: "Ghost Project IX", size: "ghost" },
 ];
 
-/** Marquee order + metadata (greyscale treatment applied in CSS via `.logo-marquee__img`) */
+/** Marquee order + metadata (home strip: greyscale on `.logo-marquee .logo-marquee__track`) */
 export const WORK_LOGOS = RAW.map(({ file, alt, size, id }) => ({
   id,
   src: encodeURI(`${DIR}/${file}`),
