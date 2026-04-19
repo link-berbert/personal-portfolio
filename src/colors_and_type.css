@@ -269,7 +269,7 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-micro: 140ms;
   --dur-ui: 280ms;
-  --dur-page: 480ms;
+  --dur-page: 280ms;
   --dur-reveal: 800ms;
 }
 

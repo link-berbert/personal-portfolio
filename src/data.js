@@ -78,4 +78,15 @@ export const AI_WORK = [
       "A worldbuilding and creative strategy practice for artists and founders developing deeper identities, stronger concepts, and more coherent bodies of work. The Creator's Catalyst helps turn scattered ideas into integrated creative systems — refining positioning, narrative, aesthetic logic, and long-term vision.",
     tags: ["Strategy", "Worldbuilding", "Creative advisory"],
   },
+  {
+    id: "unnamed-holdings",
+    num: "04",
+    title: "Unnamed Holdings Co.",
+    discipline: "Holding · Venture",
+    year: "2025 —",
+    role: "Founder, creative director",
+    summary:
+      "A parent structure for long-horizon ventures across technology, creative work, and future-facing systems. Unnamed Holdings Co. exists to hold, organize, and extend the broader vision — creating continuity across companies, worlds, and ambitious work that may take years to fully emerge.",
+    tags: ["Holding", "Structure", "Venture", "Architecture"],
+  },
 ];

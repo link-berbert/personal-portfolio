@@ -25,22 +25,32 @@ function logoMarqueeCellClass(logo) {
   return c;
 }
 
+const REVEAL_BELOW_FOLD_MS = 800;
+const REVEAL_EASE_DEFAULT = "cubic-bezier(0.2,0.6,0.2,1)";
+
 function useReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll('[data-reveal]');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    els.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(12px)';
-      el.style.transition = 'opacity 800ms cubic-bezier(0.2,0.6,0.2,1), transform 800ms cubic-bezier(0.2,0.6,0.2,1)';
+    const els = document.querySelectorAll("[data-reveal]");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = "1";
+            e.target.style.transform = "translateY(0)";
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" },
+    );
+    els.forEach((el) => {
+      /* Hero uses CSS `@keyframes` in shell.css — IntersectionObserver + useEffect
+         runs after first paint and stacked under `.page-enter`, which made type
+         feel sluggish on first load. */
+      if (el.closest(".home-hero")) return;
+      el.style.opacity = "0";
+      el.style.transform = "translateY(12px)";
+      el.style.transition = `opacity ${REVEAL_BELOW_FOLD_MS}ms ${REVEAL_EASE_DEFAULT}, transform ${REVEAL_BELOW_FOLD_MS}ms ${REVEAL_EASE_DEFAULT}`;
       io.observe(el);
     });
     return () => io.disconnect();
@@ -74,9 +84,11 @@ export default function Home({ setRoute }) {
             Lincoln Berbert · 2026
           </div>
 
-          <h1 data-reveal className="t-display-l headline-measure" style={{
-            maxWidth: '18ch', marginBottom: 0,
-          }}>
+          <h1
+            data-reveal
+            className="t-display-l headline-measure home-hero__headline"
+            style={{ marginBottom: 0 }}
+          >
             Building worlds, systems, and infrastructure for{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
               machine intelligence.

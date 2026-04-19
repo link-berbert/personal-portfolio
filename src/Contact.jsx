@@ -1,16 +1,69 @@
 import { useState } from "react";
 
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+
 export default function Contact() {
   const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", context: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [category, setCategory] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
   const pm = 'clamp(20px, 5vw, 80px)';
+
+  const accessKey = (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "").trim();
 
   const categories = [
     { id: 'ai', label: 'AI / LightWrk', desc: 'Partnerships, evaluation work, frontier AI collaboration.' },
     { id: 'creative', label: 'Creative', desc: 'Music, direction, worldbuilding, identity systems.' },
     { id: 'other', label: 'Something else', desc: 'Speaking, ideas, introductions.' },
   ];
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError(null);
+
+    if (!category) {
+      setError("Choose a topic above.");
+      return;
+    }
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const message = form.message.trim();
+    if (!name || !email || !message) {
+      setError("Name, email, and message are required.");
+      return;
+    }
+    if (!accessKey) {
+      setError("The form is not set up yet. Use the email link below.");
+      return;
+    }
+
+    const categoryLabel = categories.find(c => c.id === category)?.label ?? category;
+    setSubmitting(true);
+    try {
+      const res = await fetch(WEB3FORMS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `[Portfolio] ${categoryLabel}`,
+          name,
+          email,
+          message,
+          category: categoryLabel,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) {
+        throw new Error(typeof data.message === "string" ? data.message : "Could not send. Try again or use email below.");
+      }
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not send. Try again or use email below.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <main>
@@ -99,7 +152,7 @@ export default function Contact() {
           {/* Form */}
           <form
             className="contact-form"
-            onSubmit={e => { e.preventDefault(); setSent(true); }}
+            onSubmit={handleSubmit}
             style={{
               padding: `0 ${pm} clamp(48px, 6vw, 96px)`,
               display: 'grid',
@@ -121,6 +174,8 @@ export default function Contact() {
                 <label className="t-caption">{f.label}</label>
                 <input
                   type={f.type}
+                  name={f.id}
+                  required
                   value={form[f.id]}
                   onChange={e => setForm({ ...form, [f.id]: e.target.value })}
                   style={{
@@ -141,6 +196,8 @@ export default function Contact() {
               <label className="t-caption">Message</label>
               <textarea
                 rows={5}
+                name="message"
+                required
                 value={form.message}
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 placeholder="A sentence is usually enough."
@@ -159,28 +216,52 @@ export default function Contact() {
 
             <div style={{
               gridColumn: '1 / -1',
-              display: 'flex', justifyContent: 'space-between',
-              alignItems: 'center', marginTop: 8,
-              flexWrap: 'wrap', gap: 16,
+              display: 'flex', flexDirection: 'column',
+              gap: 12, marginTop: 8,
             }}>
-              <a href="mailto:lincoln.berbert@lightwrk.ai"
-                className="t-mono"
-                style={{ color: 'var(--fg-tertiary)', fontSize: 12 }}>
-                Or email directly: lincoln.berbert@lightwrk.ai ↗
-              </a>
-              <button type="submit"
-                style={{
-                  fontFamily: 'var(--font-body)', fontSize: 14,
-                  padding: '14px 28px',
-                  border: '1px solid var(--fg-primary)',
-                  background: 'var(--fg-primary)', color: 'var(--bg-canvas)',
-                  cursor: 'pointer',
-                  transition: 'all 140ms cubic-bezier(0.2,0.6,0.2,1)',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--fg-primary)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'var(--fg-primary)'; e.currentTarget.style.color = 'var(--bg-canvas)'; }}>
-                Get in touch →
-              </button>
+              {error ? (
+                <p
+                  className="t-caption"
+                  role="alert"
+                  style={{ margin: 0, color: '#c45', maxWidth: '52ch' }}
+                >
+                  {error}
+                </p>
+              ) : null}
+              <div style={{
+                display: 'flex', justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap', gap: 16,
+              }}>
+                <a href="mailto:lincoln.berbert@lightwrk.ai"
+                  className="t-mono"
+                  style={{ color: 'var(--fg-tertiary)', fontSize: 12 }}>
+                  Or email directly: lincoln.berbert@lightwrk.ai ↗
+                </a>
+                <button type="submit"
+                  disabled={submitting}
+                  style={{
+                    fontFamily: 'var(--font-body)', fontSize: 14,
+                    padding: '14px 28px',
+                    border: '1px solid var(--fg-primary)',
+                    background: 'var(--fg-primary)', color: 'var(--bg-canvas)',
+                    cursor: submitting ? 'wait' : 'pointer',
+                    opacity: submitting ? 0.75 : 1,
+                    transition: 'all 140ms cubic-bezier(0.2,0.6,0.2,1)',
+                  }}
+                  onMouseEnter={e => {
+                    if (e.currentTarget.disabled) return;
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = 'var(--fg-primary)';
+                  }}
+                  onMouseLeave={e => {
+                    if (e.currentTarget.disabled) return;
+                    e.currentTarget.style.background = 'var(--fg-primary)';
+                    e.currentTarget.style.color = 'var(--bg-canvas)';
+                  }}>
+                  {submitting ? "Sending…" : "Get in touch →"}
+                </button>
+              </div>
             </div>
           </form>
         </>

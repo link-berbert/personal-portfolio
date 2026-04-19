@@ -127,7 +127,9 @@ export default function App() {
       <TopBar route={route} setRoute={navigate} />
       <div
         key={route}
-        className="page-enter"
+        className={
+          route === "home" ? "page-enter page-enter--instant" : "page-enter"
+        }
         ref={(el) => {
           if (el) requestAnimationFrame(() => el.classList.add("page-active"));
         }}

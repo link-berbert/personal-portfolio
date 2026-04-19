@@ -29,10 +29,18 @@ html.is-resizing .grain {
 /* Page transition */
 .page-enter {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
   transition:
-    opacity 480ms cubic-bezier(0.2, 0.6, 0.2, 1),
-    transform 480ms cubic-bezier(0.2, 0.6, 0.2, 1);
+    opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Home: skip the wrapper fade so hero type is not held at opacity 0 while
+   JS runs; hero motion is CSS-only (see `.home-hero .home-hero__text`). */
+.page-enter.page-enter--instant,
+.page-enter.page-enter--instant.page-active {
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 .page-active {
   opacity: 1;
@@ -99,11 +107,49 @@ html.is-resizing .grain {
     0 0 48px color-mix(in srgb, var(--bg-canvas) 55%, transparent);
 }
 
+@keyframes home-hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero `[data-reveal]` — pure CSS so motion starts with first paint (no
+   useEffect / IntersectionObserver delay). Slightly shorter than below-fold
+   reveals so the fold still feels calm. */
+.home-hero .home-hero__text [data-reveal] {
+  animation: home-hero-reveal 0.18s cubic-bezier(0.16, 1, 0.35, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero .home-hero__text [data-reveal] {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Headline measure: avoid `ch` here — it is derived from the "0" glyph of
+   whichever font is *currently* shaping the line, so Times (fallback) →
+   Newsreader / Instrument / Space Grotesk changes the box width and the
+   wrapping visibly "snaps" a few ms after load. `em` keys off the fixed
+   font-size clamp instead. `text-wrap: balance` can also reflow when metrics
+   settle, so we use plain wrapping for this block. */
+.home-hero h1.home-hero__headline {
+  max-width: min(11.25em, 46vw);
+  text-wrap: wrap;
+}
+
 /* Supporting copy under the headline — must always wrap before the portrait.
    The portrait is anchored right and occupies ~48% of the hero width, so we cap
-   the body column at just under half the hero content box with a breathing gap. */
+   the body column at just under half the hero content box with a breathing gap.
+   Same `ch` → webfont swap issue as the headline; `em` tracks body font-size. */
 .home-hero__body {
-  max-width: min(56ch, calc(50% - 32px)) !important;
+  max-width: min(30em, calc(50% - 32px)) !important;
 }
 
 .home-hero__profile {
@@ -185,7 +231,7 @@ html.is-resizing .grain {
      Desktop uses 56px via inline style. */
   .home-hero__body {
     margin-top: 36px !important;
-    max-width: 56ch !important;
+    max-width: min(36em, 100%) !important;
   }
 
   /* The global `--fs-display-l` clamps at a 48px minimum, which is too large
