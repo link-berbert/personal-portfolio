@@ -19,9 +19,9 @@ export default function About({ setRoute }) {
           About
         </div>
         <h1 className="t-display-l headline-measure" style={{ maxWidth: '18ch' }}>
-          One practice.{' '}
+          One philosophy.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            Several disciplines.
+            Infinite canvases.
           </span>
         </h1>
       </section>

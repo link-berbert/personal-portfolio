@@ -124,23 +124,22 @@ html.is-resizing .grain {
 }
 
 @media (max-width: 640px) {
-  /* Mobile hero — the desktop layout overlaps the portrait with the headline,
-     which is illegible at phone widths. On mobile we unstack the pieces:
-     portrait on top (left-aligned square, generous gap), then caption →
-     headline → body beneath it. No absolute positioning, no text-shadow. */
+  /* Mobile hero — above the fold: portrait + "— LINCOLN BERBERT · 2026"
+     caption + full headline. Below the fold: the body paragraph (appears on
+     scroll). The portrait auto-shrinks on shorter phones so the three
+     above-the-fold pieces always fit, while the body lands just past the
+     viewport edge on every common phone size. */
   .home-hero {
     min-height: 0;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: clamp(28px, 7vw, 44px);
-    /* Tighter top/bottom padding than desktop — we want the portrait visible
-       above the fold on common phone viewports (≥667px tall). */
-    padding: clamp(20px, 6vw, 48px) clamp(20px, 5vw, 32px)
+    gap: clamp(24px, 6vw, 36px);
+    padding: clamp(20px, 6vw, 40px) clamp(20px, 5vw, 32px)
       clamp(48px, 12vw, 80px) !important;
-    /* Desktop hero uses `contain: layout paint` for resize perf; on mobile the
-       portrait is now inside normal flow, not absolute, so containment isn't
-       needed and would interfere with the natural content-driven height. */
+    /* Desktop hero uses `contain: layout paint` for resize perf; on mobile
+       the portrait is now in normal flow, not absolute, so containment isn't
+       needed and would fight the content-driven height. */
     contain: none;
   }
 
@@ -150,7 +149,19 @@ html.is-resizing .grain {
     right: auto;
     transform: none;
     order: -1;
-    width: min(380px, 100%);
+    /* Horizontally center the portrait even though text stays left-aligned. */
+    align-self: center;
+    /* Size the portrait so it + the caption + the headline fill the visible
+       viewport, which pushes the body paragraph just below the fold. The
+       `calc(100svh - 350px)` term subtracts a safe estimate of everything
+       stacked above/below the image in the fold (top bar ~94, hero pad-top
+       ~24, gap ~26, caption ~20, caption margin ~24, 4-line headline ~160).
+       On shorter phones this dominates and the portrait shrinks; on taller
+       phones the 380px cap or the `100%` content-box cap wins first.
+       `svh` enhances to the small-viewport unit on mobile Safari where
+       regular `vh` overstates available height when the URL bar is shown. */
+    width: min(380px, 100%, calc(100vh - 350px));
+    width: min(380px, 100%, calc(100svh - 350px));
     height: auto;
     max-height: none;
     aspect-ratio: 1 / 1;
@@ -163,8 +174,28 @@ html.is-resizing .grain {
     text-shadow: none;
   }
 
+  /* Tighten the gap between the caption and the headline on mobile so the
+     above-the-fold stack stays compact. (Desktop uses 48px via inline style.) */
+  .home-hero__text > .t-caption {
+    margin-bottom: 24px !important;
+  }
+
+  /* Pull the body paragraph a little closer to the headline on mobile so
+     it reliably lands within scroll reach rather than feeling detached.
+     Desktop uses 56px via inline style. */
   .home-hero__body {
+    margin-top: 36px !important;
     max-width: 56ch !important;
+  }
+
+  /* The global `--fs-display-l` clamps at a 48px minimum, which is too large
+     to fit the full headline above the fold on narrow phones. Override it
+     inside the hero only so the sentence always wraps cleanly without
+     cutting off. Line-height is loosened slightly from the default `1.0` so
+     a 4-line stack still breathes. */
+  .home-hero .t-display-l {
+    font-size: clamp(32px, 9vw, 44px) !important;
+    line-height: 1.08;
   }
 }
 
@@ -315,6 +346,11 @@ html.is-resizing .grain {
   min-width: 0;
 }
 
+/* Footer taglines — desktop/tablet (match previous inline clamp) */
+.footer-vision {
+  font-size: clamp(18px, 2.2vw, 24px);
+}
+
 /* Work page — body column lines up with § I · Overview (same label width + gap) */
 .work-entry-row {
   display: grid;
@@ -445,6 +481,7 @@ html.is-resizing .grain {
   .footer-vision {
     max-width: none !important;
     width: 100%;
+    font-size: clamp(22px, 5.5vw, 28px) !important;
   }
 
   /* Underline matches text width; text can still wrap within the line box */

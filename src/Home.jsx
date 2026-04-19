@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-
-const PROFILE_PIC_SRC = encodeURI("/assets/Profile Pic copy.png");
+import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
 
 /** Paths under /public/assets/Logos for Portfolio — home logo strip */
 const LOGOS_FOR_PORTFOLIO_DIR = "/assets/Logos for Portfolio";
@@ -100,7 +99,7 @@ export default function Home({ setRoute }) {
 
         <img
           className="home-hero__profile"
-          src={PROFILE_PIC_SRC}
+          src={HERO_PROFILE_PIC_SRC}
           alt=""
           width={1024}
           height={1024}

@@ -75,7 +75,6 @@ export default function Footer({ setRoute }) {
             alignItems: 'stretch',
             gap: 8,
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(18px, 2.2vw, 24px)',
             lineHeight: 1.25,
             letterSpacing: '-0.02em',
             maxWidth: 460,
@@ -104,7 +103,7 @@ export default function Footer({ setRoute }) {
           </a>
         </div>
 
-        {/* One row per pair: Index|Elsewhere, Work|LightWrk, About|LinkedIn, Contact|(empty) */}
+        {/* One row per pair: Index|Elsewhere, Work|LightWrk, About|LinkedIn, Contact|Music */}
         <div className="footer-columns">
           {navLink("home", "Index")}
           <div className="t-caption footer-columns__head">Elsewhere</div>
@@ -113,6 +112,7 @@ export default function Footer({ setRoute }) {
           {navLink("about", "About")}
           {extLink("LinkedIn ↗", "https://www.linkedin.com/in/lincoln-berbert/")}
           {navLink("contact", "Contact")}
+          {extLink("Music ↗", "https://beacons.page/berbymusic")}
         </div>
       </div>
 

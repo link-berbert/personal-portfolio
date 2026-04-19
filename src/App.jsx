@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TopBar from "./TopBar.jsx";
 import Home from "./Home.jsx";
+import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
 import Work from "./Work.jsx";
 import About from "./About.jsx";
 import Contact from "./Contact.jsx";
@@ -34,6 +35,23 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("lb-portfolio-route", JSON.stringify(route));
+  }, [route]);
+
+  /* Warm the hero portrait in the HTTP cache while the user is on Work /
+     About / Contact so returning to Home reuses it instantly. `index.html`
+     already preloads it on full page load; this covers SPA navigations away
+     from Home without a reload. */
+  useEffect(() => {
+    if (route === "home") return;
+    const id = "lb-hero-profile-pic-preload";
+    if (document.getElementById(id)) return;
+    const link = document.createElement("link");
+    link.id = id;
+    link.rel = "preload";
+    link.as = "image";
+    link.href = HERO_PROFILE_PIC_SRC;
+    link.setAttribute("fetchpriority", "low");
+    document.head.appendChild(link);
   }, [route]);
 
   useEffect(() => {
