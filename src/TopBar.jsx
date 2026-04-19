@@ -16,13 +16,22 @@ export default function TopBar({ route, setRoute }) {
     if (!el) return;
     const measure = () => {
       const h = el.offsetHeight;
+      if (h === headerHeightRef.current) return;
       headerHeightRef.current = h;
       setTranslateY((prev) => (h ? Math.max(prev, -h) : prev));
     };
     measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
+    /* Re-measure only when the stacked/row breakpoint flips — avoids the
+       per-frame ResizeObserver callback that was re-rendering this component
+       and thrashing style/paint every frame during a window resize. */
+    const mql = window.matchMedia("(min-width: 720px)");
+    const onChange = () => measure();
+    if (mql.addEventListener) mql.addEventListener("change", onChange);
+    else mql.addListener(onChange);
+    return () => {
+      if (mql.removeEventListener) mql.removeEventListener("change", onChange);
+      else mql.removeListener(onChange);
+    };
   }, []);
 
   useEffect(() => {

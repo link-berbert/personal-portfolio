@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+const PROFILE_PIC_SRC = encodeURI("/assets/Profile Pic copy.png");
+
 /** Paths under /public/assets/Logos for Portfolio — home logo strip */
 const LOGOS_FOR_PORTFOLIO_DIR = "/assets/Logos for Portfolio";
 
@@ -51,98 +53,61 @@ export default function Home({ setRoute }) {
 
   return (
     <main>
-      {/* Hero — content width matches all sections (see --max-content) */}
-      <section style={{
-        padding: 'clamp(80px, 12vw, 200px) clamp(20px, 5vw, 80px) clamp(60px, 8vw, 140px)',
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
-        width: '100%',
-        boxSizing: 'border-box',
-      }}>
-        <div data-reveal className="t-caption" style={{
-          color: 'var(--fg-secondary)', marginBottom: 48,
-          display: 'flex', alignItems: 'center', gap: 12,
-        }}>
-          <span style={{
-            display: 'inline-block', width: 28, height: 1,
-            background: 'var(--fg-tertiary)', verticalAlign: 'middle',
-          }}></span>
-          Lincoln Berbert · 2026
-        </div>
+      {/* Hero — spans the full viewport; copy stays left-aligned via padding */}
+      <section
+        className="home-hero"
+        style={{
+          position: 'relative',
+          padding: 'clamp(40px, 5vw, 80px) clamp(20px, 5vw, 80px) clamp(100px, 11vw, 180px)',
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+      >
+        <div className="home-hero__text">
+          <div data-reveal className="t-caption" style={{
+            color: 'var(--fg-secondary)', marginBottom: 48,
+            display: 'flex', alignItems: 'center', gap: 12,
+          }}>
+            <span style={{
+              display: 'inline-block', width: 28, height: 1,
+              background: 'var(--fg-tertiary)', verticalAlign: 'middle',
+            }}></span>
+            Lincoln Berbert · 2026
+          </div>
 
-        <h1 data-reveal className="t-display-l headline-measure" style={{
-          maxWidth: '18ch', marginBottom: 0,
-        }}>
-          Building worlds, systems, and infrastructure for{' '}
-          <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            machine intelligence.
-          </span>
-        </h1>
+          <h1 data-reveal className="t-display-l headline-measure" style={{
+            maxWidth: '18ch', marginBottom: 0,
+          }}>
+            Building worlds, systems, and infrastructure for{' '}
+            <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
+              machine intelligence.
+            </span>
+          </h1>
 
-        <div
-          data-reveal
-          className="hero-cta"
-          style={{
-            marginTop: 56,
-            width: '100%',
-          }}
-        >
           <p
-            className="t-body-l min-w-0"
+            data-reveal
+            className="t-body-l min-w-0 home-hero__body"
             style={{
+              marginTop: 56,
               color: 'var(--fg-secondary)',
               lineHeight: 1.6,
-              maxWidth: '56ch',
             }}
           >
             A multidisciplinary practice spanning music, creative direction, and physical AI.
             One point of view operating at the intersection of culture and infrastructure.
           </p>
-          <button
-            type="button"
-            onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
-            className="nav-item"
-            style={{
-              fontFamily: 'var(--font-mono)', fontSize: 11,
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              whiteSpace: 'nowrap', paddingBottom: 4,
-              background: 'none', border: 0, cursor: 'pointer',
-              color: 'var(--fg-primary)',
-              alignSelf: 'end',
-              flexShrink: 0,
-            }}
-          >
-            See the work ↓
-          </button>
         </div>
-      </section>
 
-      {/* Thesis */}
-      <section
-        className="page-section--split"
-        style={{
-        padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
-        borderTop: '1px solid var(--rule)',
-        display: 'grid',
-        gridTemplateColumns: '120px 1fr',
-        gap: 48,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
-        width: '100%',
-        boxSizing: 'border-box',
-      }}>
-        <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ I · Practice</div>
-        <div data-reveal className="min-w-0" style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(26px, 3.5vw, 46px)',
-          lineHeight: 1.2, letterSpacing: '-0.025em',
-          maxWidth: '26ch',
-        }}>
-          I don't believe the division between art and engineering is real.{' '}
-          <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            I believe the interesting work lives past the point where the categories stop working.
-          </span>
-        </div>
+        <img
+          className="home-hero__profile"
+          src={PROFILE_PIC_SRC}
+          alt=""
+          width={1024}
+          height={1024}
+          decoding="async"
+          fetchPriority="high"
+          aria-hidden="true"
+        />
       </section>
 
       {/* My work — logo marquee */}
@@ -154,25 +119,14 @@ export default function Home({ setRoute }) {
           boxSizing: 'border-box',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'baseline',
-            padding: '20px clamp(20px, 5vw, 80px)',
-            maxWidth: 'var(--max-content)',
-            margin: '0 auto',
-            width: '100%',
-            boxSizing: 'border-box',
-          }}
-        >
+        <div className="home-my-work__bar">
           <div className="t-caption" style={{ color: 'var(--fg-primary)' }}>
             My work
           </div>
           <button
             type="button"
             onClick={() => { setRoute('work'); window.scrollTo(0, 0); }}
-            className="nav-item"
+            className="nav-item home-my-work__cta"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 11,
@@ -184,7 +138,7 @@ export default function Home({ setRoute }) {
               color: 'var(--fg-primary)',
             }}
           >
-            Full index →
+            View projects →
           </button>
         </div>
 
@@ -226,12 +180,38 @@ export default function Home({ setRoute }) {
         </div>
       </section>
 
+      {/* Thesis — § I · Practice */}
+      <section
+        className="page-section--split"
+        style={{
+        padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
+        borderTop: '1px solid var(--rule)',
+        display: 'grid',
+        gridTemplateColumns: '120px 1fr',
+        gap: 48,
+        width: '100%',
+        boxSizing: 'border-box',
+      }}>
+        <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ I · Practice</div>
+        <div data-reveal className="min-w-0" style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(26px, 3.5vw, 46px)',
+          lineHeight: 1.2, letterSpacing: '-0.025em',
+          maxWidth: '26ch',
+        }}>
+          I don't believe the division between art and engineering is real.{' '}
+          <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
+            I believe the interesting work lives past the point where the categories stop working.
+          </span>
+        </div>
+      </section>
+
       {/* LightWrk feature */}
       <section style={{
         padding: 'clamp(64px, 8vw, 120px) clamp(20px, 5vw, 80px)',
         background: 'var(--fg-primary)',
         color: 'var(--bg-canvas)',
-        marginTop: 96,
+        marginTop: 0,
       }}>
         <div
           className="page-section--split"
@@ -239,8 +219,6 @@ export default function Home({ setRoute }) {
           display: 'grid',
           gridTemplateColumns: '120px 1fr',
           gap: 48,
-          maxWidth: 'var(--max-content)',
-          margin: '0 auto',
           width: '100%',
           boxSizing: 'border-box',
         }}
@@ -310,8 +288,6 @@ export default function Home({ setRoute }) {
         borderTop: '1px solid var(--rule)',
         display: 'grid', gridTemplateColumns: '120px 1fr',
         gap: 48,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -358,8 +334,6 @@ export default function Home({ setRoute }) {
         borderTop: '1px solid var(--fg-primary)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
         flexWrap: 'wrap', gap: 32,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}

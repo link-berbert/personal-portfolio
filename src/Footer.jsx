@@ -62,8 +62,6 @@ export default function Footer({ setRoute }) {
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         gap: 48,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}

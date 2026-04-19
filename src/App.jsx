@@ -55,6 +55,31 @@ export default function App() {
     return () => window.removeEventListener("message", onMsg);
   }, []);
 
+  /* Temporarily disable expensive paint effects (backdrop-filter, large
+     text-shadow) while the window is actively being resized. Chromium re-
+     rasterizes these on every resize frame which causes visible lag in
+     Chromium-based browsers (Arc, Dia, Comet). Safari/WebKit is unaffected
+     because its backdrop-filter path is hardware accelerated differently,
+     but this class is safe to apply there too. */
+  useEffect(() => {
+    const root = document.documentElement;
+    let timer = 0;
+    const onResize = () => {
+      root.classList.add("is-resizing");
+      if (timer) window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        root.classList.remove("is-resizing");
+        timer = 0;
+      }, 160);
+    };
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => {
+      window.removeEventListener("resize", onResize);
+      if (timer) window.clearTimeout(timer);
+      root.classList.remove("is-resizing");
+    };
+  }, []);
+
   const saveToFile = (edits) => {
     window.parent?.postMessage({ type: "__edit_mode_set_keys", edits }, "*");
   };
