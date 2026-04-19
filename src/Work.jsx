@@ -35,8 +35,6 @@ export default function Work({ setRoute }) {
       {/* Header */}
       <section style={{
         padding: `clamp(80px, 10vw, 160px) ${pm} clamp(40px, 5vw, 80px)`,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -56,6 +54,9 @@ export default function Work({ setRoute }) {
       <div style={{
         padding: `0 ${pm} clamp(28px, 4vw, 48px)`,
         borderBottom: '1px solid var(--rule)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
       }}>
         <div className="t-caption" style={{
           marginBottom: 14,
@@ -73,7 +74,6 @@ export default function Work({ setRoute }) {
             background: 'var(--rule)',
             gap: 1,
             padding: 1,
-            alignSelf: 'flex-start',
           }}
         >
           {workTabs.map(([k, label, hint]) => {
@@ -148,9 +148,7 @@ export default function Work({ setRoute }) {
             className="page-section--split"
             style={{
             padding: 'clamp(32px, 4vw, 64px) 0 24px',
-            display: 'grid', gridTemplateColumns: '120px 1fr', gap: 48,
-            maxWidth: 'var(--max-content)',
-            margin: '0 auto',
+            display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr', gap: 48,
             width: '100%',
             boxSizing: 'border-box',
             borderBottom: '1px solid var(--rule)',
@@ -177,9 +175,7 @@ export default function Work({ setRoute }) {
             className="page-section--split"
             style={{
             padding: 'clamp(32px, 4vw, 64px) 0 24px',
-            display: 'grid', gridTemplateColumns: '120px 1fr', gap: 48,
-            maxWidth: 'var(--max-content)',
-            margin: '0 auto',
+            display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr', gap: 48,
             width: '100%',
             boxSizing: 'border-box',
             borderBottom: '1px solid var(--rule)',
@@ -198,8 +194,6 @@ export default function Work({ setRoute }) {
             style={{
             padding: 'clamp(28px, 3.5vw, 52px) 0',
             borderBottom: '1px solid var(--rule)',
-            maxWidth: 'var(--max-content)',
-            margin: '0 auto',
             width: '100%',
             boxSizing: 'border-box',
           }}
@@ -274,8 +268,6 @@ function CreativeRow({ item, isLast }) {
       style={{
         padding: 'clamp(28px, 3.5vw, 52px) 0',
         borderBottom: isLast ? 'none' : '1px solid var(--rule)',
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
         transition: 'opacity var(--dur-micro) var(--ease)',

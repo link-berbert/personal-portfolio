@@ -70,8 +70,6 @@ export default function Contact() {
       {/* Header */}
       <section style={{
         padding: `clamp(80px, 10vw, 160px) ${pm} clamp(40px, 5vw, 64px)`,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -117,13 +115,17 @@ export default function Contact() {
         <>
           {/* Category select */}
           <section style={{
-            padding: `clamp(40px, 5vw, 72px) ${pm}`,
+            padding: `clamp(28px, 4vw, 48px) ${pm} clamp(28px, 4vw, 48px)`,
             borderTop: '1px solid var(--fg-primary)',
+            borderBottom: '1px solid var(--rule)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
           }}>
-            <div className="t-caption" style={{ marginBottom: 24, color: 'var(--fg-secondary)' }}>
+            <div className="t-caption" style={{ marginBottom: 14, color: 'var(--fg-secondary)' }}>
               What is this about?
             </div>
-            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', width: '100%' }}>
               {categories.map(c => (
                 <button key={c.id}
                   onClick={() => setCategory(c.id)}
@@ -154,16 +156,12 @@ export default function Contact() {
             className="contact-form"
             onSubmit={handleSubmit}
             style={{
-              padding: `0 ${pm} clamp(48px, 6vw, 96px)`,
+              padding: `clamp(28px, 4vw, 48px) ${pm} clamp(48px, 6vw, 96px)`,
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: '32px 48px',
-              maxWidth: 'var(--max-content)',
-              margin: '0 auto',
               width: '100%',
               boxSizing: 'border-box',
-              borderTop: '1px solid var(--rule)',
-              paddingTop: 40,
             }}>
 
             {[

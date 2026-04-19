@@ -488,9 +488,13 @@ html.is-resizing .grain {
 /* Work page — body column lines up with § I · Overview (same label width + gap) */
 .work-entry-row {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr) auto;
+  grid-template-columns: var(--page-split-label-width) minmax(0, 1fr) auto;
   gap: 48px;
   align-items: start;
+}
+
+.page-section--split .page-section__label {
+  white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------

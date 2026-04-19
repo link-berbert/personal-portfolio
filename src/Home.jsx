@@ -173,7 +173,7 @@ export default function Home({ setRoute }) {
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',
         display: 'grid',
-        gridTemplateColumns: '120px 1fr',
+        gridTemplateColumns: 'var(--page-split-label-width) 1fr',
         gap: 48,
         width: '100%',
         boxSizing: 'border-box',
@@ -203,7 +203,7 @@ export default function Home({ setRoute }) {
           className="page-section--split"
           style={{
           display: 'grid',
-          gridTemplateColumns: '120px 1fr',
+          gridTemplateColumns: 'var(--page-split-label-width) 1fr',
           gap: 48,
           width: '100%',
           boxSizing: 'border-box',
@@ -272,7 +272,7 @@ export default function Home({ setRoute }) {
         style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: '120px 1fr',
+        display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr',
         gap: 48,
         width: '100%',
         boxSizing: 'border-box',

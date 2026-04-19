@@ -243,6 +243,8 @@
   --s-11: 240px;
 
   --gutter: 32px;
+  /* Left rail for § labels — must fit longest uppercase mono line (e.g. § III · HOW I WORK) */
+  --page-split-label-width: 176px;
   --page-margin-desktop: 80px;
   --page-margin-mobile: 20px;
   --max-content: 1440px;

@@ -6,8 +6,6 @@ export default function About({ setRoute }) {
       {/* Header */}
       <section style={{
         padding: `clamp(80px, 10vw, 160px) ${pm} clamp(40px, 5vw, 80px)`,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -32,10 +30,8 @@ export default function About({ setRoute }) {
         style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: '120px 1fr',
+        display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr',
         gap: 48,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -73,10 +69,8 @@ export default function About({ setRoute }) {
         style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: '120px 1fr',
+        display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr',
         gap: 48,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -134,10 +128,8 @@ export default function About({ setRoute }) {
         style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: '120px 1fr',
+        display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr',
         gap: 48,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -174,10 +166,8 @@ export default function About({ setRoute }) {
         style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
         borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: '120px 1fr',
+        display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr',
         gap: 48,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}>
@@ -217,8 +207,6 @@ export default function About({ setRoute }) {
         borderTop: '1px solid var(--fg-primary)',
         display: 'flex', justifyContent: 'space-between',
         alignItems: 'center', flexWrap: 'wrap', gap: 24,
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box',
       }}
