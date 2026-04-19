@@ -884,14 +884,64 @@ html.is-resizing .grain {
     flex-shrink: 0 !important;
   }
 
+  /*
+   * One row when it fits: copyright left, theme + version right (space-between).
+   * When meta wraps alone, a single item on that flex line aligns to the start → left.
+   */
   .footer-bar {
-    flex-direction: column !important;
-    align-items: stretch !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     width: 100%;
-    gap: 10px !important;
+    gap: 10px 20px !important;
+  }
+
+  .footer-bar > span {
+    min-width: 0;
   }
 
   .footer-bar__meta {
-    align-self: flex-end;
+    align-self: center !important;
+    flex-shrink: 0;
+  }
+}
+
+/* Very narrow: sun stays top-right; version drops to full-width row below (left); v1 / Apr can break at <wbr> */
+@media (max-width: 400px) {
+  .footer-bar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: start !important;
+    gap: 8px 16px !important;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
+    justify-content: unset !important;
+  }
+
+  .footer-bar > span:first-child {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .footer-bar__meta {
+    display: contents !important;
+    align-self: unset !important;
+  }
+
+  .footer-bar > .footer-theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+  }
+
+  .footer-bar > .footer-bar__version {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+    text-align: left;
   }
 }

@@ -195,7 +195,9 @@ export default function Footer({ setRoute, theme, setTheme }) {
           style={{ display: 'flex', alignItems: 'center', gap: 16 }}
         >
           <ThemeToggle theme={theme} setTheme={setTheme} />
-          <span>v1 · Apr 2026</span>
+          <span className="footer-bar__version">
+            v1 ·<wbr /> Apr 2026
+          </span>
         </div>
       </div>
     </footer>
