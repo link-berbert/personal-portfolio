@@ -23,28 +23,6 @@ export const CREATIVE_WORK = [
       "A character built from contradiction — prophet and traitor, visionary and doubter. James Judas is a long-form narrative identity exploring the mythology of ambition, belief, and betrayal. Part music project, part world.",
     tags: ["Narrative", "Music", "Identity"],
   },
-  {
-    id: "the-prophet",
-    num: "03",
-    title: "The prophet persona.",
-    discipline: "Worldbuilding · Performance",
-    year: "2024 —",
-    role: "Concept, direction",
-    summary:
-      "An archetypal persona developed as a lens for creative direction and performance. The prophet sees before the world is ready. A study in conviction, timing, and the cost of speaking clearly.",
-    tags: ["Worldbuilding", "Performance"],
-  },
-  {
-    id: "the-future-is-bright",
-    num: "04",
-    title: "The future is bright.",
-    discipline: "Concept · Worldbuilding",
-    year: "2024",
-    role: "Concept, creative direction",
-    summary:
-      "A worldbuilding and aesthetic project exploring what optimism looks like when it is earned — not naïve, not performed. A study in how to hold belief while remaining honest about difficulty.",
-    tags: ["Concept", "Worldbuilding"],
-  },
 ];
 
 export const AI_WORK = [
