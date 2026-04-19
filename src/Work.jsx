@@ -74,13 +74,13 @@ export default function Work({ setRoute }) {
                   minWidth: 0,
                   display: 'flex',
                   flexDirection: 'column',
-                  alignItems: 'center',
+                  alignItems: 'stretch',
                   justifyContent: 'center',
                   gap: 4,
                   padding: '9px 12px',
                   border: 0,
                   cursor: 'pointer',
-                  textAlign: 'center',
+                  textAlign: 'left',
                   background: active ? 'var(--fg-primary)' : 'var(--bg-canvas)',
                   color: active ? 'var(--fg-inverse)' : 'var(--fg-secondary)',
                   transition: 'background var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease)',
@@ -107,7 +107,7 @@ export default function Work({ setRoute }) {
                     textTransform: 'none',
                     fontWeight: 400,
                     lineHeight: 1.35,
-                    maxWidth: '22ch',
+                    width: '100%',
                     color: active
                       ? 'color-mix(in oklab, var(--fg-inverse) 78%, transparent)'
                       : 'var(--fg-tertiary)',
@@ -138,7 +138,7 @@ export default function Work({ setRoute }) {
           }}
           >
             <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ I · Overview</div>
-            <p className="t-body-l min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
+            <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
               Music, identity systems, and long-form worldbuilding. Projects that take years
               to develop, resist easy categorization, and share a commitment to internal logic
               and atmospheric coherence.
@@ -167,10 +167,9 @@ export default function Work({ setRoute }) {
           }}
           >
             <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ I · Overview</div>
-            <p className="t-body-l min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-              Company building and systems thinking at the frontier of physical AI.
-              The goal is infrastructure — the evaluation and feedback layer that makes
-              intelligent machines genuinely trainable.
+            <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
+              Companies and creative structures — physical AI infrastructure, multidisciplinary
+              studios, and advisory practice — built for long-horizon work and coherent systems.
             </p>
           </div>
 
@@ -180,10 +179,6 @@ export default function Work({ setRoute }) {
             style={{
             padding: 'clamp(28px, 3.5vw, 52px) 0',
             borderBottom: '1px solid var(--rule)',
-            display: 'grid',
-            gridTemplateColumns: '56px 1fr auto',
-            gap: 24,
-            alignItems: 'start',
             maxWidth: 'var(--max-content)',
             margin: '0 auto',
             width: '100%',
@@ -200,17 +195,17 @@ export default function Work({ setRoute }) {
                 marginBottom: 12,
               }}>LightWrk.</h2>
               <div style={{ marginBottom: 14 }}>
-                {['Company · Physical AI', 'Founder'].map((t, i) => (
+                {[AI_WORK[0].discipline, AI_WORK[0].role].map((t, i) => (
                   <span key={i} className="t-mono" style={{
                     fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
                     color: 'var(--fg-tertiary)', marginRight: 20,
                   }}>{t}</span>
                 ))}
               </div>
-              <p className="t-body" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
+              <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
                 {AI_WORK[0].summary}
               </p>
-              <p className="t-body" style={{
+              <p className="t-body min-w-0" style={{
                 color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65, marginTop: 16,
               }}>
                 {AI_WORK[0].extended}
@@ -223,15 +218,10 @@ export default function Work({ setRoute }) {
                 marginTop: 24,
                 borderTop: '1px solid var(--rule)',
               }}>
-                {[
-                  ['Ontology design', 'Structured failure taxonomies for embodied AI systems — the vocabulary that makes evaluation possible.'],
-                  ['Rubric development', 'Scored, repeatable judgment frameworks. Human expertise made consistent enough to train on.'],
-                  ['Evaluation pipelines', 'End-to-end infrastructure connecting human assessors to model improvement loops.'],
-                  ['Failure taxonomy', 'Systematized categories of robot failure, designed to surface actionable training signal.'],
-                ].map(([label, desc]) => (
+                {AI_WORK[0].capabilities.map(([label, desc]) => (
                   <div key={label}>
                     <div className="t-caption" style={{ marginBottom: 8 }}>{label}</div>
-                    <p className="t-small" style={{ color: 'var(--fg-secondary)', lineHeight: 1.6 }}>
+                    <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', lineHeight: 1.65 }}>
                       {desc}
                     </p>
                   </div>
@@ -240,48 +230,16 @@ export default function Work({ setRoute }) {
             </div>
             <span className="t-mono work-entry__year" style={{
               color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap', paddingTop: 6,
-            }}>2024 —</span>
+            }}>{AI_WORK[0].year}</span>
           </div>
 
-          {/* Physical AI thinking entry */}
-          <div
-            className="work-entry-row"
-            style={{
-            padding: 'clamp(28px, 3.5vw, 52px) 0',
-            borderBottom: '1px solid var(--rule)',
-            display: 'grid',
-            gridTemplateColumns: '56px 1fr auto',
-            gap: 24,
-            alignItems: 'start',
-            maxWidth: 'var(--max-content)',
-            margin: '0 auto',
-            width: '100%',
-            boxSizing: 'border-box',
-          }}
-          >
-            <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)', paddingTop: 6 }}>02</span>
-            <div className="work-entry__body min-w-0">
-              <h2 style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(22px, 3vw, 42px)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.15,
-                marginBottom: 12,
-              }}>{AI_WORK[1].title}</h2>
-              <div style={{ marginBottom: 14 }}>
-                <span className="t-mono" style={{
-                  fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
-                  color: 'var(--fg-tertiary)', marginRight: 20,
-                }}>{AI_WORK[1].discipline}</span>
-              </div>
-              <p className="t-body" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-                {AI_WORK[1].summary}
-              </p>
-            </div>
-            <span className="t-mono work-entry__year" style={{
-              color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap', paddingTop: 6,
-            }}>{AI_WORK[1].year}</span>
-          </div>
+          {AI_WORK.slice(1).map((item, i, arr) => (
+            <CreativeRow
+              key={item.id}
+              item={item}
+              isLast={i === arr.length - 1}
+            />
+          ))}
         </div>
       )}
 
@@ -299,8 +257,6 @@ function CreativeRow({ item, isLast }) {
       style={{
         padding: 'clamp(28px, 3.5vw, 52px) 0',
         borderBottom: isLast ? 'none' : '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: '56px 1fr auto',
-        gap: 24, alignItems: 'start',
         maxWidth: 'var(--max-content)',
         margin: '0 auto',
         width: '100%',
@@ -328,7 +284,7 @@ function CreativeRow({ item, isLast }) {
             }}>{t}</span>
           ))}
         </div>
-        <p className="t-body" style={{
+        <p className="t-body min-w-0" style={{
           color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65,
         }}>{item.summary}</p>
         <div className="t-small" style={{ marginTop: 10, color: 'var(--fg-tertiary)' }}>

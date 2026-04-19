@@ -49,6 +49,115 @@ body {
   color: var(--selection-fg);
 }
 
+/* Home — scrolling logo strip (greyscale aligned to secondary text) */
+.logo-marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  padding: clamp(28px, 4.5vw, 52px) 0;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 72px,
+    black calc(100% - 72px),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 72px,
+    black calc(100% - 72px),
+    transparent
+  );
+}
+
+.logo-marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: logo-marquee-scroll 50s linear infinite;
+}
+
+.logo-marquee__group {
+  display: flex;
+  align-items: center;
+}
+
+.logo-marquee__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: content-box;
+  width: clamp(104px, 14vw, 140px);
+  height: clamp(36px, 5vw, 48px);
+  padding: 0 clamp(24px, 4vw, 48px);
+}
+
+/* James Judas — slightly larger than default */
+.logo-marquee__cell--judas {
+  width: clamp(144px, 19.5vw, 192px);
+  height: clamp(46px, 6.45vw, 63px);
+}
+
+/* Ghost Project IX — clearly larger than default / James Judas */
+.logo-marquee__cell--ghost {
+  width: clamp(152px, 21.25vw, 208px);
+  height: clamp(50px, 6.85vw, 68px);
+}
+
+/* LightWrk — wide wordmark; largest slot */
+.logo-marquee__cell--lightwrk {
+  width: clamp(190px, 26vw, 252px);
+  height: clamp(58px, 8vw, 79px);
+}
+
+.logo-marquee__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: grayscale(100%);
+  opacity: 0.76;
+}
+
+@keyframes logo-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .logo-marquee__track {
+    animation: none;
+    width: 100%;
+    max-width: var(--max-content);
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 20px;
+    padding: 0 clamp(20px, 5vw, 80px);
+    box-sizing: border-box;
+  }
+
+  .logo-marquee__group:last-child {
+    display: none;
+  }
+
+  .logo-marquee__group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 /* Hero intro row: body + “See the work” span the same content column as sections (--max-content) */
 .hero-cta {
   display: grid;
@@ -90,6 +199,14 @@ body {
   min-width: 0;
 }
 
+/* Work page — body column lines up with § I · Overview (same label width + gap) */
+.work-entry-row {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 48px;
+  align-items: start;
+}
+
 /* --------------------------------------------------------------------------
    Mobile — max-width 640px only (narrow phones / small portrait).
    Fixes wrapping, overflow, and sidebar-label grids that squash content.
@@ -124,22 +241,6 @@ body {
 
   .page-section--split .page-section__label {
     padding-top: 0 !important;
-  }
-
-  /* Home: Creative | AI columns */
-  .home-sw-cols {
-    grid-template-columns: 1fr !important;
-  }
-
-  .home-sw-cols > div:first-child {
-    border-right: none !important;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .home-sw-header {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 16px !important;
   }
 
   .lightwrk-cards {

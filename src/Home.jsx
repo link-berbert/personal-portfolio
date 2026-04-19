@@ -1,5 +1,28 @@
-import { useState, useEffect } from "react";
-import { CREATIVE_WORK, AI_WORK } from "./data.js";
+import { useEffect } from "react";
+
+/** Paths under /public/assets/Logos for Portfolio — home logo strip */
+const LOGOS_FOR_PORTFOLIO_DIR = "/assets/Logos for Portfolio";
+
+const WORK_LOGOS = [
+  { file: "1.png", alt: "Unnamed Holdings Co." },
+  { file: "2.png", alt: "Final Hour" },
+  { file: "3.png", alt: "James Judas", size: "judas" },
+  { file: "4.png", alt: "The Creator's Catalyst" },
+  { file: "5.png", alt: "LightWrk", size: "lightwrk" },
+  { file: "6.png", alt: "Ghost Project IX", size: "ghost" },
+].map(({ file, alt, size }) => ({
+  src: encodeURI(`${LOGOS_FOR_PORTFOLIO_DIR}/${file}`),
+  alt,
+  size,
+}));
+
+function logoMarqueeCellClass(logo) {
+  let c = "logo-marquee__cell";
+  if (logo.size === "judas") c += " logo-marquee__cell--judas";
+  if (logo.size === "ghost") c += " logo-marquee__cell--ghost";
+  if (logo.size === "lightwrk") c += " logo-marquee__cell--lightwrk";
+  return c;
+}
 
 function useReveal() {
   useEffect(() => {
@@ -21,61 +44,6 @@ function useReveal() {
     });
     return () => io.disconnect();
   }, []);
-}
-
-function WorkRow({ item, onClick }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <div
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      data-reveal
-      className="work-entry-row"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '56px 1fr auto',
-        gap: 24, alignItems: 'baseline',
-        padding: '28px 0',
-        borderBottom: '1px solid var(--rule)',
-        cursor: onClick ? 'pointer' : 'default',
-        transition: 'background var(--dur-micro) var(--ease)',
-      }}>
-      <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)' }}>
-        {item.num}
-      </span>
-      <div className="work-entry__body min-w-0">
-        <div style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(20px, 2.5vw, 30px)',
-          letterSpacing: '-0.02em', lineHeight: 1.15,
-          color: hovered ? 'var(--fg-primary)' : 'var(--fg-primary)',
-          transition: 'opacity var(--dur-micro) var(--ease)',
-          opacity: hovered ? 1 : 0.9,
-        }}>
-          {item.title}
-        </div>
-        <div className="t-small" style={{ marginTop: 6, color: 'var(--fg-secondary)' }}>
-          {item.summary}
-        </div>
-        <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {item.tags && item.tags.map(t => (
-            <span key={t} className="t-mono" style={{
-              fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
-              color: 'var(--fg-tertiary)', padding: '2px 0',
-            }}>{t}</span>
-          ))}
-        </div>
-      </div>
-      <div className="t-mono work-entry__year" style={{
-        color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
-        opacity: hovered ? 1 : 0.6,
-        transition: 'opacity var(--dur-micro) var(--ease)',
-      }}>
-        {item.year}
-      </div>
-    </div>
-  );
 }
 
 export default function Home({ setRoute }) {
@@ -177,112 +145,83 @@ export default function Home({ setRoute }) {
         </div>
       </section>
 
-      {/* Selected Work preview — split */}
-      <section style={{
-        borderTop: '1px solid var(--fg-primary)',
-        maxWidth: 'var(--max-content)',
-        margin: '0 auto',
-        width: '100%',
-        boxSizing: 'border-box',
-      }}>
-        <div
-          className="home-sw-header"
-          style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-          padding: '20px clamp(20px, 5vw, 80px)',
+      {/* My work — logo marquee */}
+      <section
+        className="home-my-work"
+        style={{
+          borderTop: '1px solid var(--fg-primary)',
+          width: '100%',
+          boxSizing: 'border-box',
         }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'baseline',
+            padding: '20px clamp(20px, 5vw, 80px)',
+            maxWidth: 'var(--max-content)',
+            margin: '0 auto',
+            width: '100%',
+            boxSizing: 'border-box',
+          }}
         >
           <div className="t-caption" style={{ color: 'var(--fg-primary)' }}>
-            Selected work · Ongoing
+            My work
           </div>
           <button
-            onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
+            type="button"
+            onClick={() => { setRoute('work'); window.scrollTo(0, 0); }}
             className="nav-item"
             style={{
-              fontFamily: 'var(--font-mono)', fontSize: 11,
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              background: 'none', border: 0, cursor: 'pointer',
+              fontFamily: 'var(--font-mono)',
+              fontSize: 11,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              background: 'none',
+              border: 0,
+              cursor: 'pointer',
               color: 'var(--fg-primary)',
-            }}>
+            }}
+          >
             Full index →
           </button>
         </div>
 
-        <div
-          className="home-sw-cols"
-          style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr',
-          borderTop: '1px solid var(--rule)',
-        }}
-        >
-          {/* Creative column */}
-          <div style={{
-            padding: 'clamp(32px, 4vw, 64px) clamp(20px, 5vw, 80px)',
-            borderRight: '1px solid var(--rule)',
-          }}>
-            <div className="t-caption" style={{ marginBottom: 32, color: 'var(--fg-secondary)' }}>
-              Creative
+        <div className="logo-marquee" aria-label="Work and affiliations">
+          <div className="logo-marquee__track">
+            <div className="logo-marquee__group">
+              {WORK_LOGOS.map((logo) => (
+                <div
+                  key={logo.src}
+                  className={logoMarqueeCellClass(logo)}
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="logo-marquee__img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))}
             </div>
-            {CREATIVE_WORK.slice(0, 2).map(item => (
-              <div key={item.id} data-reveal style={{ marginBottom: 40 }}>
-                <div style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(20px, 2.2vw, 28px)',
-                  letterSpacing: '-0.02em', lineHeight: 1.2,
-                }}>
-                  {item.title}
+            <div className="logo-marquee__group" aria-hidden="true">
+              {WORK_LOGOS.map((logo) => (
+                <div
+                  key={`dup-${logo.src}`}
+                  className={logoMarqueeCellClass(logo)}
+                >
+                  <img
+                    src={logo.src}
+                    alt=""
+                    className="logo-marquee__img"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-                <div className="t-small" style={{ marginTop: 8, color: 'var(--fg-secondary)' }}>
-                  {item.discipline} · {item.year}
-                </div>
-              </div>
-            ))}
-            <button
-              onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
-              style={{
-                fontFamily: 'var(--font-mono)', fontSize: 11,
-                letterSpacing: '0.08em', textTransform: 'uppercase',
-                background: 'none', border: 0, cursor: 'pointer',
-                color: 'var(--fg-tertiary)', padding: 0, marginTop: 8,
-              }}>
-              All creative work →
-            </button>
-          </div>
-
-          {/* AI column */}
-          <div style={{
-            padding: 'clamp(32px, 4vw, 64px) clamp(20px, 5vw, 80px)',
-          }}>
-            <div className="t-caption" style={{ marginBottom: 32, color: 'var(--fg-secondary)' }}>
-              AI / Companies
+              ))}
             </div>
-            {AI_WORK.slice(0, 1).map(item => (
-              <div key={item.id} data-reveal style={{ marginBottom: 40 }}>
-                <div style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(20px, 2.2vw, 28px)',
-                  letterSpacing: '-0.02em', lineHeight: 1.2,
-                }}>
-                  {item.title}
-                </div>
-                <div className="t-small" style={{ marginTop: 8, color: 'var(--fg-secondary)' }}>
-                  {item.discipline} · {item.year}
-                </div>
-                <p className="t-small" style={{ marginTop: 12, color: 'var(--fg-secondary)', maxWidth: '44ch', lineHeight: 1.6 }}>
-                  {item.summary}
-                </p>
-              </div>
-            ))}
-            <button
-              onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
-              style={{
-                fontFamily: 'var(--font-mono)', fontSize: 11,
-                letterSpacing: '0.08em', textTransform: 'uppercase',
-                background: 'none', border: 0, cursor: 'pointer',
-                color: 'var(--fg-tertiary)', padding: 0, marginTop: 8,
-              }}>
-              All AI work →
-            </button>
           </div>
         </div>
       </section>

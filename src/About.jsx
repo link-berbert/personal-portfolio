@@ -191,7 +191,7 @@ export default function About({ setRoute }) {
         >
           {[
             ['Companies', ['LightWrk (founder) · 2024 —']],
-            ['Creative', ['Berby (artist) · 2021 —', 'James Judas · 2023 —']],
+            ['Creative', ['Berby (artist) · 2022 —', 'James Judas · 2023 —']],
             ['Focus areas', ['Physical AI evaluation', 'Structured human feedback', 'Creative direction', 'Worldbuilding · narrative identity']],
             ['Interests', ['World models', 'Embodied AI', 'Frontier systems', 'Long-form narrative', 'Aesthetic systems']],
           ].map(([k, items]) => (
