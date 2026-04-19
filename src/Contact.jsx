@@ -29,8 +29,8 @@ export default function Contact() {
           <span style={{ display: 'inline-block', width: 28, height: 1, background: 'var(--fg-tertiary)', verticalAlign: 'middle' }}></span>
           Contact
         </div>
-        <h1 className="t-display-l headline-measure" style={{ maxWidth: '16ch' }}>
-          Write.{' '}
+        <h1 className="t-display-l headline-measure" style={{ maxWidth: '20ch' }}>
+          Send a note.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
             I read everything.
           </span>
@@ -179,7 +179,7 @@ export default function Contact() {
                 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--fg-primary)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'var(--fg-primary)'; e.currentTarget.style.color = 'var(--bg-canvas)'; }}>
-                Send →
+                Get in touch →
               </button>
             </div>
           </form>

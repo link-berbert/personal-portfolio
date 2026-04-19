@@ -12,23 +12,26 @@ const TWEAK_DEFAULTS = {
   grain: false,
 };
 
+const ROUTES = new Set(["home", "work", "about", "contact"]);
+
+function readStoredRoute() {
+  try {
+    const raw = localStorage.getItem("lb-portfolio-route");
+    if (!raw) return "home";
+    const v = JSON.parse(raw);
+    if (typeof v === "string" && ROUTES.has(v)) return v;
+  } catch {
+    /* ignore */
+  }
+  return "home";
+}
+
 export default function App() {
-  const [route, setRoute] = useState("home");
+  const [route, setRoute] = useState(readStoredRoute);
   const [type, setType] = useState(TWEAK_DEFAULTS.typeVariation);
   const [grain, setGrain] = useState(TWEAK_DEFAULTS.grain);
   const [editOpen, setEditOpen] = useState(false);
-  const [pageKey, setPageKey] = useState(0);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("lb-portfolio-route");
-    if (saved) {
-      try {
-        setRoute(JSON.parse(saved));
-      } catch {
-        /* ignore */
-      }
-    }
-  }, []);
   useEffect(() => {
     localStorage.setItem("lb-portfolio-route", JSON.stringify(route));
   }, [route]);
@@ -58,7 +61,6 @@ export default function App() {
 
   const navigate = (r) => {
     setRoute(r);
-    setPageKey((k) => k + 1);
     window.scrollTo(0, 0);
   };
 
@@ -81,7 +83,7 @@ export default function App() {
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <TopBar route={route} setRoute={navigate} />
       <div
-        key={pageKey}
+        key={route}
         className="page-enter"
         ref={(el) => {
           if (el) requestAnimationFrame(() => el.classList.add("page-active"));

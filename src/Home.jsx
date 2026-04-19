@@ -431,7 +431,7 @@ export default function Home({ setRoute }) {
           lineHeight: 1.05, letterSpacing: '-0.025em',
           maxWidth: '20ch',
         }}>
-          Write.{' '}
+          Send a note.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
             I read everything.
           </span>
