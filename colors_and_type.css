@@ -1,0 +1,355 @@
+/* ============================================================
+   LINCOLN BERBERT — DESIGN TOKENS
+   Single source of truth for color, type, spacing, motion.
+   ============================================================ */
+
+/* --- Webfonts (Google Fonts CDN — substitutes, see README) --- */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500;600&display=swap');
+
+/* ============================================================
+   COLOR — warm monochrome + single restrained accent
+   ============================================================ */
+
+:root {
+  /* Neutral ramp (warm, paper-based, not cool grey) */
+  --paper-00: #FBFAF7;   /* lightest highlight */
+  --paper-05: #F4F2EE;   /* DEFAULT canvas (light) */
+  --paper-10: #EBE8E2;   /* elevated */
+  --paper-20: #D9D5CC;   /* subtle borders */
+  --paper-30: #A8A49A;   /* dim text */
+  --paper-40: #6E6B65;   /* secondary text */
+  --paper-50: #3F3E3B;   /* near-black elevated */
+  --paper-60: #1A1A18;   /* near-black */
+  --paper-70: #111110;   /* DEFAULT ink (light mode text) */
+  --paper-80: #0B0B0A;   /* DEFAULT canvas (dark) */
+
+  /* No chromatic accent — emphasis is pure ink.
+     The system is strictly monochrome; "accent" = ink primary. */
+
+  /* Light mode semantic (default) */
+  --bg-canvas: var(--paper-05);
+  --bg-elevated: var(--paper-00);
+  --bg-inset: var(--paper-10);
+  --fg-primary: var(--paper-70);
+  --fg-secondary: var(--paper-40);
+  --fg-tertiary: var(--paper-30);
+  --fg-inverse: var(--paper-05);
+  --rule: var(--paper-20);
+  --rule-strong: var(--paper-40);
+  --accent: var(--paper-70);           /* ink */
+  --accent-hover: var(--paper-60);
+  --accent-bg: var(--paper-10);
+  --selection-bg: var(--paper-70);
+  --selection-fg: var(--paper-00);
+}
+
+[data-theme="dark"] {
+  --bg-canvas: var(--paper-80);
+  --bg-elevated: var(--paper-60);
+  --bg-inset: var(--paper-50);
+  --fg-primary: #ECEAE4;
+  --fg-secondary: #A8A49A;
+  --fg-tertiary: #6E6B65;
+  --fg-inverse: var(--paper-70);
+  --rule: #2A2A27;
+  --rule-strong: #6E6B65;
+  --accent: #ECEAE4;                 /* ink inverts to paper */
+  --accent-hover: #FFFFFF;
+  --accent-bg: #2A2A27;
+}
+
+/* ============================================================
+   TYPOGRAPHY — three directions, toggled via data-type on <html>
+   Default: V1 Editorial
+   ============================================================ */
+
+:root {
+  --font-display: "Newsreader", "Times New Roman", serif;
+  --font-body: "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --display-feature: "ss01", "ss02";
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-italic-style: italic;
+}
+
+[data-type="research"] {
+  --font-display: "Space Grotesk", "Helvetica Neue", sans-serif;
+  --font-body: "Geist", -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+}
+
+[data-type="manifesto"] {
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Geist", -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --display-weight: 400;
+  --display-tracking: -0.02em;
+}
+
+/* ============================================================
+   TYPE SCALE
+   ============================================================ */
+
+:root {
+  --fs-display-xl: clamp(64px, 9vw, 128px);
+  --fs-display-l:  clamp(48px, 6.5vw, 88px);
+  --fs-display-m:  clamp(36px, 4.5vw, 60px);
+  --fs-h1: 40px;
+  --fs-h2: 32px;
+  --fs-h3: 24px;
+  --fs-h4: 20px;
+  --fs-body-l: 19px;
+  --fs-body: 17px;
+  --fs-small: 14px;
+  --fs-caption: 12px;
+
+  --lh-display: 0.98;
+  --lh-heading: 1.15;
+  --lh-body: 1.55;
+  --lh-tight: 1.1;
+
+  --letter-display: -0.03em;
+  --letter-heading: -0.02em;
+  --letter-body: 0em;
+  --letter-caption: 0.08em; /* uppercase mono labels */
+}
+
+/* ============================================================
+   SEMANTIC TEXT STYLES
+   ============================================================ */
+
+.t-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--display-tracking);
+  font-weight: var(--display-weight);
+  text-wrap: balance;
+}
+
+.t-display-l {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-l);
+  line-height: 1.0;
+  letter-spacing: var(--display-tracking);
+  font-weight: var(--display-weight);
+  text-wrap: balance;
+}
+
+.t-display-m {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-m);
+  line-height: 1.05;
+  letter-spacing: var(--display-tracking);
+  font-weight: var(--display-weight);
+  text-wrap: balance;
+}
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--letter-heading);
+  font-weight: var(--display-weight);
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--letter-heading);
+  font-weight: var(--display-weight);
+}
+
+.t-h3 {
+  font-family: var(--font-body);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+.t-h4 {
+  font-family: var(--font-body);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-heading);
+  font-weight: 500;
+}
+
+.t-body-l {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  text-wrap: pretty;
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  text-wrap: pretty;
+}
+
+.t-small {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--fg-secondary);
+}
+
+.t-caption {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  letter-spacing: var(--letter-caption);
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.t-italic {
+  font-style: italic;
+}
+
+/* ============================================================
+   SPACING — 4px base, eight significant stops
+   ============================================================ */
+
+:root {
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 160px;
+  --s-11: 240px;
+
+  --gutter: 32px;
+  --page-margin-desktop: 80px;
+  --page-margin-mobile: 20px;
+  --max-content: 1440px;
+  --measure: 68ch;
+}
+
+/* ============================================================
+   RADII — minimal; the system is mostly hard corners
+   ============================================================ */
+
+:root {
+  --r-0: 0;
+  --r-1: 2px;     /* inputs, small controls */
+  --r-2: 4px;     /* tags, chips (rare) */
+  --r-full: 9999px; /* only the scroll indicator */
+}
+
+/* ============================================================
+   MOTION — one ease, three durations
+   ============================================================ */
+
+:root {
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1.0);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 140ms;
+  --dur-ui: 280ms;
+  --dur-page: 480ms;
+  --dur-reveal: 800ms;
+}
+
+/* ============================================================
+   SHADOWS — exists only for overlays; otherwise none
+   ============================================================ */
+
+:root {
+  --shadow-none: none;
+  --shadow-overlay: 0 1px 2px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.10);
+}
+
+[data-theme="dark"] {
+  --shadow-overlay: 0 1px 2px rgba(0,0,0,0.4), 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* ============================================================
+   BASE RESET + DEFAULTS
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg-canvas);
+  color: var(--fg-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--selection-bg); color: var(--selection-fg); }
+
+h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: inherit; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+img { max-width: 100%; display: block; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+
+/* ============================================================
+   LINK — the signature interaction
+   first letter turns vermillion on hover
+   ============================================================ */
+
+.link {
+  position: relative;
+  display: inline-block;
+  transition: opacity var(--dur-micro) var(--ease);
+}
+.link::first-letter {
+  transition: color var(--dur-micro) var(--ease);
+}
+.link:hover::first-letter {
+  color: var(--accent);
+}
+
+/* ============================================================
+   NAV UNDERLINE — rule grows from 0 to 100%
+   ============================================================ */
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 1px;
+  width: 0;
+  background: currentColor;
+  transition: width var(--dur-ui) var(--ease);
+}
+.nav-item:hover::after,
+.nav-item[aria-current="page"]::after {
+  width: 100%;
+}
