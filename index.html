@@ -41,10 +41,6 @@
     /* Selection */
     ::selection { background: var(--selection-bg); color: var(--selection-fg); }
 
-    /* Mobile nav — hide labels on small screens */
-    @media (max-width: 560px) {
-      .nav-label { display: none; }
-    }
   </style>
 </head>
 <body>
@@ -65,14 +61,12 @@ const { useState, useEffect } = React;
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "typeVariation": "default",
-  "theme": "light",
   "grain": false
 }/*EDITMODE-END*/;
 
 function App() {
   const [route, setRoute] = useState('home');
   const [type, setType] = useState(TWEAK_DEFAULTS.typeVariation);
-  const [theme, setTheme] = useState(TWEAK_DEFAULTS.theme);
   const [grain, setGrain] = useState(TWEAK_DEFAULTS.grain);
   const [editOpen, setEditOpen] = useState(false);
   const [pageKey, setPageKey] = useState(0);
@@ -88,11 +82,11 @@ function App() {
     localStorage.setItem('lb-portfolio-route', JSON.stringify(route));
   }, [route]);
 
-  // Apply design tokens to html element
+  // Apply design tokens to html element (light mode only — no dark theme)
   useEffect(() => {
     document.documentElement.dataset.type = type === 'default' ? '' : type;
-    document.documentElement.dataset.theme = theme;
-  }, [type, theme]);
+    document.documentElement.removeAttribute('data-theme');
+  }, [type]);
 
   // Grain
   useEffect(() => {
@@ -130,12 +124,7 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <TopBar
-        route={route}
-        setRoute={navigate}
-        theme={theme}
-        setTheme={t => { setTheme(t); saveToFile({ theme: t }); }}
-      />
+      <TopBar route={route} setRoute={navigate} />
       <div
         key={pageKey}
         className="page-enter"
@@ -150,7 +139,6 @@ function App() {
         open={editOpen}
         onClose={() => setEditOpen(false)}
         type={type} setType={setType}
-        theme={theme} setTheme={setTheme}
         grain={grain} setGrain={setGrain}
         saveToFile={saveToFile}
       />

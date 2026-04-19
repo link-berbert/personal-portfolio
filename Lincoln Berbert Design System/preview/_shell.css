@@ -1,0 +1,29 @@
+/* Shared shell for preview cards */
+@import url("../colors_and_type.css");
+
+html, body {
+  margin: 0;
+  background: var(--bg-canvas);
+  color: var(--fg-primary);
+  font-family: var(--font-body);
+  width: 700px;
+  overflow: hidden;
+}
+.card {
+  box-sizing: border-box;
+  padding: 20px 24px;
+  width: 700px;
+}
+.card--pad-l { padding: 32px 32px; }
+.card--dark { background: #0B0B0A; color: #ECEAE4; }
+.row { display: flex; align-items: center; gap: 12px; }
+.stack { display: flex; flex-direction: column; gap: 8px; }
+.rule-top { border-top: 1px solid var(--rule); padding-top: 16px; }
+.rule-bottom { border-bottom: 1px solid var(--rule); padding-bottom: 16px; }
+.dim { color: var(--fg-secondary); }
+.tiny { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-tertiary); }
+.swatch { width: 100%; height: 64px; border: 1px solid var(--rule); }
+.grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }

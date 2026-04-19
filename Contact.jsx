@@ -153,10 +153,10 @@ function Contact() {
               alignItems: 'center', marginTop: 8,
               flexWrap: 'wrap', gap: 16,
             }}>
-              <a href="mailto:lincoln@lightwrk.co"
+              <a href="mailto:lincoln.berbert@lightwrk.ai"
                 className="t-mono"
                 style={{ color: 'var(--fg-tertiary)', fontSize: 12 }}>
-                Or email directly: lincoln@lightwrk.co ↗
+                Or email directly: lincoln.berbert@lightwrk.ai ↗
               </a>
               <button type="submit"
                 style={{

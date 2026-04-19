@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Form inputs</title><link rel="stylesheet" href="_shell.css"></head>
+<body><div class="card card--pad-l">
+<style>.f{display:flex;flex-direction:column;gap:6px}.f label{font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#6E6B65}
+.f input,.f textarea{font-family:'Geist',sans-serif;font-size:16px;padding:8px 0;border:0;border-bottom:1px solid #D9D5CC;background:transparent;color:#111110;outline:0;transition:border-color .14s cubic-bezier(0.2,.6,.2,1)}
+.f input:focus,.f textarea:focus{border-color:#111110}
+.f input::placeholder{color:#A8A49A}
+</style>
+<div class="tiny">Form inputs — single hairline, mono label, no container</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:14px">
+  <div class="f"><label>Name</label><input value="Lincoln Berbert"></div>
+  <div class="f"><label>Email</label><input value="" placeholder="you@domain.com"></div>
+  <div class="f" style="grid-column:1/-1"><label>Message</label><input placeholder="A sentence is usually enough."></div>
+</div>
+</div></body></html>

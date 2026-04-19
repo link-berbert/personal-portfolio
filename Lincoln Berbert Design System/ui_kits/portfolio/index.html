@@ -1,0 +1,113 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Lincoln Berbert — Portfolio</title>
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html,body{height:100%}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:200;opacity:0;mix-blend-mode:multiply;transition:opacity .3s;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+  .grain.on{opacity:1}
+  .fade-enter{opacity:0;transform:translateY(6px)}
+  .fade-active{opacity:1;transform:translateY(0);transition:opacity 480ms cubic-bezier(0.2,0.6,0.2,1), transform 480ms cubic-bezier(0.2,0.6,0.2,1)}
+  .tweak-btn{position:fixed;bottom:24px;right:24px;z-index:99;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;background:var(--fg-primary);color:var(--bg-canvas);cursor:pointer;border:0}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="grain" id="grain"></div>
+
+<script src="data.js"></script>
+<script type="text/babel" src="TopBar.jsx"></script>
+<script type="text/babel" src="ProjectRow.jsx"></script>
+<script type="text/babel" src="Home.jsx"></script>
+<script type="text/babel" src="WorkIndex.jsx"></script>
+<script type="text/babel" src="ProjectDetail.jsx"></script>
+<script type="text/babel" src="About.jsx"></script>
+<script type="text/babel" src="Writing.jsx"></script>
+<script type="text/babel" src="Contact.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+<script type="text/babel" src="Tweaks.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "typeVariation": "default",
+  "theme": "light",
+  "grain": false
+}/*EDITMODE-END*/;
+
+function App() {
+  const [route, setRoute] = useState('home');
+  const [projectId, setProjectId] = useState(null);
+  const [type, setType] = useState(TWEAK_DEFAULTS.typeVariation);
+  const [theme, setTheme] = useState(TWEAK_DEFAULTS.theme);
+  const [grain, setGrain] = useState(TWEAK_DEFAULTS.grain);
+  const [accent, setAccent] = useState('#111110'); // kept for API, unused (monochrome)
+  const [editOpen, setEditOpen] = useState(false);
+  const [tweakUnlocked, setTweakUnlocked] = useState(false);
+
+  // Persist route in localStorage
+  useEffect(()=>{
+    const saved = localStorage.getItem('lb-route');
+    if (saved) { try { const { r, pid } = JSON.parse(saved); setRoute(r); setProjectId(pid); } catch(e){} }
+  }, []);
+  useEffect(()=>{ localStorage.setItem('lb-route', JSON.stringify({r:route,pid:projectId})); }, [route, projectId]);
+
+  // Apply tokens to html
+  useEffect(()=>{
+    document.documentElement.dataset.type = type;
+    document.documentElement.dataset.theme = theme;
+  }, [type, theme]);
+  useEffect(()=>{ document.getElementById('grain').classList.toggle('on', grain); }, [grain]);
+
+  // Edit mode protocol — register listener BEFORE announcing availability
+  useEffect(()=>{
+    const onMsg = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setEditOpen(true);
+      if (e.data?.type === '__deactivate_edit_mode') setEditOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent?.postMessage({type:'__edit_mode_available'}, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const saveToFile = (edits) => {
+    window.parent?.postMessage({type:'__edit_mode_set_keys', edits}, '*');
+  };
+
+  const openProject = (id) => { setProjectId(id); setRoute('project'); window.scrollTo(0,0); };
+  const setRouteScroll = (r) => { setRoute(r); window.scrollTo(0,0); };
+
+  let screen;
+  switch (route) {
+    case 'work': screen = <WorkIndex openProject={openProject} />; break;
+    case 'project': screen = <ProjectDetail id={projectId} setRoute={setRouteScroll} openProject={openProject} />; break;
+    case 'about': screen = <About />; break;
+    case 'writing': screen = <Writing />; break;
+    case 'contact': screen = <Contact />; break;
+    default: screen = <Home setRoute={setRouteScroll} openProject={openProject} />;
+  }
+
+  return (
+    <div style={{minHeight:'100vh',display:'flex',flexDirection:'column'}}>
+      <TopBar route={route==='project'?'work':route} setRoute={setRouteScroll} theme={theme} setTheme={(t)=>{setTheme(t);saveToFile({theme:t});}} />
+      <div key={route+projectId} className="fade-enter fade-active" style={{flex:1}}>
+        {screen}
+      </div>
+      <Footer setRoute={setRouteScroll} />
+
+      <Tweaks open={editOpen} onClose={()=>setEditOpen(false)}
+              type={type} setType={setType}
+              theme={theme} setTheme={setTheme}
+              grain={grain} setGrain={setGrain}
+              accent={accent} setAccent={setAccent}
+              saveToFile={saveToFile} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body></html>

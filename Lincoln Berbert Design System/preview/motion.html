@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Motion</title><link rel="stylesheet" href="_shell.css"></head>
+<body><div class="card card--pad-l">
+<style>.mrow{display:grid;grid-template-columns:120px 1fr auto;gap:14px;align-items:center;padding:6px 0;border-bottom:1px solid #EBE8E2}.mrow:last-child{border-bottom:0}.l{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.05em;color:#6E6B65}.v{font-family:'Geist Mono',monospace;font-size:10.5px;color:#A8A49A}.trk{height:2px;background:#EBE8E2;position:relative;overflow:hidden}.dot{position:absolute;top:-3px;left:0;width:8px;height:8px;background:#D84B20}
+@keyframes slide{0%,15%{left:0}85%,100%{left:calc(100% - 8px)}}
+.dot{animation:slide 2.2s cubic-bezier(0.2, 0.6, 0.2, 1.0) infinite}
+</style>
+<div class="tiny">One ease curve · three durations</div>
+<div style="margin-top:14px">
+<div class="mrow"><div class="l">dur-micro</div><div class="trk"><div class="dot" style="animation-duration:1.4s"></div></div><div class="v">140 ms</div></div>
+<div class="mrow"><div class="l">dur-ui</div><div class="trk"><div class="dot" style="animation-duration:1.8s"></div></div><div class="v">280 ms</div></div>
+<div class="mrow"><div class="l">dur-page</div><div class="trk"><div class="dot" style="animation-duration:2.4s"></div></div><div class="v">480 ms</div></div>
+<div class="mrow"><div class="l">dur-reveal</div><div class="trk"><div class="dot" style="animation-duration:3.0s"></div></div><div class="v">800 ms</div></div>
+</div>
+<div class="tiny dim" style="margin-top:14px">cubic-bezier(0.2, 0.6, 0.2, 1.0) · slightly overdamped · confident, never bouncy</div>
+</div></body></html>

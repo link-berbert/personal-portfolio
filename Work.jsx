@@ -3,6 +3,11 @@ function Work({ setRoute }) {
 
   const pm = 'clamp(20px, 5vw, 80px)';
 
+  const workTabs = [
+    ['creative', 'Creative', 'Music, identity, worldbuilding'],
+    ['ai', 'AI / Companies', 'Physical AI & company building'],
+  ];
+
   return (
     <main>
       {/* Header */}
@@ -23,33 +28,87 @@ function Work({ setRoute }) {
         </h1>
       </section>
 
-      {/* Section tabs */}
+      {/* Section tabs — segmented control + hints */}
       <div style={{
-        display: 'flex', gap: 0,
-        padding: `0 ${pm}`,
-        borderBottom: '1px solid var(--fg-primary)',
+        padding: `0 ${pm} clamp(28px, 4vw, 48px)`,
+        borderBottom: '1px solid var(--rule)',
       }}>
-        {[['creative', 'Creative'], ['ai', 'AI / Companies']].map(([k, label]) => (
-          <button key={k}
-            onClick={() => setSection(k)}
-            style={{
-              fontFamily: 'var(--font-mono)', fontSize: 11,
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              padding: '12px 0', marginRight: 40,
-              border: 0, background: 'none', cursor: 'pointer',
-              color: section === k ? 'var(--fg-primary)' : 'var(--fg-tertiary)',
-              borderBottom: section === k ? '1px solid var(--fg-primary)' : '1px solid transparent',
-              marginBottom: -1,
-              transition: 'color var(--dur-ui) var(--ease)',
-            }}>
-            {label}
-          </button>
-        ))}
+        <div className="t-caption" style={{
+          marginBottom: 14,
+          color: 'var(--fg-secondary)',
+        }}>
+          Browse by category
+        </div>
+        <div
+          role="tablist"
+          aria-label="Work categories"
+          style={{
+            display: 'inline-flex',
+            maxWidth: '100%',
+            background: 'var(--rule)',
+            gap: 1,
+            padding: 1,
+            alignSelf: 'flex-start',
+          }}
+        >
+          {workTabs.map(([k, label, hint]) => {
+            const active = section === k;
+            return (
+              <button
+                key={k}
+                type="button"
+                role="tab"
+                className="work-section-tab"
+                aria-selected={active}
+                id={`work-tab-${k}`}
+                onClick={() => setSection(k)}
+                style={{
+                  flex: '1 1 0',
+                  minWidth: 'min(160px, 42vw)',
+                  textAlign: 'left',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: 6,
+                  padding: '14px 18px',
+                  border: 0,
+                  cursor: 'pointer',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 12,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  lineHeight: 1.25,
+                  background: active ? 'var(--fg-primary)' : 'var(--bg-canvas)',
+                  color: active ? 'var(--fg-inverse)' : 'var(--fg-secondary)',
+                  transition: 'background var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease)',
+                }}
+              >
+                <span style={{ fontWeight: active ? 500 : 400 }}>{label}</span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 12,
+                    letterSpacing: 0,
+                    textTransform: 'none',
+                    fontWeight: 400,
+                    lineHeight: 1.45,
+                    color: active
+                      ? 'color-mix(in oklab, var(--fg-inverse) 72%, transparent)'
+                      : 'var(--fg-tertiary)',
+                    transition: 'color var(--dur-ui) var(--ease)',
+                  }}
+                >
+                  {hint}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Creative section */}
       {section === 'creative' && (
-        <div style={{ padding: `0 ${pm}` }}>
+        <div role="tabpanel" id="work-panel-creative" aria-labelledby="work-tab-creative" style={{ padding: `0 ${pm}` }}>
           <div style={{
             padding: 'clamp(32px, 4vw, 64px) 0 24px',
             display: 'grid', gridTemplateColumns: '120px 1fr', gap: 48,
@@ -71,7 +130,7 @@ function Work({ setRoute }) {
 
       {/* AI / Companies section */}
       {section === 'ai' && (
-        <div style={{ padding: `0 ${pm}` }}>
+        <div role="tabpanel" id="work-panel-ai" aria-labelledby="work-tab-ai" style={{ padding: `0 ${pm}` }}>
           <div style={{
             padding: 'clamp(32px, 4vw, 64px) 0 24px',
             display: 'grid', gridTemplateColumns: '120px 1fr', gap: 48,

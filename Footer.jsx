@@ -23,13 +23,13 @@ function Footer({ setRoute }) {
               I read everything.
             </span>
           </div>
-          <a href="mailto:lincoln@lightwrk.co"
+          <a href="mailto:lincoln.berbert@lightwrk.ai"
             style={{
               marginTop: 20, display: 'inline-block', fontSize: 16,
               borderBottom: '1px solid var(--rule-strong)', paddingBottom: 2,
               color: 'var(--fg-primary)',
             }}>
-            lincoln@lightwrk.co ↗
+            lincoln.berbert@lightwrk.ai ↗
           </a>
         </div>
 
@@ -51,7 +51,7 @@ function Footer({ setRoute }) {
         <div>
           <div className="t-caption" style={{ marginBottom: 14 }}>Elsewhere</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {[['LightWrk ↗', '#'], ['Twitter ↗', '#'], ['LinkedIn ↗', '#']].map(([l, h]) => (
+            {[['LightWrk ↗', 'https://lightwrk.ai'], ['Twitter ↗', '#'], ['LinkedIn ↗', 'https://www.linkedin.com/in/lincoln-berbert/']].map(([l, h]) => (
               <a key={l} href={h} style={{ fontSize: 14, color: 'var(--fg-secondary)',
                 transition: 'color var(--dur-micro) var(--ease)' }}
                 onMouseEnter={e => e.target.style.color = 'var(--fg-primary)'}

@@ -1,4 +1,4 @@
-function Tweaks({ open, onClose, type, setType, theme, setTheme, grain, setGrain, saveToFile }) {
+function Tweaks({ open, onClose, type, setType, grain, setGrain, saveToFile }) {
   if (!open) return null;
 
   const row = (label, control) => (
@@ -47,12 +47,6 @@ function Tweaks({ open, onClose, type, setType, theme, setTheme, grain, setGrain
         [['default', 'V1'], ['research', 'V2'], ['manifesto', 'V3']],
         type,
         v => { setType(v); saveToFile({ typeVariation: v }); }
-      ))}
-
-      {row('Theme', segmented(
-        [['light', 'Light'], ['dark', 'Dark']],
-        theme,
-        v => { setTheme(v); saveToFile({ theme: v }); }
       ))}
 
       {row('Grain overlay', (
