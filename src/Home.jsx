@@ -1,29 +1,6 @@
 import { useEffect } from "react";
 import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
-
-/** Paths under /public/assets/Logos for Portfolio — home logo strip */
-const LOGOS_FOR_PORTFOLIO_DIR = "/assets/Logos for Portfolio";
-
-const WORK_LOGOS = [
-  { file: "1.png", alt: "Unnamed Holdings Co." },
-  { file: "2.png", alt: "Final Hour" },
-  { file: "3.png", alt: "James Judas", size: "judas" },
-  { file: "4.png", alt: "The Creator's Catalyst" },
-  { file: "5.png", alt: "LightWrk", size: "lightwrk" },
-  { file: "6.png", alt: "Ghost Project IX", size: "ghost" },
-].map(({ file, alt, size }) => ({
-  src: encodeURI(`${LOGOS_FOR_PORTFOLIO_DIR}/${file}`),
-  alt,
-  size,
-}));
-
-function logoMarqueeCellClass(logo) {
-  let c = "logo-marquee__cell";
-  if (logo.size === "judas") c += " logo-marquee__cell--judas";
-  if (logo.size === "ghost") c += " logo-marquee__cell--ghost";
-  if (logo.size === "lightwrk") c += " logo-marquee__cell--lightwrk";
-  return c;
-}
+import { WORK_LOGOS, logoMarqueeCellClass } from "./workLogos.js";
 
 const REVEAL_BELOW_FOLD_MS = 800;
 const REVEAL_EASE_DEFAULT = "cubic-bezier(0.2,0.6,0.2,1)";
@@ -84,11 +61,9 @@ export default function Home({ setRoute }) {
             Lincoln Berbert · 2026
           </div>
 
-          <h1
-            data-reveal
-            className="t-display-l headline-measure home-hero__headline"
-            style={{ marginBottom: 0 }}
-          >
+          <h1 data-reveal className="t-display-l headline-measure" style={{
+            maxWidth: '18ch', marginBottom: 0,
+          }}>
             Building worlds, systems, and infrastructure for{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
               machine intelligence.

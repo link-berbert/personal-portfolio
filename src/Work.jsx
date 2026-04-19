@@ -1,5 +1,24 @@
 import { useState } from "react";
 import { CREATIVE_WORK, AI_WORK } from "./data.js";
+import { getWorkLogoByProjectId, logoMarqueeCellClass } from "./workLogos.js";
+
+function WorkPageLogo({ projectId }) {
+  const logo = getWorkLogoByProjectId(projectId);
+  if (!logo) return null;
+  return (
+    <div className="work-entry__logo" data-logo-id={projectId}>
+      <div className={logoMarqueeCellClass(logo)}>
+        <img
+          src={logo.src}
+          alt=""
+          className="logo-marquee__img"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function Work({ setRoute }) {
   const [section, setSection] = useState("creative"); // 'creative' | 'ai'
@@ -187,29 +206,26 @@ export default function Work({ setRoute }) {
           >
             <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)', paddingTop: 6 }}>01</span>
             <div className="work-entry__body min-w-0">
-              <h2 style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(22px, 3vw, 42px)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.15,
-                marginBottom: 12,
-              }}>LightWrk.</h2>
-              <div style={{ marginBottom: 14 }}>
-                {[AI_WORK[0].discipline, AI_WORK[0].role].map((t, i) => (
-                  <span key={i} className="t-mono" style={{
-                    fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
-                    color: 'var(--fg-tertiary)', marginRight: 20,
-                  }}>{t}</span>
-                ))}
+              <WorkPageLogo projectId="lightwrk" />
+              <h2 className="sr-only">LightWrk.</h2>
+              <div className="work-entry__main-text">
+                <div style={{ marginBottom: 14 }}>
+                  {[AI_WORK[0].discipline, AI_WORK[0].role].map((t, i) => (
+                    <span key={i} className="t-mono" style={{
+                      fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
+                      color: 'var(--fg-tertiary)', marginRight: 20,
+                    }}>{t}</span>
+                  ))}
+                </div>
+                <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', lineHeight: 1.65 }}>
+                  {AI_WORK[0].summary}
+                </p>
+                <p className="t-body min-w-0" style={{
+                  color: 'var(--fg-secondary)', lineHeight: 1.65, marginTop: 16,
+                }}>
+                  {AI_WORK[0].extended}
+                </p>
               </div>
-              <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-                {AI_WORK[0].summary}
-              </p>
-              <p className="t-body min-w-0" style={{
-                color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65, marginTop: 16,
-              }}>
-                {AI_WORK[0].extended}
-              </p>
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
@@ -249,6 +265,7 @@ export default function Work({ setRoute }) {
 
 function CreativeRow({ item, isLast }) {
   const [hovered, setHovered] = useState(false);
+  const hasLogo = !!getWorkLogoByProjectId(item.id);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -268,27 +285,33 @@ function CreativeRow({ item, isLast }) {
         {item.num}
       </span>
       <div className="work-entry__body min-w-0">
-        <h2 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(22px, 3vw, 42px)',
-          letterSpacing: '-0.02em', lineHeight: 1.15,
-          marginBottom: 12,
-        }}>
+        <WorkPageLogo projectId={item.id} />
+        <h2
+          className={hasLogo ? "sr-only" : undefined}
+          style={hasLogo ? undefined : {
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(22px, 3vw, 42px)',
+            letterSpacing: '-0.02em', lineHeight: 1.15,
+            marginBottom: 12,
+          }}
+        >
           {item.title}
         </h2>
-        <div style={{ marginBottom: 14 }}>
-          {item.tags && item.tags.map(t => (
-            <span key={t} className="t-mono" style={{
-              fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
-              color: 'var(--fg-tertiary)', marginRight: 18,
-            }}>{t}</span>
-          ))}
-        </div>
-        <p className="t-body min-w-0" style={{
-          color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65,
-        }}>{item.summary}</p>
-        <div className="t-small" style={{ marginTop: 10, color: 'var(--fg-tertiary)' }}>
-          {item.role}
+        <div className="work-entry__main-text">
+          <div style={{ marginBottom: 14 }}>
+            {item.tags && item.tags.map(t => (
+              <span key={t} className="t-mono" style={{
+                fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
+                color: 'var(--fg-tertiary)', marginRight: 18,
+              }}>{t}</span>
+            ))}
+          </div>
+          <p className="t-body min-w-0" style={{
+            color: 'var(--fg-secondary)', lineHeight: 1.65,
+          }}>{item.summary}</p>
+          <div className="t-small" style={{ marginTop: 10, color: 'var(--fg-tertiary)' }}>
+            {item.role}
+          </div>
         </div>
       </div>
       <span className="t-mono work-entry__year" style={{

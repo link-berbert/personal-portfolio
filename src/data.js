@@ -4,7 +4,7 @@ export const CREATIVE_WORK = [
   {
     id: "berby",
     num: "01",
-    title: "Berby.",
+    title: "Berby Music.",
     discipline: "Music · Identity",
     year: "2022 —",
     role: "Artist, composer, creative direction",

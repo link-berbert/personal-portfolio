@@ -133,23 +133,11 @@ html.is-resizing .grain {
   }
 }
 
-/* Headline measure: avoid `ch` here — it is derived from the "0" glyph of
-   whichever font is *currently* shaping the line, so Times (fallback) →
-   Newsreader / Instrument / Space Grotesk changes the box width and the
-   wrapping visibly "snaps" a few ms after load. `em` keys off the fixed
-   font-size clamp instead. `text-wrap: balance` can also reflow when metrics
-   settle, so we use plain wrapping for this block. */
-.home-hero h1.home-hero__headline {
-  max-width: min(11.25em, 46vw);
-  text-wrap: wrap;
-}
-
 /* Supporting copy under the headline — must always wrap before the portrait.
    The portrait is anchored right and occupies ~48% of the hero width, so we cap
-   the body column at just under half the hero content box with a breathing gap.
-   Same `ch` → webfont swap issue as the headline; `em` tracks body font-size. */
+   the body column at just under half the hero content box with a breathing gap. */
 .home-hero__body {
-  max-width: min(30em, calc(50% - 32px)) !important;
+  max-width: min(56ch, calc(50% - 32px)) !important;
 }
 
 .home-hero__profile {
@@ -231,7 +219,7 @@ html.is-resizing .grain {
      Desktop uses 56px via inline style. */
   .home-hero__body {
     margin-top: 36px !important;
-    max-width: min(36em, 100%) !important;
+    max-width: 56ch !important;
   }
 
   /* The global `--fs-display-l` clamps at a 48px minimum, which is too large
@@ -332,6 +320,106 @@ html.is-resizing .grain {
   object-position: center;
   filter: grayscale(100%);
   opacity: 0.76;
+}
+
+/* Visually hidden heading — keeps section structure for a11y when logo replaces title */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Anchor for visually hidden headings inside project rows */
+.work-entry__body {
+  position: relative;
+}
+
+/* Shared measure for tags + body + role so mono labels align with paragraph text (avoids .t-body text-wrap: pretty vs mono edge mismatch) */
+.work-entry__main-text {
+  max-width: 52ch;
+  min-width: 0;
+}
+
+.work-entry__main-text .t-body {
+  max-width: none;
+  text-wrap: wrap;
+}
+
+/* Work page — same logo cells as marquee; per-project horizontal tune + vertical align with index num */
+.work-entry__logo {
+  margin-bottom: 18px;
+  margin-top: clamp(6px, 0.75vw, 11px);
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Unnamed Holdings — keep prior anchor position; hair higher */
+.work-entry__logo[data-logo-id="unnamed-holdings"] {
+  margin-left: clamp(-8px, -0.85vw, -3px);
+  margin-top: clamp(2px, 0.38vw, 6px);
+}
+
+/* The Creator's Catalyst — a hair further left */
+.work-entry__logo[data-logo-id="creators-catalyst"] {
+  margin-left: clamp(-14px, -1.12vw, -7px);
+}
+
+/* James Judas, Ghost Project IX — baseline horizontal */
+.work-entry__logo[data-logo-id="james-judas"],
+.work-entry__logo[data-logo-id="ghost-project-ix"] {
+  margin-left: clamp(-2px, 0.15vw, 4px);
+}
+
+/* LightWrk — a hair left */
+.work-entry__logo[data-logo-id="lightwrk"] {
+  margin-left: clamp(-5px, -0.05vw, 2px);
+}
+
+/* Final Hour — two–three hairs left; tiniest smidge right */
+.work-entry__logo[data-logo-id="final-hour"] {
+  margin-left: clamp(-8px, -0.48vw, -1px);
+}
+
+/* Final Hour — keep default vertical (base .work-entry__logo margin-top); no override here */
+
+/* James Judas — slightly higher than base */
+.work-entry__logo[data-logo-id="james-judas"] {
+  margin-top: clamp(0px, 0.28vw, 3px);
+}
+
+/* Ghost Project IX — a hair lower than before */
+.work-entry__logo[data-logo-id="ghost-project-ix"] {
+  margin-top: clamp(-8px, -0.68vw, -2px);
+}
+
+/* LightWrk — two–three hairs higher than Ghost */
+.work-entry__logo[data-logo-id="lightwrk"] {
+  margin-top: clamp(-17px, -1.12vw, -9px);
+}
+
+.work-entry__logo .logo-marquee__cell {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.work-entry__logo .logo-marquee__img {
+  object-position: left center;
+  /* Darker than hero strip: higher opacity + slight brightness pull */
+  opacity: 0.92;
+  filter: grayscale(100%) brightness(0.88);
+}
+
+/* Nudge year with logo-only rows (no visible display title) */
+@media (min-width: 641px) {
+  .work-entry-row:has(.work-entry__logo) .work-entry__year {
+    padding-top: clamp(6px, 0.8vw, 12px);
+  }
 }
 
 @keyframes logo-marquee-scroll {
