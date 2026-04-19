@@ -1,6 +1,6 @@
-const { useState, useEffect, useRef } = React;
+import { useState, useEffect, useRef } from "react";
 
-function TopBar({ route, setRoute }) {
+export default function TopBar({ route, setRoute }) {
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
 
@@ -10,26 +10,20 @@ function TopBar({ route, setRoute }) {
       setHidden(y > lastY.current && y > 80);
       lastY.current = y;
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const items = [
-    ['home', 'Index'],
-    ['work', 'Work'],
-    ['about', 'About'],
-    ['contact', 'Contact'],
+    ["home", "Index"],
+    ["work", "Work"],
+    ["about", "About"],
+    ["contact", "Contact"],
   ];
 
   return (
-    <header
-      className={`top-bar${hidden ? ' top-bar--hidden' : ''}`}
-    >
-      <button
-        type="button"
-        className="top-bar__brand"
-        onClick={() => setRoute('home')}
-      >
+    <header className={`top-bar${hidden ? " top-bar--hidden" : ""}`}>
+      <button type="button" className="top-bar__brand" onClick={() => setRoute("home")}>
         <span className="top-bar__brand-mark">L·B</span>
         <span className="top-bar__brand-name">Lincoln Berbert</span>
       </button>
@@ -44,12 +38,12 @@ function TopBar({ route, setRoute }) {
               window.scrollTo(0, 0);
             }}
             className="nav-item"
-            aria-current={route === k ? 'page' : undefined}
+            aria-current={route === k ? "page" : undefined}
             style={{
-              fontFamily: 'var(--font-body)',
-              cursor: 'pointer',
-              color: route === k ? 'var(--fg-primary)' : 'var(--fg-secondary)',
-              transition: 'color var(--dur-micro) var(--ease)',
+              fontFamily: "var(--font-body)",
+              cursor: "pointer",
+              color: route === k ? "var(--fg-primary)" : "var(--fg-secondary)",
+              transition: "color var(--dur-micro) var(--ease)",
             }}
           >
             {label}
@@ -59,5 +53,3 @@ function TopBar({ route, setRoute }) {
     </header>
   );
 }
-
-window.TopBar = TopBar;

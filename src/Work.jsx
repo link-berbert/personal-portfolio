@@ -1,5 +1,8 @@
-function Work({ setRoute }) {
-  const [section, setSection] = React.useState('creative'); // 'creative' | 'ai'
+import { useState } from "react";
+import { CREATIVE_WORK, AI_WORK } from "./data.js";
+
+export default function Work({ setRoute }) {
+  const [section, setSection] = useState("creative"); // 'creative' | 'ai'
 
   const pm = 'clamp(20px, 5vw, 80px)';
 
@@ -122,8 +125,8 @@ function Work({ setRoute }) {
             </p>
           </div>
 
-          {window.CREATIVE_WORK.map((item, i) => (
-            <CreativeRow key={item.id} item={item} isLast={i === window.CREATIVE_WORK.length - 1} />
+          {CREATIVE_WORK.map((item, i) => (
+            <CreativeRow key={item.id} item={item} isLast={i === CREATIVE_WORK.length - 1} />
           ))}
         </div>
       )}
@@ -170,10 +173,10 @@ function Work({ setRoute }) {
                 ))}
               </div>
               <p className="t-body-l" style={{ color: 'var(--fg-secondary)', maxWidth: '56ch', lineHeight: 1.65, marginBottom: 24 }}>
-                {window.AI_WORK[0].summary}
+                {AI_WORK[0].summary}
               </p>
               <p className="t-body" style={{ color: 'var(--fg-secondary)', maxWidth: '56ch', lineHeight: 1.65, marginBottom: 40 }}>
-                {window.AI_WORK[0].extended}
+                {AI_WORK[0].extended}
               </p>
               <div style={{
                 display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -209,17 +212,17 @@ function Work({ setRoute }) {
                   fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(22px, 3vw, 38px)',
                   letterSpacing: '-0.02em', lineHeight: 1.15,
-                }}>{window.AI_WORK[1].title}</h2>
-                <span className="t-mono" style={{ color: 'var(--fg-tertiary)' }}>{window.AI_WORK[1].year}</span>
+                }}>{AI_WORK[1].title}</h2>
+                <span className="t-mono" style={{ color: 'var(--fg-tertiary)' }}>{AI_WORK[1].year}</span>
               </div>
               <div style={{ marginBottom: 14 }}>
                 <span className="t-mono" style={{
                   fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
                   color: 'var(--fg-tertiary)', marginRight: 20,
-                }}>{window.AI_WORK[1].discipline}</span>
+                }}>{AI_WORK[1].discipline}</span>
               </div>
               <p className="t-body" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-                {window.AI_WORK[1].summary}
+                {AI_WORK[1].summary}
               </p>
             </div>
           </div>
@@ -231,7 +234,7 @@ function Work({ setRoute }) {
 }
 
 function CreativeRow({ item, isLast }) {
-  const [hovered, setHovered] = React.useState(false);
+  const [hovered, setHovered] = useState(false);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -277,5 +280,3 @@ function CreativeRow({ item, isLast }) {
     </div>
   );
 }
-
-window.Work = Work;

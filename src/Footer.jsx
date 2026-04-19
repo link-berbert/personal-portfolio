@@ -1,4 +1,4 @@
-function Footer({ setRoute }) {
+export default function Footer({ setRoute }) {
   return (
     <footer style={{
       marginTop: 160,
@@ -87,5 +87,3 @@ function Footer({ setRoute }) {
     </footer>
   );
 }
-
-window.Footer = Footer;

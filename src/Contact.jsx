@@ -1,7 +1,9 @@
-function Contact() {
-  const [sent, setSent] = React.useState(false);
-  const [form, setForm] = React.useState({ name: '', email: '', context: '', message: '' });
-  const [category, setCategory] = React.useState(null);
+import { useState } from "react";
+
+export default function Contact() {
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", context: "", message: "" });
+  const [category, setCategory] = useState(null);
   const pm = 'clamp(20px, 5vw, 80px)';
 
   const categories = [
@@ -178,5 +180,3 @@ function Contact() {
     </main>
   );
 }
-
-window.Contact = Contact;

@@ -1,4 +1,5 @@
-const { useEffect: _ue, useRef: _ur } = React;
+import { useState, useEffect } from "react";
+import { CREATIVE_WORK, AI_WORK } from "./data.js";
 
 function useReveal() {
   useEffect(() => {
@@ -23,7 +24,7 @@ function useReveal() {
 }
 
 function WorkRow({ item, onClick }) {
-  const [hovered, setHovered] = React.useState(false);
+  const [hovered, setHovered] = useState(false);
   return (
     <div
       onClick={onClick}
@@ -76,7 +77,7 @@ function WorkRow({ item, onClick }) {
   );
 }
 
-function Home({ setRoute }) {
+export default function Home({ setRoute }) {
   useReveal();
 
   return (
@@ -189,7 +190,7 @@ function Home({ setRoute }) {
             <div className="t-caption" style={{ marginBottom: 32, color: 'var(--fg-secondary)' }}>
               Creative
             </div>
-            {window.CREATIVE_WORK.slice(0, 2).map(item => (
+            {CREATIVE_WORK.slice(0, 2).map(item => (
               <div key={item.id} data-reveal style={{ marginBottom: 40 }}>
                 <div style={{
                   fontFamily: 'var(--font-display)',
@@ -222,7 +223,7 @@ function Home({ setRoute }) {
             <div className="t-caption" style={{ marginBottom: 32, color: 'var(--fg-secondary)' }}>
               AI / Companies
             </div>
-            {window.AI_WORK.slice(0, 1).map(item => (
+            {AI_WORK.slice(0, 1).map(item => (
               <div key={item.id} data-reveal style={{ marginBottom: 40 }}>
                 <div style={{
                   fontFamily: 'var(--font-display)',
@@ -397,6 +398,3 @@ function Home({ setRoute }) {
     </main>
   );
 }
-
-window.Home = Home;
-window.WorkRow = WorkRow;

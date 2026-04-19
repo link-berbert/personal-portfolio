@@ -1,4 +1,4 @@
-function About({ setRoute }) {
+export default function About({ setRoute }) {
   const pm = 'clamp(20px, 5vw, 80px)';
 
   return (
@@ -209,5 +209,3 @@ function About({ setRoute }) {
     </main>
   );
 }
-
-window.About = About;

@@ -1,4 +1,4 @@
-function Tweaks({ open, onClose, type, setType, grain, setGrain, saveToFile }) {
+export default function Tweaks({ open, onClose, type, setType, grain, setGrain, saveToFile }) {
   if (!open) return null;
 
   const row = (label, control) => (
@@ -70,5 +70,3 @@ function Tweaks({ open, onClose, type, setType, grain, setGrain, saveToFile }) {
     </div>
   );
 }
-
-window.Tweaks = Tweaks;
