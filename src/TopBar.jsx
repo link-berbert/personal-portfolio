@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useCallback, useEffect, useRef, useLayoutEffect } from "react";
 
 const TOP_REVEAL = 64;
 /** Min upward delta (px) before snapping the bar back in (unchanged from prior behavior) */
@@ -7,9 +7,17 @@ const SCROLL_UP_SHOW = 4;
 export default function TopBar({ route, setRoute }) {
   const headerRef = useRef(null);
   const headerHeightRef = useRef(0);
-  const [translateY, setTranslateY] = useState(0);
+  /** Scroll-linked position; kept in refs so scroll never schedules React renders. */
+  const translateYRef = useRef(0);
   /** When false, transform tracks scroll 1:1 (hide). When true, transform animates (reveal). */
-  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const transitionEnabledRef = useRef(true);
+
+  const syncHeaderDom = useCallback(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    el.style.transform = `translateY(${translateYRef.current}px)`;
+    el.classList.toggle("top-bar--instant", !transitionEnabledRef.current);
+  }, []);
 
   useLayoutEffect(() => {
     const el = headerRef.current;
@@ -18,7 +26,13 @@ export default function TopBar({ route, setRoute }) {
       const h = el.offsetHeight;
       if (h === headerHeightRef.current) return;
       headerHeightRef.current = h;
-      setTranslateY((prev) => (h ? Math.max(prev, -h) : prev));
+      if (h) {
+        const nextY = Math.max(translateYRef.current, -h);
+        if (nextY !== translateYRef.current) {
+          translateYRef.current = nextY;
+          syncHeaderDom();
+        }
+      }
     };
     measure();
     /* Re-measure only when the stacked/row breakpoint flips — avoids the
@@ -32,22 +46,24 @@ export default function TopBar({ route, setRoute }) {
       if (mql.removeEventListener) mql.removeEventListener("change", onChange);
       else mql.removeListener(onChange);
     };
-  }, []);
+  }, [syncHeaderDom]);
 
   useEffect(() => {
     let lastY = window.scrollY;
     let rafId = 0;
 
-    const prefersReducedMotion = () =>
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const onScroll = () => {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
-        if (prefersReducedMotion()) {
-          setTranslateY(0);
-          setTransitionEnabled(true);
+        if (reducedMotion.matches) {
+          if (translateYRef.current !== 0 || !transitionEnabledRef.current) {
+            translateYRef.current = 0;
+            transitionEnabledRef.current = true;
+            syncHeaderDom();
+          }
           lastY = window.scrollY;
           return;
         }
@@ -57,18 +73,32 @@ export default function TopBar({ route, setRoute }) {
         const h = headerHeightRef.current;
 
         if (y < TOP_REVEAL) {
-          setTransitionEnabled(true);
-          setTranslateY(0);
+          if (translateYRef.current !== 0 || !transitionEnabledRef.current) {
+            transitionEnabledRef.current = true;
+            translateYRef.current = 0;
+            syncHeaderDom();
+          }
           lastY = y;
         } else if (delta > 0) {
-          setTransitionEnabled(false);
+          const wasAnimated = transitionEnabledRef.current;
+          transitionEnabledRef.current = false;
+          const prevY = translateYRef.current;
           if (h > 0) {
-            setTranslateY((prev) => Math.max(prev - delta, -h));
+            translateYRef.current = Math.max(prevY - delta, -h);
+          }
+          if (
+            wasAnimated ||
+            translateYRef.current !== prevY
+          ) {
+            syncHeaderDom();
           }
           lastY = y;
         } else if (delta < -SCROLL_UP_SHOW) {
-          setTransitionEnabled(true);
-          setTranslateY(0);
+          if (translateYRef.current !== 0 || !transitionEnabledRef.current) {
+            transitionEnabledRef.current = true;
+            translateYRef.current = 0;
+            syncHeaderDom();
+          }
           lastY = y;
         }
         // Small scroll-up: keep lastY so delta can accumulate to SCROLL_UP_SHOW
@@ -81,7 +111,7 @@ export default function TopBar({ route, setRoute }) {
       window.removeEventListener("scroll", onScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [syncHeaderDom]);
 
   const items = [
     ["home", "Index"],
@@ -91,11 +121,7 @@ export default function TopBar({ route, setRoute }) {
   ];
 
   return (
-    <header
-      ref={headerRef}
-      className={`top-bar${transitionEnabled ? "" : " top-bar--instant"}`}
-      style={{ transform: `translateY(${translateY}px)` }}
-    >
+    <header ref={headerRef} className="top-bar">
       <button type="button" className="top-bar__brand" onClick={() => setRoute("home")}>
         <span className="top-bar__brand-mark">L·B</span>
         <span className="top-bar__brand-name">Lincoln Berbert</span>

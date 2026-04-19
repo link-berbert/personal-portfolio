@@ -34,7 +34,11 @@ export default function Contact() {
       return;
     }
     if (!accessKey) {
-      setError("The form is not set up yet. Use the email link below.");
+      setError(
+        import.meta.env.DEV
+          ? "Missing VITE_WEB3FORMS_ACCESS_KEY. Add it to env/.env and restart the dev server."
+          : "This deployment has no form key. In Vercel → Settings → Environment Variables, set VITE_WEB3FORMS_ACCESS_KEY, then redeploy. Or use the email link below.",
+      );
       return;
     }
 
