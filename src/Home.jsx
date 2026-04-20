@@ -72,7 +72,7 @@ export default function Home({ setRoute }) {
           <h1 data-reveal className="t-display-l headline-measure" style={{
             maxWidth: '18ch', marginBottom: 0,
           }}>
-            Building worlds, systems, and infrastructure for{' '}
+            Building music, myth, and{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
               machine intelligence.
             </span>
@@ -87,8 +87,7 @@ export default function Home({ setRoute }) {
               lineHeight: 1.6,
             }}
           >
-            A multidisciplinary practice spanning music, creative direction, and physical AI.
-            One point of view operating at the intersection of culture and infrastructure.
+            Regardless of medium, the philosophy is the same — create systems that are both beautiful and functional.
           </p>
         </div>
 
@@ -186,7 +185,7 @@ export default function Home({ setRoute }) {
         boxSizing: 'border-box',
       }}
       >
-        <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ I · Practice</div>
+        <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ I · Vision</div>
         <div
           data-reveal
           className="min-w-0"
@@ -195,9 +194,9 @@ export default function Home({ setRoute }) {
           maxWidth: '26ch',
         }}
         >
-          I don't believe the division between art and engineering is real.{' '}
+          The next century's defining systems will be remembered {' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            I believe the interesting work lives past the point where the categories stop working.
+            for how they work and how they feel.
           </span>
         </div>
       </section>

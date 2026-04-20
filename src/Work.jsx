@@ -62,7 +62,7 @@ export default function Work({ setRoute }) {
 
   const workTabs = [
     ['creative', 'Creative', 'Music, design, worldbuilding'],
-    ['ai', 'AI / Companies', 'Physical AI & company building'],
+    ['ai', 'AI / Companies', 'Physical AI & business ventures'],
   ];
 
   return (
@@ -191,9 +191,7 @@ export default function Work({ setRoute }) {
           >
             <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ I · Overview</div>
             <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-              Music, identity systems, and long-form worldbuilding. Projects that take years
-              to develop, resist easy categorization, and share a commitment to internal logic
-              and atmospheric coherence.
+            Creative work shaped by narrative, atmosphere, and internal coherence.
             </p>
           </div>
 
@@ -218,8 +216,7 @@ export default function Work({ setRoute }) {
           >
             <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ I · Overview</div>
             <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-              Companies and creative structures — physical AI infrastructure, multidisciplinary
-              studios, and advisory practice — built for long-horizon work and coherent systems.
+            Companies and systems built for long-horizon work, model improvement, and ambitious execution.
             </p>
           </div>
 
