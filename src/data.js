@@ -7,7 +7,7 @@ export const CREATIVE_WORK = [
     title: "Berby Music.",
     discipline: "Music · Identity",
     year: "2022 —",
-    role: "Artist, composer, creative direction",
+    role: "Artist, producer",
     summary:
       "A long-form musical identity. Berby is Lincoln's artist name and the primary creative vessel — a world with its own sound, visual grammar, and internal logic. Not a brand, not a persona. A practice.",
     tags: ["Music", "Identity", "Worldbuilding"],
@@ -21,8 +21,8 @@ export const CREATIVE_WORK = [
     num: "02",
     title: "James Judas.",
     discipline: "Character · Narrative",
-    year: "2023 —",
-    role: "Author, creative director",
+    year: "2024 —",
+    role: "Author, designer",
     summary:
       "A character built from contradiction — prophet and traitor, visionary and doubter. James Judas is a long-form narrative identity exploring the mythology of ambition, belief, and betrayal. Part music project, part world.",
     tags: ["Narrative", "Music", "Identity"],
@@ -33,7 +33,7 @@ export const CREATIVE_WORK = [
     title: "Ghost Project IX.",
     discipline: "Worldbuilding · Ambient · AI · Film",
     year: "2025 —",
-    role: "Worldbuilder, composer, creative director",
+    role: "Worldbuilder, composer",
     summary:
       "A far-future science fiction world set after ecological collapse, solar catastrophe, and humanity's exodus from a dying solar system. Ghost Project IX spans ambient music, visual atmosphere, speculative narrative, and AI-assisted worldbuilding — moving between industrial decay, orbital ruins, Martian necropolises, solitary deep-space travel, and distant sanctuaries around Proxima Centauri. A project about memory, survival, technology, and the strange role of the human creator inside the machine.",
     tags: ["Worldbuilding", "Ambient", "AI", "Film"],
@@ -50,7 +50,7 @@ export const AI_WORK = [
     num: "01",
     title: "LightWrk.",
     discipline: "Company · Physical AI",
-    year: "2024 —",
+    year: "2026 —",
     role: "Founder, CEO",
     summary:
       "LightWrk is building the structured human feedback infrastructure that physical AI systems need to improve. The work spans ontology design, rubric development, scored failure taxonomies, and repeatable human judgment pipelines — the layer between raw robot behavior and meaningful model improvement.",
@@ -73,7 +73,7 @@ export const AI_WORK = [
     num: "02",
     title: "Final Hour.",
     discipline: "Studio · Worldbuilding",
-    year: "2025 —",
+    year: "2022 —",
     role: "Founder, creative director",
     summary:
       "A multidisciplinary studio built around long-horizon worldbuilding, aesthetic systems, and ambitious creative direction. Final Hour is the umbrella for projects across music, film, interactive media, design, live experience, and future-facing cultural work — a structure for building coherent worlds rather than isolated outputs.",
@@ -103,8 +103,8 @@ export const AI_WORK = [
     num: "04",
     title: "Unnamed Holdings Co.",
     discipline: "Holding · Venture",
-    year: "2025 —",
-    role: "Founder, creative director",
+    year: "2026 —",
+    role: "Founder, owner",
     summary:
       "A parent structure for long-horizon ventures across technology, creative work, and future-facing systems. Unnamed Holdings Co. exists to hold, organize, and extend the broader vision — creating continuity across companies, worlds, and ambitious work that may take years to fully emerge.",
     tags: ["Holding", "Structure", "Venture", "Architecture"],

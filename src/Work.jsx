@@ -61,7 +61,7 @@ export default function Work({ setRoute }) {
   const pm = 'clamp(20px, 5vw, 80px)';
 
   const workTabs = [
-    ['creative', 'Creative', 'Music, identity, worldbuilding'],
+    ['creative', 'Creative', 'Music, design, worldbuilding'],
     ['ai', 'AI / Companies', 'Physical AI & company building'],
   ];
 
