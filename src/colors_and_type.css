@@ -304,8 +304,17 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html, body {
-  margin: 0; padding: 0;
+/* Horizontal bleed (e.g. home ink band) must not widen the viewport scrollport.
+   Apply on `html` only — the same rule on `body` can force `overflow-y: auto` per spec. */
+html {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
   background: var(--bg-canvas);
   color: var(--fg-primary);
   font-family: var(--font-body);

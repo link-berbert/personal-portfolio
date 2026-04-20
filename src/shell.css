@@ -773,17 +773,40 @@ html.is-resizing .grain {
   min-width: 0;
 }
 
-/* LightWrk § II — cluster to viewport right; ch/max-width unchanged */
+/* LightWrk § II — symmetric section padding (matches § I / § III). On wide
+   viewports the cluster bleed interpolates between the old thin-right inset and
+   full `--home-ink-pad-x` compensation; html overflow-x clip prevents horizontal scroll. */
+.home-surface-ink {
+  /* Shared with wide-screen bleed math: must match horizontal padding tokens. */
+  --home-ink-pad-x: clamp(20px, 5vw, 80px);
+  padding: clamp(64px, 8vw, 120px) var(--home-ink-pad-x);
+}
+
 .home-surface-ink .page-section--split > .min-w-0 {
   justify-self: end;
   width: fit-content;
   max-width: 100%;
   text-align: left;
-  /* Section keeps a thin `--home-ink-pad-right`; extra clamp pulls through the old “symmetric pad” gap */
-  margin-right: calc(
-    -1 * var(--home-ink-pad-right, 0px) - clamp(16px, 5vw, 88px)
-  );
-  padding-right: max(8px, env(safe-area-inset-right, 0px));
+}
+
+@media (min-width: 1280px) {
+  .home-surface-ink .page-section--split > .min-w-0 {
+    /*
+     * Pull = thin + clamp was too little (symmetric pad); pad-x + clamp was too
+     * much. Use the average of thin and pad-x as the inset term, then + clamp.
+     */
+    margin-right: calc(
+      -1 *
+        (
+          (
+              max(10px, env(safe-area-inset-right, 0px)) + var(--home-ink-pad-x)
+            ) /
+            2 +
+          clamp(16px, 5vw, 88px)
+        )
+    );
+    padding-right: max(8px, env(safe-area-inset-right, 0px));
+  }
 }
 
 /* Home § I / § III — label rail on the right */

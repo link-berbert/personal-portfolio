@@ -206,10 +206,8 @@ export default function Home({ setRoute }) {
       <section
         className="home-surface-ink"
         style={{
-        '--home-ink-pad-left': 'clamp(20px, 5vw, 80px)',
-        '--home-ink-pad-right': 'max(10px, env(safe-area-inset-right, 0px))',
-        padding:
-          'clamp(64px, 8vw, 120px) var(--home-ink-pad-right) clamp(64px, 8vw, 120px) var(--home-ink-pad-left)',
+        /* Padding, ink-pad vars, and the wider-viewport bleed live in shell.css so a
+           media query can flip them below --home-ink-narrow-bp without !important. */
         background: 'var(--fg-primary)',
         color: 'var(--bg-canvas)',
         marginTop: 0,
