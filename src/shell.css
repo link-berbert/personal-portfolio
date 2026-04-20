@@ -353,30 +353,27 @@ html.is-resizing .grain {
   border-width: 0;
 }
 
-/* Left rail — same width as § labels; index left, logo / title to its right (body column start stays fixed) */
+/* Left rail — § label column; brand / title stacked above role (same stack for every row) */
 .work-entry__rail {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  gap: clamp(12px, 1.65vw, 20px);
+  justify-content: flex-start;
+  gap: 0;
   min-width: 0;
   width: 100%;
 }
 
-.work-entry__rail .work-entry__num {
-  flex: 0 0 auto;
-  line-height: 1;
-}
-
-/* Remainder of the rail = fixed-width logo slot for all rows → copy column never shifts horizontally */
+/* fit-content so every mark shares the same left edge; copy column + gap unchanged */
 .work-entry__brand {
-  flex: 1 1 0;
+  flex: 0 1 auto;
+  width: fit-content;
+  max-width: 100%;
   min-width: 0;
-  width: auto;
 }
 
-/* Berby Music. etc. — wrap inside the slot beside the index */
+/* Berby Music. etc. — wrap inside the label-width column */
 .work-entry__brand h2 {
   max-width: 100%;
   overflow-wrap: break-word;
@@ -388,7 +385,7 @@ html.is-resizing .grain {
   min-width: 0;
 }
 
-/* Logos fill the slot to the right of the index; neutralize per-project nudges in the rail */
+/* Logos fill the brand box width; neutralize per-project nudges in the rail */
 .work-entry__rail .work-entry__logo {
   width: 100%;
   margin-top: 0;
@@ -402,16 +399,17 @@ html.is-resizing .grain {
   box-sizing: border-box;
   padding-left: 0;
   padding-right: 0;
-  height: clamp(36px, 5vw, 52px);
+  /* ~1.25× default slot vs marquee (work rail only) */
+  height: clamp(45px, 6.25vw, 65px);
 }
 
 .work-entry__rail .work-entry__logo[data-logo-id="james-judas"] .logo-marquee__cell,
 .work-entry__rail .work-entry__logo[data-logo-id="ghost-project-ix"] .logo-marquee__cell {
-  height: clamp(40px, 5.5vw, 58px);
+  height: clamp(50px, 6.9vw, 73px);
 }
 
 .work-entry__rail .work-entry__logo[data-logo-id="lightwrk"] .logo-marquee__cell {
-  height: clamp(48px, 6.6vw, 70px);
+  height: clamp(60px, 8.25vw, 88px);
 }
 
 /*
@@ -447,7 +445,46 @@ html.is-resizing .grain {
   margin-top: clamp(0px, 0.06vw, 1px);
 }
 
-/* Small caps sit on the body’s em-box; nudge up to meet the index cap without changing font size */
+/* Outbound link — same mono + rule underline as “View creative work” on Home */
+.work-external-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 2px;
+  transition:
+    color var(--dur-micro) var(--ease),
+    border-color var(--dur-micro) var(--ease);
+}
+
+.work-external-link:hover {
+  color: var(--fg-secondary);
+  border-bottom-color: var(--fg-primary);
+}
+
+.work-external-link:focus-visible {
+  outline: 2px solid var(--fg-primary);
+  outline-offset: 3px;
+}
+
+/* Same glyph rendering as `.footer-columns__ext` (body 14px); link label stays mono uppercase */
+.work-external-link__arrow {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  margin-left: 0.22em;
+  display: inline;
+  vertical-align: baseline;
+}
+
+/* Small caps sit on the body’s em-box; nudge up optically without changing font size */
 .work-entry__tags {
   line-height: 1.15;
 }
@@ -462,6 +499,30 @@ html.is-resizing .grain {
 .work-entry__main-text {
   max-width: 52ch;
   min-width: 0;
+}
+
+/* Space from last body line to link ≈ former 10px + one role line + 20px link offset */
+.work-entry__main-text > .work-external-link {
+  margin-top: calc(10px + 1.5 * var(--fs-small) + 20px);
+}
+
+/* LightWrk: link only under grid — tail padding + same 10px gap that used to sit above the link */
+.work-entry__main-text--after-capabilities {
+  margin-top: 0;
+}
+
+.work-entry__main-text.work-entry__main-text--after-capabilities > .work-external-link {
+  margin-top: 10px;
+}
+
+/* Capability grid — equal vertical padding above/below columns (matches row interior rhythm) */
+.work-entry__tail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
 }
 
 .work-entry__main-text .t-body {
@@ -688,13 +749,52 @@ html.is-resizing .grain {
   align-items: start;
 }
 
-.work-entry__num {
-  font-variant-numeric: tabular-nums;
+.page-section--split .page-section__label {
   white-space: nowrap;
 }
 
-.page-section--split .page-section__label {
-  white-space: nowrap;
+/* Home § II (ink) — `label | 1fr`; cluster pin + cell min-height from `useInkClusterPinRight` in Home.jsx */
+.page-section--split.home-ink-split {
+  align-items: start;
+}
+
+.home-ink-body-cell {
+  width: 100%;
+  min-width: 0;
+}
+
+.home-ink-body-cluster {
+  display: block;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.home-ink-body-cluster > * {
+  min-width: 0;
+}
+
+/* LightWrk § II — cluster to viewport right; ch/max-width unchanged */
+.home-surface-ink .page-section--split > .min-w-0 {
+  justify-self: end;
+  width: fit-content;
+  max-width: 100%;
+  text-align: left;
+  /* Section keeps a thin `--home-ink-pad-right`; extra clamp pulls through the old “symmetric pad” gap */
+  margin-right: calc(
+    -1 * var(--home-ink-pad-right, 0px) - clamp(16px, 5vw, 88px)
+  );
+  padding-right: max(8px, env(safe-area-inset-right, 0px));
+}
+
+/* Home § I / § III — label rail on the right */
+.page-section--split.page-section--split--mirror {
+  grid-template-columns: minmax(0, 1fr) var(--page-split-label-width);
+}
+
+.page-section--split.page-section--split--mirror > .page-section__label {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
 }
 
 /* --------------------------------------------------------------------------
@@ -733,6 +833,36 @@ html.is-resizing .grain {
     padding-top: 0 !important;
   }
 
+  .page-section--split.page-section--split--mirror > .page-section__label {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    text-align: left !important;
+  }
+
+  .page-section--split.page-section--split--mirror > .min-w-0 {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+  .home-ink-body-cluster {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .home-surface-ink .page-section--split > .min-w-0 {
+    justify-self: stretch !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* LightWrk band only: restore symmetric horizontal padding on phones */
+  .home-surface-ink:has(.page-section--split) {
+    padding-left: clamp(20px, 5vw, 80px) !important;
+    padding-right: clamp(20px, 5vw, 80px) !important;
+  }
+
   .home-my-work__bar {
     /* Keep the row layout on mobile so "View projects →" stays flush right,
        opposite the "My work" label. Just tighten the gap/padding for phones. */
@@ -759,7 +889,7 @@ html.is-resizing .grain {
     min-width: 0;
   }
 
-  /* Work list rows: rail (num + brand) → body → year */
+  /* Work list rows: rail (brand) → body → year */
   .work-entry-row {
     grid-template-columns: minmax(0, 1fr) !important;
     gap: 10px !important;
@@ -771,26 +901,22 @@ html.is-resizing .grain {
     padding-top: 0 !important;
   }
 
-  .work-entry-row .work-entry__num {
-    font-variant-numeric: tabular-nums;
-  }
-
   .work-entry-row .work-entry__body {
     min-width: 0;
   }
 
-  /* Taller logo slots on phones only — same flex/grid as desktop; vertical nudges unchanged */
+  /* Taller logo slots on phones only — ~1.25× prior work-rail sizes; marquee unchanged */
   .work-entry__rail .work-entry__logo .logo-marquee__cell {
-    height: clamp(44px, 13vw, 60px);
+    height: clamp(55px, 16.25vw, 75px);
   }
 
   .work-entry__rail .work-entry__logo[data-logo-id="james-judas"] .logo-marquee__cell,
   .work-entry__rail .work-entry__logo[data-logo-id="ghost-project-ix"] .logo-marquee__cell {
-    height: clamp(48px, 14.5vw, 66px);
+    height: clamp(60px, 18.125vw, 83px);
   }
 
   .work-entry__rail .work-entry__logo[data-logo-id="lightwrk"] .logo-marquee__cell {
-    height: clamp(52px, 16vw, 72px);
+    height: clamp(65px, 20vw, 90px);
   }
 
   /* Taller mobile cells shifted ink lower — pull these marks back up (desktop nudges stay as-is ≥641px) */

@@ -2,6 +2,14 @@ import { useEffect } from "react";
 import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
 import { WORK_LOGOS, logoMarqueeCellClass } from "./workLogos.js";
 
+/** Shared display scale for home § I / § II / § III primary ledes */
+const homeSectionLedeTypo = {
+  fontFamily: "var(--font-display)",
+  fontSize: "clamp(28px, 4vw, 56px)",
+  lineHeight: 1.1,
+  letterSpacing: "-0.025em",
+};
+
 const REVEAL_BELOW_FOLD_MS = 800;
 const REVEAL_EASE_DEFAULT = "cubic-bezier(0.2,0.6,0.2,1)";
 
@@ -166,25 +174,27 @@ export default function Home({ setRoute }) {
         </div>
       </section>
 
-      {/* Thesis — § I · Practice */}
+      {/* Thesis — § I · Practice (mirrored rail vs § II) */}
       <section
-        className="page-section--split"
+        className="page-section--split page-section--split--mirror"
         style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',
         display: 'grid',
-        gridTemplateColumns: 'var(--page-split-label-width) 1fr',
         gap: 48,
         width: '100%',
         boxSizing: 'border-box',
-      }}>
+      }}
+      >
         <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ I · Practice</div>
-        <div data-reveal className="min-w-0" style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(26px, 3.5vw, 46px)',
-          lineHeight: 1.2, letterSpacing: '-0.025em',
+        <div
+          data-reveal
+          className="min-w-0"
+          style={{
+          ...homeSectionLedeTypo,
           maxWidth: '26ch',
-        }}>
+        }}
+        >
           I don't believe the division between art and engineering is real.{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
             I believe the interesting work lives past the point where the categories stop working.
@@ -196,7 +206,10 @@ export default function Home({ setRoute }) {
       <section
         className="home-surface-ink"
         style={{
-        padding: 'clamp(64px, 8vw, 120px) clamp(20px, 5vw, 80px)',
+        '--home-ink-pad-left': 'clamp(20px, 5vw, 80px)',
+        '--home-ink-pad-right': 'max(10px, env(safe-area-inset-right, 0px))',
+        padding:
+          'clamp(64px, 8vw, 120px) var(--home-ink-pad-right) clamp(64px, 8vw, 120px) var(--home-ink-pad-left)',
         background: 'var(--fg-primary)',
         color: 'var(--bg-canvas)',
         marginTop: 0,
@@ -222,19 +235,9 @@ export default function Home({ setRoute }) {
             § II · Company
           </div>
           <div className="min-w-0">
-            <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: 11,
-              letterSpacing: '0.12em', textTransform: 'uppercase',
-              marginBottom: 20,
-              color: 'color-mix(in srgb, var(--bg-canvas) 50%, transparent)',
-            }}>
-              LightWrk · Founded 2024
-            </div>
             <h2 data-reveal className="headline-measure" style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(32px, 5vw, 72px)',
-              lineHeight: 1.0, letterSpacing: '-0.03em',
-              maxWidth: '20ch', marginBottom: 32,
+              ...homeSectionLedeTypo,
+              maxWidth: '26ch', marginBottom: 32,
               color: 'var(--bg-canvas)',
             }}>
               Structured human feedback for physical AI.
@@ -280,24 +283,23 @@ export default function Home({ setRoute }) {
         </div>
       </section>
 
-      {/* Creative feature */}
+      {/* Creative feature (mirrored rail vs § II) */}
       <section
-        className="page-section--split"
+        className="page-section--split page-section--split--mirror"
         style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr',
+        display: 'grid',
         gap: 48,
         width: '100%',
         boxSizing: 'border-box',
-      }}>
+      }}
+      >
         <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ III · Creative</div>
         <div className="min-w-0">
           <h2 data-reveal className="headline-measure" style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(28px, 4vw, 56px)',
-            lineHeight: 1.1, letterSpacing: '-0.025em',
-            maxWidth: '22ch', marginBottom: 32,
+            ...homeSectionLedeTypo,
+            maxWidth: '26ch', marginBottom: 32,
           }}>
             Music, identity, and long-form{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
@@ -326,12 +328,13 @@ export default function Home({ setRoute }) {
         </div>
       </section>
 
-      {/* Closing CTA */}
+      {/* Closing CTA — same ink band as § II (inverts in dark mode) */}
       <section
-        className="home-closing-cta"
+        className="home-closing-cta home-surface-ink"
         style={{
         padding: 'clamp(64px, 8vw, 120px) clamp(20px, 5vw, 80px)',
-        borderTop: '1px solid var(--fg-primary)',
+        background: 'var(--fg-primary)',
+        color: 'var(--bg-canvas)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
         flexWrap: 'wrap', gap: 32,
         width: '100%',
@@ -342,25 +345,37 @@ export default function Home({ setRoute }) {
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(28px, 4vw, 60px)',
           lineHeight: 1.05, letterSpacing: '-0.025em',
-          maxWidth: '20ch',
+          maxWidth: 'min(34ch, 100%)',
         }}>
           Send a note.{' '}
-          <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            I read everything.
+          <span style={{
+            fontStyle: 'italic',
+            color: 'color-mix(in srgb, var(--bg-canvas) 50%, transparent)',
+          }}>
+            I read{'\u00a0'}everything.
           </span>
         </div>
         <button
+          type="button"
           onClick={() => { setRoute('contact'); window.scrollTo(0,0); }}
           style={{
             fontFamily: 'var(--font-body)', fontSize: 14,
             padding: '14px 28px',
-            border: '1px solid var(--fg-primary)',
-            background: 'var(--fg-primary)', color: 'var(--bg-canvas)',
+            border: '1px solid var(--bg-canvas)',
+            background: 'transparent',
+            color: 'var(--bg-canvas)',
             cursor: 'pointer',
             transition: 'all 140ms cubic-bezier(0.2,0.6,0.2,1)',
           }}
-          onMouseEnter={e => { e.target.style.background = 'var(--bg-canvas)'; e.target.style.color = 'var(--fg-primary)'; }}
-          onMouseLeave={e => { e.target.style.background = 'var(--fg-primary)'; e.target.style.color = 'var(--bg-canvas)'; }}>
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'var(--bg-canvas)';
+            e.currentTarget.style.color = 'var(--fg-primary)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent';
+            e.currentTarget.style.color = 'var(--bg-canvas)';
+          }}
+        >
           Get in touch →
         </button>
       </section>

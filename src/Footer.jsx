@@ -110,7 +110,7 @@ export default function Footer({ setRoute, theme, setTheme }) {
 
   return (
     <footer style={{
-      marginTop: 160,
+      marginTop: 0,
       padding: 'clamp(48px, 6vw, 96px) clamp(20px, 5vw, 80px) 32px',
       borderTop: '1px solid var(--rule)',
     }}>

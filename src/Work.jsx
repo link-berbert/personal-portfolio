@@ -2,6 +2,41 @@ import { useState } from "react";
 import { CREATIVE_WORK, AI_WORK } from "./data.js";
 import { getWorkLogoByProjectId, logoMarqueeCellClass } from "./workLogos.js";
 
+const NE_ARROW = "\u2197";
+
+/** Role string → same chips as former category tags (split on commas). */
+function workRoleAsTags(role) {
+  if (!role || typeof role !== "string") return [];
+  return role.split(/,\s*/).map((s) => s.trim()).filter(Boolean);
+}
+
+function WorkExternalLink({ href, label }) {
+  const trimmed = label.trimEnd();
+  const endsWithArrow = trimmed.endsWith(NE_ARROW);
+  const textBeforeArrow = endsWithArrow ? trimmed.slice(0, -1).trimEnd() : trimmed;
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="work-external-link"
+    >
+      {endsWithArrow ? (
+        <>
+          {textBeforeArrow}
+          {" "}
+          <span className="work-external-link__arrow" aria-hidden>
+            {NE_ARROW}
+          </span>
+        </>
+      ) : (
+        label
+      )}
+    </a>
+  );
+}
+
 function WorkPageLogo({ projectId }) {
   const logo = getWorkLogoByProjectId(projectId);
   if (!logo) return null;
@@ -199,7 +234,6 @@ export default function Work({ setRoute }) {
           }}
           >
             <div className="work-entry__rail">
-              <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)' }}>01</span>
               <div className="work-entry__brand">
                 <WorkPageLogo projectId="lightwrk" />
                 <h2 className="sr-only">LightWrk.</h2>
@@ -208,10 +242,10 @@ export default function Work({ setRoute }) {
             <div className="work-entry__body min-w-0">
               <div className="work-entry__main-text">
                 <div className="work-entry__tags" style={{ marginBottom: 14 }}>
-                  {[AI_WORK[0].discipline, AI_WORK[0].role].map((t, i) => (
-                    <span key={i} className="t-mono" style={{
+                  {workRoleAsTags(AI_WORK[0].role).map((t, i) => (
+                    <span key={`${i}-${t}`} className="t-mono" style={{
                       fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
-                      color: 'var(--fg-tertiary)', marginRight: 20,
+                      color: 'var(--fg-tertiary)', marginRight: 18,
                     }}>{t}</span>
                   ))}
                 </div>
@@ -224,17 +258,7 @@ export default function Work({ setRoute }) {
                   {AI_WORK[0].extended}
                 </p>
               </div>
-              <div
-                className="work-entry__tail"
-                style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: 24,
-                paddingTop: 24,
-                marginTop: 24,
-                borderTop: '1px solid var(--rule)',
-              }}
-              >
+              <div className="work-entry__tail">
                 {AI_WORK[0].capabilities.map(([label, desc]) => (
                   <div key={label}>
                     <div className="t-caption" style={{ marginBottom: 8 }}>{label}</div>
@@ -244,6 +268,14 @@ export default function Work({ setRoute }) {
                   </div>
                 ))}
               </div>
+              {AI_WORK[0].externalLink && (
+                <div className="work-entry__main-text work-entry__main-text--after-capabilities min-w-0">
+                  <WorkExternalLink
+                    href={AI_WORK[0].externalLink.href}
+                    label={AI_WORK[0].externalLink.label}
+                  />
+                </div>
+              )}
             </div>
             <span className="t-mono work-entry__year" style={{
               color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
@@ -281,9 +313,6 @@ function CreativeRow({ item, isLast }) {
         opacity: hovered ? 1 : 0.88,
       }}>
       <div className="work-entry__rail">
-        <span className="t-mono work-entry__num" style={{ color: 'var(--fg-tertiary)' }}>
-          {item.num}
-        </span>
         <div className="work-entry__brand">
           <WorkPageLogo projectId={item.id} />
           <h2
@@ -302,8 +331,8 @@ function CreativeRow({ item, isLast }) {
       <div className="work-entry__body min-w-0">
         <div className="work-entry__main-text">
           <div className="work-entry__tags" style={{ marginBottom: 14 }}>
-            {item.tags && item.tags.map(t => (
-              <span key={t} className="t-mono" style={{
+            {workRoleAsTags(item.role).map((t, i) => (
+              <span key={`${i}-${t}`} className="t-mono" style={{
                 fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase',
                 color: 'var(--fg-tertiary)', marginRight: 18,
               }}>{t}</span>
@@ -312,9 +341,12 @@ function CreativeRow({ item, isLast }) {
           <p className="t-body min-w-0" style={{
             color: 'var(--fg-secondary)', lineHeight: 1.65,
           }}>{item.summary}</p>
-          <div className="t-small" style={{ marginTop: 10, color: 'var(--fg-tertiary)' }}>
-            {item.role}
-          </div>
+          {item.externalLink && (
+            <WorkExternalLink
+              href={item.externalLink.href}
+              label={item.externalLink.label}
+            />
+          )}
         </div>
       </div>
       <span className="t-mono work-entry__year" style={{

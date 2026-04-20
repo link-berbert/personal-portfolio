@@ -199,12 +199,13 @@ export default function About({ setRoute }) {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA — ink band (matches home closing; inverts in dark mode) */}
       <section
-        className="page-cta-row"
+        className="page-cta-row home-surface-ink"
         style={{
         padding: `clamp(48px, 6vw, 96px) ${pm}`,
-        borderTop: '1px solid var(--fg-primary)',
+        background: 'var(--fg-primary)',
+        color: 'var(--bg-canvas)',
         display: 'flex', justifyContent: 'space-between',
         alignItems: 'center', flexWrap: 'wrap', gap: 24,
         width: '100%',
@@ -220,17 +221,26 @@ export default function About({ setRoute }) {
           If any of this is relevant to what you're building —
         </div>
         <button
+          type="button"
           onClick={() => { setRoute('contact'); window.scrollTo(0,0); }}
           style={{
             fontFamily: 'var(--font-body)', fontSize: 14,
             padding: '14px 28px',
-            border: '1px solid var(--fg-primary)',
-            background: 'none', color: 'var(--fg-primary)',
+            border: '1px solid var(--bg-canvas)',
+            background: 'transparent',
+            color: 'var(--bg-canvas)',
             cursor: 'pointer',
             transition: 'all 140ms cubic-bezier(0.2,0.6,0.2,1)',
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'var(--fg-primary)'; e.currentTarget.style.color = 'var(--bg-canvas)'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'var(--fg-primary)'; }}>
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'var(--bg-canvas)';
+            e.currentTarget.style.color = 'var(--fg-primary)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'transparent';
+            e.currentTarget.style.color = 'var(--bg-canvas)';
+          }}
+        >
           Write →
         </button>
       </section>

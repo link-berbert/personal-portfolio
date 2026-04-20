@@ -160,7 +160,6 @@ export default function App() {
         ref={(el) => {
           if (el) requestAnimationFrame(() => el.classList.add("page-active"));
         }}
-        style={{ flex: 1 }}
       >
         {screen}
       </div>
