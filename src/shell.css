@@ -583,14 +583,15 @@ html.is-resizing .grain {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 24px;
   margin-top: 24px;
+  max-width: 52ch;
   padding: 24px 0;
   border-top: 1px solid var(--rule);
 }
 
-/* Keep LightWrk capability cards in original desktop slots even with one removed. */
+/* LightWrk capabilities: two columns that span the full body measure. */
 @media (min-width: 900px) {
   .work-entry__tail--lightwrk {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -638,7 +639,7 @@ html.is-resizing .grain {
 
 /* James Judas — optical nudge vs cap height of tags */
 .work-entry__logo[data-logo-id="james-judas"] {
-  margin-top: clamp(0px, 0.2vw, 2px);
+  margin-top: 0px;
 }
 
 /* Ghost Project IX */
@@ -865,42 +866,17 @@ html.is-resizing .grain {
 
 @media (min-width: 1280px) {
   .home-surface-ink .page-section--split > .min-w-0 {
-    /*
-     * Full wide-screen pull (1280px+): tuned midpoint between thin inset and
-     * full pad compensation, plus the historical vw clamp.
-     */
-    margin-right: calc(
-      -1 *
-        (
-          (
-              max(10px, env(safe-area-inset-right, 0px)) + var(--home-ink-pad-x)
-            ) /
-            2 +
-          clamp(16px, 5vw, 88px)
-        )
-    );
-    padding-right: max(8px, env(safe-area-inset-right, 0px));
+    /* One additional step left after zeroing prior negative offset. */
+    margin-right: 8px;
   }
 }
 
 @media (min-width: 1024px) and (max-width: 1279.98px) {
   .home-surface-ink .page-section--split > .min-w-0 {
-    /*
-     * Taper the bleed down as the viewport narrows below 1280 to avoid the
-     * small-laptop jump: factor is 1 at 1280, 0 at 1024.
-     */
-    --home-ink-bleed-target: calc(
-      (
-          max(10px, env(safe-area-inset-right, 0px)) + var(--home-ink-pad-x)
-        ) /
-        2 +
-        clamp(16px, 5vw, 88px)
-    );
+    /* Mirror the desktop left shift and taper it out toward 1024. */
+    --home-ink-bleed-target: 8px;
     --home-ink-bleed-t: clamp(0, (100vw - 1024px) / 256px, 1);
-    margin-right: calc(
-      -1 * var(--home-ink-bleed-target) * var(--home-ink-bleed-t)
-    );
-    padding-right: max(8px, env(safe-area-inset-right, 0px));
+    margin-right: calc(var(--home-ink-bleed-target) * var(--home-ink-bleed-t));
   }
 }
 

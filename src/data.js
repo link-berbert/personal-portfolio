@@ -13,7 +13,7 @@ export const CREATIVE_WORK = [
     tags: ["Music", "Identity", "Worldbuilding"],
     externalLink: {
       href: "https://beacons.page/berbymusic",
-      label: "Berby Music ↗",
+      label: "View Berby Music Website ↗",
     },
   },
   {
@@ -39,7 +39,7 @@ export const CREATIVE_WORK = [
     tags: ["Worldbuilding", "Ambient", "AI", "Film"],
     externalLink: {
       href: "https://www.youtube.com/@GhostProjectIX",
-      label: "View YouTube Channel ↗",
+      label: "View Ghost Project IX YouTube Channel ↗",
     },
   },
 ];
@@ -53,18 +53,15 @@ export const AI_WORK = [
     year: "2026 —",
     role: "Founder, CEO",
     summary:
-      "LightWrk is building the structured human feedback infrastructure that physical AI systems need to improve. The work spans ontology design, rubric development, scored failure taxonomies, and repeatable human judgment pipelines — the layer between raw robot behavior and meaningful model improvement.",
-    extended:
-      "Physical AI systems fail in ways that are hard to label and harder to fix. The problem is not data volume — it is data quality and structure. LightWrk designs the evaluation frameworks, judgment rubrics, and scoring infrastructure that let human experts produce feedback that actually trains better models.",
+      "A venture-scale company building human-in-the-loop evaluation systems for physical AI and world model labs. Distilling human experience and knowledge into machines creates a theoretically infinite return on investment. This opens the door to expansive, long-horizon projects that are only limited by human imagination. The challenge lies in keeping machines consistently aligned with human values.",
     tags: ["Physical AI", "Evaluation", "Infrastructure"],
     capabilities: [
-      ["Ontology design", "Structured failure taxonomies for embodied AI systems — the vocabulary that makes evaluation possible."],
-      ["Rubric development", "Scored, repeatable judgment frameworks. Human expertise made consistent enough to train on."],
-      ["Evaluation pipelines", "End-to-end infrastructure connecting human assessors to model improvement loops."],
+      ["Ontology design", "Structured failure taxonomies for embodied AI systems. Definin the vocabulary that makes evaluation possible."],
+      ["Evaluation frameworks", "Scored, repeatable judgment frameworks and rubrics. Expert human feedback made measurable and consistent enough to train on."],
     ],
     externalLink: {
       href: "https://lightwrk.ai",
-      label: "LightWrk ↗",
+      label: "View LightWrk Website↗",
     },
   },
   {
@@ -75,11 +72,11 @@ export const AI_WORK = [
     year: "2022 —",
     role: "Founder, creative director",
     summary:
-      "A multidisciplinary studio built around long-horizon worldbuilding, aesthetic systems, and ambitious creative direction. Final Hour is the umbrella for projects across music, film, interactive media, design, live experience, and future-facing cultural work — a structure for building coherent worlds rather than isolated outputs.",
+      "A multidisciplinary studio built around long-horizon worldbuilding, aesthetic systems, and ambitious creative direction. Final Hour is the umbrella for projects across music, film, interactive media, design, live experience, and future-facing cultural work. Every project must evoke emotion, and be built around a coherent world.",
     tags: ["Studio", "Worldbuilding", "Creative systems"],
     externalLink: {
       href: "https://www.linkedin.com/company/final-hour-productions/",
-      label: "View LinkedIn Page ↗",
+      label: "View Final Hour Productions LinkedIn Page ↗",
     },
   },
   {
@@ -90,11 +87,11 @@ export const AI_WORK = [
     year: "2025 —",
     role: "Founder, strategist",
     summary:
-      "A worldbuilding and creative strategy practice for artists and founders developing deeper identities, stronger concepts, and more coherent bodies of work. The Creator's Catalyst helps turn scattered ideas into integrated creative systems — refining positioning, narrative, aesthetic logic, and long-term vision.",
+      "A creative strategy and worldbuilding agency for artists and founders developing deeper identities, stronger concepts, and more coherent bodies of work. The Creator's Catalyst helps turn scattered ideas into integrated creative systems by refining positioning, narrative, aesthetic logic, and long-term vision.",
     tags: ["Strategy", "Worldbuilding", "Creative advisory"],
     externalLink: {
       href: "https://beacons.ai/thecreatorscatalyst",
-      label: "The Creator's Catalyst ↗",
+      label: "View The Creator's Catalyst Website ↗",
     },
   },
   {
@@ -105,7 +102,7 @@ export const AI_WORK = [
     year: "2026 —",
     role: "Founder, owner",
     summary:
-      "A parent structure for long-horizon ventures across technology, creative work, and future-facing systems. Unnamed Holdings Co. exists to hold, organize, and extend the broader vision — creating continuity across companies, worlds, and ambitious work that may take years to fully emerge.",
+      "A parent structure for long-horizon ventures across technology, creative work, and future-facing systems. Unnamed Holdings Co. exists to hold, organize, and extend the broader vision in order to create continuity across companies, worlds, and ambitious work that may take years to fully emerge.",
     tags: ["Holding", "Structure", "Venture", "Architecture"],
   },
 ];

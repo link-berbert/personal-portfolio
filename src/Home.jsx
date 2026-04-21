@@ -242,7 +242,7 @@ export default function Home({ setRoute }) {
               maxWidth: '26ch', marginBottom: 32,
               color: 'var(--bg-canvas)',
             }}>
-              Structured human feedback for physical AI.
+              Physical AI, organizational<br />structures, and business ventures.
             </h2>
             <p className="home-mobile-link-line" style={{
               fontSize: 17, lineHeight: 1.65,
