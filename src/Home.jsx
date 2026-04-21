@@ -244,7 +244,7 @@ export default function Home({ setRoute }) {
             }}>
               Structured human feedback for physical AI.
             </h2>
-            <p style={{
+            <p className="home-mobile-link-line" style={{
               fontSize: 17, lineHeight: 1.65,
               maxWidth: '56ch',
               color: 'color-mix(in srgb, var(--bg-canvas) 75%, transparent)',
@@ -254,27 +254,29 @@ export default function Home({ setRoute }) {
               in keeping machines consistently aligned with human values.
               <br />
               <br />
-              See how I am building towards a functional future:
-              <button
-                className="home-inline-link home-inline-link--inverse"
-                onClick={() => {
-                  window.location.hash = "ai-companies";
-                  setRoute('work');
-                  window.scrollTo(0, 0);
-                }}
-                style={{
-                  marginLeft: 16,
-                  fontFamily: 'var(--font-mono)', fontSize: 12,
-                  letterSpacing: '0.08em', textTransform: 'uppercase',
-                  backgroundColor: 'transparent', border: 0, cursor: 'pointer',
-                  '--home-inline-link-color': 'var(--bg-canvas)',
-                  '--home-inline-link-rule': 'color-mix(in srgb, var(--bg-canvas) 70%, transparent)',
-                  padding: 0,
-                  position: 'relative', top: -2,
-                  borderBottom: '1px solid var(--home-inline-link-rule)', paddingBottom: 1,
-                }}>
-                View AI / Companies work →
-              </button>
+              See how I am building towards a{" "}
+              <span className="home-mobile-link-target">
+                <span className="home-mobile-link-label">functional future:</span>
+                <button
+                  className="home-inline-link home-inline-link--inverse"
+                  onClick={() => {
+                    window.location.hash = "ai-companies";
+                    setRoute('work');
+                    window.scrollTo(0, 0);
+                  }}
+                  style={{
+                    fontFamily: 'var(--font-mono)', fontSize: 12,
+                    letterSpacing: '0.08em', textTransform: 'uppercase',
+                    backgroundColor: 'transparent', border: 0, cursor: 'pointer',
+                    '--home-inline-link-color': 'var(--bg-canvas)',
+                    '--home-inline-link-rule': 'color-mix(in srgb, var(--bg-canvas) 70%, transparent)',
+                    padding: 0,
+                    position: 'relative', top: -2,
+                    borderBottom: '1px solid var(--home-inline-link-rule)', paddingBottom: 1,
+                  }}>
+                  View AI / Companies work →
+                </button>
+              </span>
             </p>
             </div>
           </div>
@@ -303,34 +305,36 @@ export default function Home({ setRoute }) {
               worldbuilding.
             </span>
           </h2>
-          <p className="t-body" style={{
+          <p className="t-body home-mobile-link-line" style={{
             color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65,
           }}>
             Whether it's Leonardo da Vinci, Jony Ive, or Virgil Abloh, history keeps proving the same thing: given any tool, humans will try to make something beautiful with it.
              Technology is no different. When machines can do anything, artistic expression, entertainment, and storytelling become the defining features of human intelligence.
              <br />
              <br />
-             See how I am building towards a beautiful future:
-             <button
-               className="home-inline-link home-inline-link--default"
-               onClick={() => {
-                 window.location.hash = "creative-work";
-                 setRoute('work');
-                 window.scrollTo(0, 0);
-               }}
-               style={{
-                 marginLeft: 16,
-                 fontFamily: 'var(--font-mono)', fontSize: 12,
-                 letterSpacing: '0.08em', textTransform: 'uppercase',
-                 backgroundColor: 'transparent', border: 0, cursor: 'pointer',
-                 '--home-inline-link-color': 'var(--fg-primary)',
-                 '--home-inline-link-rule': 'var(--rule-strong)',
-                 padding: 0,
-                 position: 'relative', top: -2,
-                 borderBottom: '1px solid var(--home-inline-link-rule)', paddingBottom: 1,
-               }}>
-               View creative work →
-             </button>
+             See how I am building towards a{" "}
+             <span className="home-mobile-link-target">
+               <span className="home-mobile-link-label">beautiful future:</span>
+               <button
+                 className="home-inline-link home-inline-link--default"
+                 onClick={() => {
+                   window.location.hash = "creative-work";
+                   setRoute('work');
+                   window.scrollTo(0, 0);
+                 }}
+                 style={{
+                   fontFamily: 'var(--font-mono)', fontSize: 12,
+                   letterSpacing: '0.08em', textTransform: 'uppercase',
+                   backgroundColor: 'transparent', border: 0, cursor: 'pointer',
+                   '--home-inline-link-color': 'var(--fg-primary)',
+                   '--home-inline-link-rule': 'var(--rule-strong)',
+                   padding: 0,
+                   position: 'relative', top: -2,
+                   borderBottom: '1px solid var(--home-inline-link-rule)', paddingBottom: 1,
+                 }}>
+                 View creative work →
+               </button>
+             </span>
           </p>
         </div>
       </section>

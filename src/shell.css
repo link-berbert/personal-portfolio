@@ -434,7 +434,7 @@ html.is-resizing .grain {
 }
 
 .work-entry__rail .work-entry__logo[data-logo-id="lightwrk"] {
-  margin-top: clamp(-24px, -1.95vw, -16px);
+  margin-top: clamp(-31px, -2.45vw, -20px);
 }
 
 .work-entry__rail .work-entry__logo[data-logo-id="final-hour"] {
@@ -585,6 +585,13 @@ html.is-resizing .grain {
   margin-top: 24px;
   padding: 24px 0;
   border-top: 1px solid var(--rule);
+}
+
+/* Keep LightWrk capability cards in original desktop slots even with one removed. */
+@media (min-width: 900px) {
+  .work-entry__tail--lightwrk {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .work-entry__main-text .t-body {
@@ -854,8 +861,8 @@ html.is-resizing .grain {
 @media (min-width: 1280px) {
   .home-surface-ink .page-section--split > .min-w-0 {
     /*
-     * Pull = thin + clamp was too little (symmetric pad); pad-x + clamp was too
-     * much. Use the average of thin and pad-x as the inset term, then + clamp.
+     * Full wide-screen pull (1280px+): tuned midpoint between thin inset and
+     * full pad compensation, plus the historical vw clamp.
      */
     margin-right: calc(
       -1 *
@@ -866,6 +873,27 @@ html.is-resizing .grain {
             2 +
           clamp(16px, 5vw, 88px)
         )
+    );
+    padding-right: max(8px, env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  .home-surface-ink .page-section--split > .min-w-0 {
+    /*
+     * Taper the bleed down as the viewport narrows below 1280 to avoid the
+     * small-laptop jump: factor is 1 at 1280, 0 at 1024.
+     */
+    --home-ink-bleed-target: calc(
+      (
+          max(10px, env(safe-area-inset-right, 0px)) + var(--home-ink-pad-x)
+        ) /
+        2 +
+        clamp(16px, 5vw, 88px)
+    );
+    --home-ink-bleed-t: clamp(0, (100vw - 1024px) / 256px, 1);
+    margin-right: calc(
+      -1 * var(--home-ink-bleed-target) * var(--home-ink-bleed-t)
     );
     padding-right: max(8px, env(safe-area-inset-right, 0px));
   }
@@ -887,6 +915,20 @@ html.is-resizing .grain {
    Fixes wrapping, overflow, and sidebar-label grids that squash content.
    -------------------------------------------------------------------------- */
 @media (max-width: 640px) {
+  .home-mobile-link-target {
+    display: contents;
+  }
+
+  .home-mobile-link-target .home-inline-link {
+    display: block;
+    width: fit-content;
+    margin-top: 16px;
+  }
+
+  .home-mobile-link-target .home-mobile-link-label {
+    margin-right: 0;
+  }
+
   main {
     overflow-x: clip;
   }
@@ -1115,6 +1157,27 @@ html.is-resizing .grain {
   .footer-bar__meta {
     align-self: center !important;
     flex-shrink: 0;
+  }
+}
+
+.home-mobile-link-target {
+  display: contents;
+}
+
+.home-mobile-link-target .home-mobile-link-label {
+  margin-right: 16px;
+}
+
+/* In cramped tablet/small-laptop widths, push both CTA links to their own line
+   so § II and § III match even though the § II label is longer. */
+@media (min-width: 641px) and (max-width: 980px) {
+  .home-mobile-link-target .home-inline-link {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .home-mobile-link-target .home-mobile-link-label {
+    margin-right: 0;
   }
 }
 

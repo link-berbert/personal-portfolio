@@ -61,7 +61,6 @@ export const AI_WORK = [
       ["Ontology design", "Structured failure taxonomies for embodied AI systems — the vocabulary that makes evaluation possible."],
       ["Rubric development", "Scored, repeatable judgment frameworks. Human expertise made consistent enough to train on."],
       ["Evaluation pipelines", "End-to-end infrastructure connecting human assessors to model improvement loops."],
-      ["Failure taxonomy", "Systematized categories of robot failure, designed to surface actionable training signal."],
     ],
     externalLink: {
       href: "https://lightwrk.ai",

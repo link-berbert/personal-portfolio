@@ -211,7 +211,7 @@ export default function Work({ setRoute }) {
           >
             <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ I · Overview</div>
             <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65 }}>
-            Creative work shaped by narrative, atmosphere, and internal coherence.
+            Creative work shaped by narrative depth, atmospheric detail, and emotional impact.
             </p>
           </div>
 
@@ -275,7 +275,7 @@ export default function Work({ setRoute }) {
                   {AI_WORK[0].extended}
                 </p>
               </div>
-              <div className="work-entry__tail">
+              <div className="work-entry__tail work-entry__tail--lightwrk">
                 {AI_WORK[0].capabilities.map(([label, desc]) => (
                   <div key={label}>
                     <div className="t-caption" style={{ marginBottom: 8 }}>{label}</div>
