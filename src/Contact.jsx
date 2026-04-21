@@ -9,13 +9,15 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const pm = 'clamp(20px, 5vw, 80px)';
+  const contactContentWidth = 'min(100%, 920px)';
 
   const accessKey = (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "").trim();
 
   const categories = [
-    { id: 'ai', label: 'AI / LightWrk', desc: 'Partnerships, evaluation work, frontier AI collaboration.' },
-    { id: 'creative', label: 'Creative', desc: 'Music, direction, worldbuilding, identity systems.' },
-    { id: 'other', label: 'Something else', desc: 'Speaking, ideas, introductions.' },
+    { id: 'ai', label: 'AI / LightWrk', desc: 'Partnerships, questions, and evaluation work.' },
+    { id: 'other-ventures', label: 'Other Ventures', desc: 'Brand, product, and strategy support.' },
+    { id: 'creative', label: 'Creative', desc: 'Music, design, and worldbuilding projects.' },
+    { id: 'other', label: 'Something Else', desc: 'Speaking, ideas, and introductions.' },
   ];
 
   async function handleSubmit(e) {
@@ -94,7 +96,7 @@ export default function Contact() {
           marginTop: 36, maxWidth: '52ch',
           color: 'var(--fg-secondary)', lineHeight: 1.65,
         }}>
-          A sentence is usually enough context. I respond to most things within a few days.
+          Don't hesitate to reach out. I usually respond within a few days.
         </p>
       </section>
 
@@ -112,7 +114,7 @@ export default function Contact() {
             letterSpacing: '-0.025em', lineHeight: 1.1,
             maxWidth: '20ch',
           }}>
-            I'll reply within a few days.
+            I'll respond as soon as I can.
           </div>
         </section>
       ) : (
@@ -129,9 +131,10 @@ export default function Contact() {
             <div className="t-caption" style={{ marginBottom: 14, color: 'var(--fg-secondary)' }}>
               What is this about?
             </div>
-            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', width: '100%' }}>
+            <div className="contact-category-grid" style={{ width: contactContentWidth }}>
               {categories.map(c => (
                 <button key={c.id}
+                  className="contact-category-button"
                   onClick={() => setCategory(c.id)}
                   style={{
                     fontFamily: 'var(--font-body)', fontSize: 14,
@@ -143,7 +146,8 @@ export default function Contact() {
                     cursor: 'pointer',
                     transition: 'all var(--dur-ui) var(--ease)',
                     display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
-                    gap: 4, textAlign: 'left',
+                    justifyContent: 'space-between',
+                    gap: 4, textAlign: 'left', width: '100%', minHeight: '100%',
                   }}>
                   <span style={{ fontWeight: 500 }}>{c.label}</span>
                   <span style={{
@@ -157,112 +161,120 @@ export default function Contact() {
 
           {/* Form */}
           <form
-            className="contact-form"
             onSubmit={handleSubmit}
             style={{
               padding: `clamp(28px, 4vw, 48px) ${pm} clamp(48px, 6vw, 96px)`,
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '32px 48px',
               width: '100%',
               boxSizing: 'border-box',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
             }}>
+            <div
+              className="contact-form"
+              style={{
+                width: contactContentWidth,
+                boxSizing: 'border-box',
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '32px 48px',
+              }}>
 
-            {[
-              { id: 'name', label: 'Name', type: 'text', col: 1 },
-              { id: 'email', label: 'Email', type: 'email', col: 1 },
-            ].map(f => (
-              <div key={f.id} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <label className="t-caption">{f.label}</label>
-                <input
-                  type={f.type}
-                  name={f.id}
+              {[
+                { id: 'name', label: 'Name', type: 'text', col: 1 },
+                { id: 'email', label: 'Email', type: 'email', col: 1 },
+              ].map(f => (
+                <div key={f.id} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <label className="t-caption">{f.label}</label>
+                  <input
+                    type={f.type}
+                    name={f.id}
+                    required
+                    value={form[f.id]}
+                    onChange={e => setForm({ ...form, [f.id]: e.target.value })}
+                    style={{
+                      fontFamily: 'var(--font-body)', fontSize: 17,
+                      padding: '10px 0', border: 0,
+                      borderBottom: '1px solid var(--rule)',
+                      background: 'transparent', color: 'var(--fg-primary)',
+                      outline: 0, width: '100%',
+                      transition: 'border-color var(--dur-ui) var(--ease)',
+                    }}
+                    onFocus={e => e.target.style.borderBottomColor = 'var(--fg-primary)'}
+                    onBlur={e => e.target.style.borderBottomColor = 'var(--rule)'}
+                  />
+                </div>
+              ))}
+
+              <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <label className="t-caption">Message</label>
+                <textarea
+                  rows={5}
+                  name="message"
                   required
-                  value={form[f.id]}
-                  onChange={e => setForm({ ...form, [f.id]: e.target.value })}
+                  value={form.message}
+                  onChange={e => setForm({ ...form, message: e.target.value })}
                   style={{
                     fontFamily: 'var(--font-body)', fontSize: 17,
                     padding: '10px 0', border: 0,
                     borderBottom: '1px solid var(--rule)',
                     background: 'transparent', color: 'var(--fg-primary)',
-                    outline: 0, width: '100%',
+                    outline: 0, resize: 'vertical', width: '100%',
                     transition: 'border-color var(--dur-ui) var(--ease)',
                   }}
                   onFocus={e => e.target.style.borderBottomColor = 'var(--fg-primary)'}
                   onBlur={e => e.target.style.borderBottomColor = 'var(--rule)'}
                 />
               </div>
-            ))}
 
-            <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label className="t-caption">Message</label>
-              <textarea
-                rows={5}
-                name="message"
-                required
-                value={form.message}
-                onChange={e => setForm({ ...form, message: e.target.value })}
-                placeholder="A sentence is usually enough."
-                style={{
-                  fontFamily: 'var(--font-body)', fontSize: 17,
-                  padding: '10px 0', border: 0,
-                  borderBottom: '1px solid var(--rule)',
-                  background: 'transparent', color: 'var(--fg-primary)',
-                  outline: 0, resize: 'vertical', width: '100%',
-                  transition: 'border-color var(--dur-ui) var(--ease)',
-                }}
-                onFocus={e => e.target.style.borderBottomColor = 'var(--fg-primary)'}
-                onBlur={e => e.target.style.borderBottomColor = 'var(--rule)'}
-              />
-            </div>
-
-            <div style={{
-              gridColumn: '1 / -1',
-              display: 'flex', flexDirection: 'column',
-              gap: 12, marginTop: 8,
-            }}>
-              {error ? (
-                <p
-                  className="t-caption"
-                  role="alert"
-                  style={{ margin: 0, color: '#c45', maxWidth: '52ch' }}
-                >
-                  {error}
-                </p>
-              ) : null}
               <div style={{
-                display: 'flex', justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap', gap: 16,
+                gridColumn: '1 / -1',
+                display: 'flex', flexDirection: 'column',
+                gap: 12, marginTop: 8,
               }}>
-                <a href="mailto:lincoln.berbert@lightwrk.ai"
-                  className="t-mono"
-                  style={{ color: 'var(--fg-tertiary)', fontSize: 12 }}>
-                  Or email directly: lincoln.berbert@lightwrk.ai ↗
-                </a>
-                <button type="submit"
-                  disabled={submitting}
-                  style={{
-                    fontFamily: 'var(--font-body)', fontSize: 14,
-                    padding: '14px 28px',
-                    border: '1px solid var(--fg-primary)',
-                    background: 'var(--fg-primary)', color: 'var(--bg-canvas)',
-                    cursor: submitting ? 'wait' : 'pointer',
-                    opacity: submitting ? 0.75 : 1,
-                    transition: 'all 140ms cubic-bezier(0.2,0.6,0.2,1)',
-                  }}
-                  onMouseEnter={e => {
-                    if (e.currentTarget.disabled) return;
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = 'var(--fg-primary)';
-                  }}
-                  onMouseLeave={e => {
-                    if (e.currentTarget.disabled) return;
-                    e.currentTarget.style.background = 'var(--fg-primary)';
-                    e.currentTarget.style.color = 'var(--bg-canvas)';
-                  }}>
-                  {submitting ? "Sending…" : "Get in touch →"}
-                </button>
+                {error ? (
+                  <p
+                    className="t-caption"
+                    role="alert"
+                    style={{ margin: 0, color: '#c45', maxWidth: '52ch' }}
+                  >
+                    {error}
+                  </p>
+                ) : null}
+                <div style={{
+                  display: 'flex', justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap', gap: 16,
+                }}>
+                  <a href="mailto:lincoln.berbert@lightwrk.ai"
+                    className="t-mono"
+                    style={{ color: 'var(--fg-tertiary)', fontSize: 12 }}>
+                    Or email directly: lincoln.berbert@lightwrk.ai ↗
+                  </a>
+                  <button type="submit"
+                    disabled={submitting}
+                    style={{
+                      fontFamily: 'var(--font-body)', fontSize: 14,
+                      padding: '14px 28px',
+                      border: '1px solid var(--fg-primary)',
+                      background: 'var(--fg-primary)', color: 'var(--bg-canvas)',
+                      cursor: submitting ? 'wait' : 'pointer',
+                      opacity: submitting ? 0.75 : 1,
+                      transition: 'all 140ms cubic-bezier(0.2,0.6,0.2,1)',
+                    }}
+                    onMouseEnter={e => {
+                      if (e.currentTarget.disabled) return;
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = 'var(--fg-primary)';
+                    }}
+                    onMouseLeave={e => {
+                      if (e.currentTarget.disabled) return;
+                      e.currentTarget.style.background = 'var(--fg-primary)';
+                      e.currentTarget.style.color = 'var(--bg-canvas)';
+                    }}>
+                    {submitting ? "Sending…" : "Get in touch →"}
+                  </button>
+                </div>
               </div>
             </div>
           </form>

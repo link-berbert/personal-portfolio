@@ -35,7 +35,7 @@ export const CREATIVE_WORK = [
     year: "2025 —",
     role: "Worldbuilder, composer",
     summary:
-      "A far-future science fiction world set after ecological collapse, solar catastrophe, and humanity's exodus from a dying solar system. Ghost Project IX spans ambient music, visual atmosphere, speculative narrative, and AI-assisted worldbuilding — moving between industrial decay, orbital ruins, Martian necropolises, solitary deep-space travel, and distant sanctuaries around Proxima Centauri. A project about memory, survival, technology, and the strange role of the human creator inside the machine.",
+      "A far-future science fiction world set after ecological collapse, solar catastrophe, and humanity’s exodus from a dying solar system. Journey through industrial decay, orbital ruins, Martian necropolises, solitary deep-space travel, and distant sanctuaries around Proxima Centauri. Ghost Project IX is an experimental project in creative direction, visual design, and worldbuilding, using AI-generated music to explore memory, survival, technology, and the role of the human creator in a post-human world.",
     tags: ["Worldbuilding", "Ambient", "AI", "Film"],
     externalLink: {
       href: "https://www.youtube.com/@GhostProjectIX",

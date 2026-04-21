@@ -1174,6 +1174,28 @@ html.is-resizing .grain {
   margin-right: 16px;
 }
 
+.contact-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.contact-category-button {
+  width: 100%;
+}
+
+@media (max-width: 980px) {
+  .contact-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* In cramped tablet/small-laptop widths, push both CTA links to their own line
    so § II and § III match even though the § II label is longer. */
 @media (min-width: 641px) and (max-width: 980px) {
