@@ -243,6 +243,7 @@ export default function Work({ setRoute }) {
           {/* LightWrk — same row/grid + type scale as Creative */}
           <div
             className="work-entry-row"
+            data-project-id="lightwrk"
             style={{
             padding: 'clamp(28px, 3.5vw, 52px) 0',
             borderBottom: '1px solid var(--rule)',
@@ -266,6 +267,9 @@ export default function Work({ setRoute }) {
                     }}>{t}</span>
                   ))}
                 </div>
+                <span className="t-mono work-entry__year work-entry__year--mobile" style={{
+                  color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
+                }}>{AI_WORK[0].year}</span>
                 <p className="t-body min-w-0" style={{ color: 'var(--fg-secondary)', lineHeight: 1.65 }}>
                   {AI_WORK[0].summary}
                 </p>
@@ -294,7 +298,7 @@ export default function Work({ setRoute }) {
                 </div>
               )}
             </div>
-            <span className="t-mono work-entry__year" style={{
+            <span className="t-mono work-entry__year work-entry__year--desktop" style={{
               color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
             }}>{AI_WORK[0].year}</span>
           </div>
@@ -321,6 +325,7 @@ function CreativeRow({ item, isLast }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="work-entry-row"
+      data-project-id={item.id}
       style={{
         padding: 'clamp(28px, 3.5vw, 52px) 0',
         borderBottom: isLast ? 'none' : '1px solid var(--rule)',
@@ -355,6 +360,9 @@ function CreativeRow({ item, isLast }) {
               }}>{t}</span>
             ))}
           </div>
+          <span className="t-mono work-entry__year work-entry__year--mobile" style={{
+            color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
+          }}>{item.year}</span>
           <p className="t-body min-w-0" style={{
             color: 'var(--fg-secondary)', lineHeight: 1.65,
           }}>{item.summary}</p>
@@ -366,7 +374,7 @@ function CreativeRow({ item, isLast }) {
           )}
         </div>
       </div>
-      <span className="t-mono work-entry__year" style={{
+      <span className="t-mono work-entry__year work-entry__year--desktop" style={{
         color: 'var(--fg-tertiary)', fontSize: 12, whiteSpace: 'nowrap',
       }}>{item.year}</span>
     </div>

@@ -563,9 +563,9 @@ html.is-resizing .grain {
   min-width: 0;
 }
 
-/* Space from last body line to link ≈ former 10px + one role line + 20px link offset */
+/* Space from last body line to link ≈ former 10px + one role line + 16px link offset */
 .work-entry__main-text > .work-external-link {
-  margin-top: calc(10px + 1.5 * var(--fs-small) + 20px);
+  margin-top: calc(10px + 1.5 * var(--fs-small) + 16px);
 }
 
 /* LightWrk: link only under grid — tail padding + same 10px gap that used to sit above the link */
@@ -574,7 +574,7 @@ html.is-resizing .grain {
 }
 
 .work-entry__main-text.work-entry__main-text--after-capabilities > .work-external-link {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 /* Capability grid — equal vertical padding above/below columns (matches row interior rhythm) */
@@ -668,10 +668,15 @@ html.is-resizing .grain {
   filter: grayscale(100%) invert(1) brightness(1.1);
 }
 
-/* Year: light optical alignment with first line of tags */
+/* Year: desktop date in right column, mobile date under tags */
+.work-entry__year--mobile {
+  display: none;
+  margin-bottom: 14px;
+}
+
 @media (min-width: 641px) {
   .work-entry__year {
-    padding-top: 2px;
+    margin-top: clamp(-7px, -0.48em, -4px);
   }
 }
 
@@ -1022,14 +1027,39 @@ html.is-resizing .grain {
     gap: 10px !important;
   }
 
-  .work-entry-row .work-entry__year {
+  .work-entry-row .work-entry__year--desktop {
     white-space: normal !important;
     justify-self: start;
     padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .work-entry__year--desktop {
+    display: none;
+  }
+
+  .work-entry__year--mobile {
+    display: block;
   }
 
   .work-entry-row .work-entry__body {
     min-width: 0;
+  }
+
+  /*
+   * Narrow logo marks (Ghost + LightWrk) can leave extra perceived bottom gap.
+   * Pull only the text block upward on mobile; keep logo slot + logo size unchanged.
+   */
+  .work-entry-row[data-project-id="ghost-project-ix"] .work-entry__body {
+    margin-top: clamp(-18px, -4.6vw, -12px);
+  }
+
+  .work-entry-row[data-project-id="lightwrk"] .work-entry__body {
+    margin-top: clamp(-28px, -7.2vw, -20px);
+  }
+
+  .work-entry-row[data-project-id="james-judas"] .work-entry__body {
+    margin-top: clamp(-7px, -1.8vw, -4px);
   }
 
   /* Taller logo slots on phones only — ~1.25× prior work-rail sizes; marquee unchanged */
