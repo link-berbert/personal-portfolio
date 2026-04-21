@@ -249,9 +249,8 @@ export default function Home({ setRoute }) {
               maxWidth: '56ch',
               color: 'color-mix(in srgb, var(--bg-canvas) 75%, transparent)',
             }}>
-              Distilling human experience and knowledge into machines creates a theoretically infinite return on investment.
-              This leverage opens the door to expansive, long-horizon projects that are only limited by human imagination. The challenge lies
-              in keeping machines consistently aligned with human values.
+              A vision only matters if it can be implemented, repeated, and sustained. The future isn't built by ideas alone. 
+              Companies provide the structure, leverage, and durable systems that make ambitious work possible over time. 
               <br />
               <br />
               See how I am building towards a{" "}
