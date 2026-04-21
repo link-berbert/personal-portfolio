@@ -484,6 +484,68 @@ html.is-resizing .grain {
   vertical-align: baseline;
 }
 
+/* Home inline CTA links — subtle glow + motion on hover */
+.home-inline-link {
+  transition: border-color var(--dur-micro) var(--ease);
+  color: var(--home-inline-link-color);
+  overflow: hidden;
+}
+
+.home-inline-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  mix-blend-mode: difference;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform calc(var(--dur-micro) + 120ms) var(--ease);
+  pointer-events: none;
+}
+
+.home-inline-link:hover::after {
+  transform: scaleX(1);
+}
+
+.home-inline-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Vision lede: fixed two-line lock on non-mobile, normal flow on tiny screens */
+.home-vision-line {
+  display: inline;
+}
+
+/* Use only as much width as the § I label needs, so the Vision copy gets the rest. */
+@media (min-width: 740px) {
+  .page-section--split.page-section--split--mirror.home-vision-split {
+    grid-template-columns: minmax(0, 1fr) max-content;
+  }
+}
+
+@media (min-width: 740px) {
+  .home-vision-line {
+    display: block;
+  }
+}
+
+/* Mid-to-large widths: widen Vision measure so first line holds through "democratized," */
+@media (min-width: 740px) and (max-width: 1280px) {
+  .home-vision-lede {
+    max-width: 100% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-inline-link,
+  .home-inline-link::after,
+  .home-inline-link:hover::after {
+    transition: none;
+    transform: none;
+  }
+}
+
 /* Small caps sit on the body’s em-box; nudge up optically without changing font size */
 .work-entry__tags {
   line-height: 1.15;

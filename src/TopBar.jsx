@@ -133,6 +133,7 @@ export default function TopBar({ route, setRoute }) {
             type="button"
             key={k}
             onClick={() => {
+              if (k === "work") window.location.hash = "ai-companies";
               setRoute(k);
               window.scrollTo(0, 0);
             }}

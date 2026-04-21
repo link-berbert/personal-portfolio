@@ -87,7 +87,7 @@ export default function Home({ setRoute }) {
               lineHeight: 1.6,
             }}
           >
-            Regardless of medium, the philosophy is the same — create systems that are both beautiful and functional.
+            Regardless of medium, the philosophy is the same — create systems that are both functional and beautiful.
           </p>
         </div>
 
@@ -175,7 +175,7 @@ export default function Home({ setRoute }) {
 
       {/* Thesis — § I · Practice (mirrored rail vs § II) */}
       <section
-        className="page-section--split page-section--split--mirror"
+        className="page-section--split page-section--split--mirror home-vision-split"
         style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',
@@ -188,15 +188,20 @@ export default function Home({ setRoute }) {
         <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ I · Vision</div>
         <div
           data-reveal
-          className="min-w-0"
+          className="min-w-0 home-vision-lede"
           style={{
           ...homeSectionLedeTypo,
-          maxWidth: '26ch',
+          maxWidth: '100%',
         }}
         >
-          The next century's defining systems will be remembered {' '}
-          <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-            for how they work and how they feel.
+          <span className="home-vision-line">
+            A future where intelligence is democratized,{" "}
+          </span>
+          <span
+            className="home-vision-line home-vision-line--bottom"
+            style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}
+          >
+            and humans are defined by their beauty.
           </span>
         </div>
       </section>
@@ -229,7 +234,7 @@ export default function Home({ setRoute }) {
               color: 'color-mix(in srgb, var(--fg-inverse) 50%, transparent)',
             }}
           >
-            § II · Company
+            § II · AI / Companies
           </div>
           <div className="min-w-0">
             <h2 data-reveal className="headline-measure" style={{
@@ -244,40 +249,35 @@ export default function Home({ setRoute }) {
               maxWidth: '56ch',
               color: 'color-mix(in srgb, var(--bg-canvas) 75%, transparent)',
             }}>
-              Physical AI systems fail in ways that are hard to label and harder to fix.
-              LightWrk is building the ontologies, rubrics, and judgment pipelines
-              that turn human expertise into training signal — the evaluation layer
-              that frontier robotics is still missing.
+              Distilling human experience and knowledge into machines creates a theoretically infinite return on investment.
+              This leverage opens the door to expansive, long-horizon projects that are only limited by human imagination. The challenge lies
+              in keeping machines consistently aligned with human values.
+              <br />
+              <br />
+              See how I am building towards a functional future:
+              <button
+                className="home-inline-link home-inline-link--inverse"
+                onClick={() => {
+                  window.location.hash = "ai-companies";
+                  setRoute('work');
+                  window.scrollTo(0, 0);
+                }}
+                style={{
+                  marginLeft: 16,
+                  fontFamily: 'var(--font-mono)', fontSize: 12,
+                  letterSpacing: '0.08em', textTransform: 'uppercase',
+                  backgroundColor: 'transparent', border: 0, cursor: 'pointer',
+                  '--home-inline-link-color': 'var(--bg-canvas)',
+                  '--home-inline-link-rule': 'color-mix(in srgb, var(--bg-canvas) 70%, transparent)',
+                  padding: 0,
+                  position: 'relative', top: -2,
+                  borderBottom: '1px solid var(--home-inline-link-rule)', paddingBottom: 1,
+                }}>
+                View AI / Companies work →
+              </button>
             </p>
-            <div
-              className="lightwrk-cards"
-              style={{
-              marginTop: 40, display: 'flex', gap: 48,
-            }}
-            >
-              {[
-                ['Ontology design', 'Structured failure taxonomies for embodied systems'],
-                ['Rubric development', 'Scored, repeatable human judgment at scale'],
-                ['Model improvement', 'Feedback that closes the loop between behavior and training'],
-              ].map(([label, desc]) => (
-                <div key={label} style={{ maxWidth: 200 }}>
-                  <div style={{
-                    fontFamily: 'var(--font-mono)', fontSize: 11,
-                    letterSpacing: '0.06em', textTransform: 'uppercase',
-                    marginBottom: 8,
-                    color: 'color-mix(in srgb, var(--bg-canvas) 50%, transparent)',
-                  }}>{label}</div>
-                  <div style={{
-                    fontSize: 14, lineHeight: 1.55,
-                    color: 'color-mix(in srgb, var(--bg-canvas) 75%, transparent)',
-                  }}>
-                    {desc}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
-        </div>
       </section>
 
       {/* Creative feature (mirrored rail vs § II) */}
@@ -298,7 +298,7 @@ export default function Home({ setRoute }) {
             ...homeSectionLedeTypo,
             maxWidth: '26ch', marginBottom: 32,
           }}>
-            Music, identity, and long-form{' '}
+            Music, design, and long-form{' '}
             <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
               worldbuilding.
             </span>
@@ -306,22 +306,32 @@ export default function Home({ setRoute }) {
           <p className="t-body" style={{
             color: 'var(--fg-secondary)', maxWidth: '52ch', lineHeight: 1.65,
           }}>
-            Under the name Berby, and through characters like James Judas,
-            Lincoln builds worlds — aesthetic systems with internal logic, narrative structure,
-            and a sound. Creative work that takes the long view.
+            Whether it's Leonardo da Vinci, Jony Ive, or Virgil Abloh, history keeps proving the same thing: given any tool, humans will try to make something beautiful with it.
+             Technology is no different. When machines can do anything, artistic expression, entertainment, and storytelling become the defining features of human intelligence.
+             <br />
+             <br />
+             See how I am building towards a beautiful future:
+             <button
+               className="home-inline-link home-inline-link--default"
+               onClick={() => {
+                 window.location.hash = "creative-work";
+                 setRoute('work');
+                 window.scrollTo(0, 0);
+               }}
+               style={{
+                 marginLeft: 16,
+                 fontFamily: 'var(--font-mono)', fontSize: 12,
+                 letterSpacing: '0.08em', textTransform: 'uppercase',
+                 backgroundColor: 'transparent', border: 0, cursor: 'pointer',
+                 '--home-inline-link-color': 'var(--fg-primary)',
+                 '--home-inline-link-rule': 'var(--rule-strong)',
+                 padding: 0,
+                 position: 'relative', top: -2,
+                 borderBottom: '1px solid var(--home-inline-link-rule)', paddingBottom: 1,
+               }}>
+               View creative work →
+             </button>
           </p>
-          <button
-            onClick={() => { setRoute('work'); window.scrollTo(0,0); }}
-            style={{
-              marginTop: 28,
-              fontFamily: 'var(--font-mono)', fontSize: 11,
-              letterSpacing: '0.08em', textTransform: 'uppercase',
-              background: 'none', border: 0, cursor: 'pointer',
-              color: 'var(--fg-primary)', padding: 0,
-              borderBottom: '1px solid var(--rule-strong)', paddingBottom: 2,
-            }}>
-            View creative work →
-          </button>
         </div>
       </section>
 

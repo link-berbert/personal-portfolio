@@ -1,8 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CREATIVE_WORK, AI_WORK } from "./data.js";
 import { getWorkLogoByProjectId, logoMarqueeCellClass } from "./workLogos.js";
 
 const NE_ARROW = "\u2197";
+
+function readWorkSectionFromHash() {
+  const hash = (window.location.hash || "").toLowerCase();
+  if (hash.includes("ai")) return "ai";
+  if (hash.includes("creative")) return "creative";
+  return "ai";
+}
+
+function writeWorkSectionHash(section) {
+  window.location.hash = section === "ai" ? "ai-companies" : "creative-work";
+}
 
 /** Role string → same chips as former category tags (split on commas). */
 function workRoleAsTags(role) {
@@ -56,14 +67,20 @@ function WorkPageLogo({ projectId }) {
 }
 
 export default function Work({ setRoute }) {
-  const [section, setSection] = useState("creative"); // 'creative' | 'ai'
+  const [section, setSection] = useState(readWorkSectionFromHash); // 'creative' | 'ai'
 
   const pm = 'clamp(20px, 5vw, 80px)';
 
   const workTabs = [
-    ['creative', 'Creative', 'Music, design, worldbuilding'],
     ['ai', 'AI / Companies', 'Physical AI & business ventures'],
+    ['creative', 'Creative Work', 'Music, design, worldbuilding'],
   ];
+
+  useEffect(() => {
+    const onHashChange = () => setSection(readWorkSectionFromHash());
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   return (
     <main>
@@ -122,7 +139,10 @@ export default function Work({ setRoute }) {
                 aria-selected={active}
                 aria-label={`${label}. ${hint}`}
                 id={`work-tab-${k}`}
-                onClick={() => setSection(k)}
+                onClick={() => {
+                  setSection(k);
+                  writeWorkSectionHash(k);
+                }}
                 style={{
                   flex: '1 1 0',
                   minWidth: 0,
