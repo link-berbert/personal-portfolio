@@ -453,7 +453,7 @@ html.is-resizing .grain {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--fg-primary);
+  color: var(--fg-secondary);
   text-decoration: none;
   border-bottom: 1px solid var(--rule-strong);
   padding-bottom: 2px;
@@ -463,11 +463,32 @@ html.is-resizing .grain {
 }
 
 .work-external-link:hover {
-  color: var(--fg-secondary);
-  border-bottom-color: var(--fg-primary);
+  color: var(--fg-primary);
 }
 
 .work-external-link:focus-visible {
+  outline: 2px solid var(--fg-primary);
+  outline-offset: 3px;
+}
+
+.footer-email {
+  margin-top: 20px;
+  display: inline-block;
+  font-size: 16px;
+  color: var(--fg-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 2px;
+  transition:
+    color var(--dur-micro) var(--ease),
+    border-color var(--dur-micro) var(--ease);
+}
+
+.footer-email:hover {
+  color: var(--fg-primary);
+}
+
+.footer-email:focus-visible {
   outline: 2px solid var(--fg-primary);
   outline-offset: 3px;
 }

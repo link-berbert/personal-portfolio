@@ -150,14 +150,6 @@ export default function Footer({ setRoute, theme, setTheme }) {
           <a
             href="mailto:lincoln.berbert@lightwrk.ai"
             className="footer-email"
-            style={{
-              marginTop: 20,
-              display: 'inline-block',
-              fontSize: 16,
-              borderBottom: '1px solid var(--rule-strong)',
-              paddingBottom: 2,
-              color: 'var(--fg-primary)',
-            }}
           >
             lincoln.berbert@lightwrk.ai ↗
           </a>

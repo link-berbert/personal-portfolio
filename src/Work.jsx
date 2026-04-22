@@ -318,12 +318,9 @@ export default function Work({ setRoute }) {
 }
 
 function CreativeRow({ item, isLast }) {
-  const [hovered, setHovered] = useState(false);
   const hasLogo = !!getWorkLogoByProjectId(item.id);
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       className="work-entry-row"
       data-project-id={item.id}
       style={{
@@ -331,8 +328,7 @@ function CreativeRow({ item, isLast }) {
         borderBottom: isLast ? 'none' : '1px solid var(--rule)',
         width: '100%',
         boxSizing: 'border-box',
-        transition: 'opacity var(--dur-micro) var(--ease)',
-        opacity: hovered ? 1 : 0.88,
+        opacity: 0.88,
       }}>
       <div className="work-entry__rail">
         <div className="work-entry__brand">

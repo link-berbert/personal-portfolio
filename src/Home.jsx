@@ -242,7 +242,10 @@ export default function Home({ setRoute }) {
               maxWidth: '26ch', marginBottom: 32,
               color: 'var(--bg-canvas)',
             }}>
-              Physical AI, organizational<br />structures, and business ventures.
+              Physical AI, organizational<br />structures, and{' '}
+              <span style={{ fontStyle: 'italic', color: 'color-mix(in srgb, var(--bg-canvas) 65%, transparent)' }}>
+              business ventures.
+            </span>
             </h2>
             <p className="home-mobile-link-line" style={{
               fontSize: 17, lineHeight: 1.65,
@@ -251,6 +254,7 @@ export default function Home({ setRoute }) {
             }}>
               A vision only matters if it can be implemented, repeated, and sustained. The future isn't built by ideas alone. 
               Companies provide the structure, leverage, and durable systems that make ambitious work possible over time. 
+              Physical AI extends that logic into the real world through intelligence that is embodied, actionable, and materially useful.
               <br />
               <br />
               See how I am building towards a{" "}
