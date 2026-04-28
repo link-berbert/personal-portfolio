@@ -117,20 +117,20 @@ export default function About({ setRoute }) {
           >
             {[
               {
-                label: 'Music / Identity',
+                label: 'Music',
                 body: 'Music is one way I work through identity, atmosphere, and coherence. With Berby and related projects, the goal is not just to make songs, but to build something with its own sound, visual language, and internal logic.',
               },
               {
-                label: 'Creative Direction',
-                body: 'Creative direction is where aesthetics become systems. Brand thinking, narrative structure, visual logic, and emotional tone all come down to the same question: does this feel coherent and beautiful enough to hold together over time?',
+                label: 'Entrepreneurship',
+                body: 'Entrepreneurship is how I build durability. It is where vision becomes structure, judgment turns into systems, and ideas are forced to prove themselves in the real world. The goal is not just to start things, but to build something that stands the test of time.',
               },
               {
                 label: 'Physical AI',
-                body: 'With LightWrk, those same instincts move into a technical domain. Evaluation only works when the system has clear structure. Ontologies, rubrics, and judgment pipelines are still acts of design, just aimed at making intelligence more legible, trainable, and useful in the real world.',
+                body: 'With LightWrk, I am applying my philosophy to a technical domain. Evaluation only works when the system has clear structure. Ontologies, rubrics, and judgment pipelines are still acts of design, just aimed at making intelligence more legible, trainable, and useful in the real world.',
               },
               {
                 label: 'Worldbuilding',
-                body: 'Worldbuilding is the clearest thread running through all of it. Whether I am shaping a character, a company, or a speculative environment, the work starts with rules, identity, and internal consistency. The medium may change but the philosophy does not.',
+                body: 'Worldbuilding is the clearest thread running through all of my work. Whether I am shaping a character, a company, or a speculative environment, the work starts with rules, identity, and internal consistency. The medium may change but the philosophy does not.',
               },
             ].map(({ label, body }) => (
               <div key={label} style={{ borderTop: '1px solid var(--rule)', paddingTop: 24 }}>
