@@ -34,7 +34,7 @@ function readStoredTheme() {
 
 function readStoredRoute() {
   try {
-    const raw = localStorage.getItem("lb-portfolio-route");
+    const raw = sessionStorage.getItem("lb-portfolio-route");
     if (!raw) return "home";
     const v = JSON.parse(raw);
     if (typeof v === "string" && ROUTES.has(v)) return v;
@@ -52,7 +52,7 @@ export default function App() {
   const [editOpen, setEditOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("lb-portfolio-route", JSON.stringify(route));
+    sessionStorage.setItem("lb-portfolio-route", JSON.stringify(route));
   }, [route]);
 
   useEffect(() => {
