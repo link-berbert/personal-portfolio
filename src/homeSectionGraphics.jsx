@@ -240,25 +240,25 @@ export function BeautifulFutureGraphic({ className = "" }) {
         <g className="bfg-globe-hit" transform="translate(332,148) scale(1.2) translate(-332,-148)">
           <circle cx="332" cy="148" r="56" fill="transparent" style={HIT} />
           <circle cx="332" cy="148" r="52" stroke="url(#bfg-globe-grad)" strokeWidth="1.25" className="bfg-globe-ring" />
-          <ellipse cx="332" cy="148" rx="20" ry="52" stroke="currentColor" strokeOpacity="0.08" strokeWidth="0.75" className="bfg-meridian" />
-          <ellipse cx="332" cy="148" rx="38" ry="52" stroke="currentColor" strokeOpacity="0.05" strokeWidth="0.5" className="bfg-meridian" />
-          <ellipse cx="332" cy="148" rx="52" ry="16" stroke="currentColor" strokeOpacity="0.07" strokeWidth="0.75" className="bfg-meridian" />
-          <ellipse cx="332" cy="126" rx="46" ry="9" stroke="currentColor" strokeOpacity="0.04" strokeWidth="0.5" className="bfg-meridian" />
-          <ellipse cx="332" cy="170" rx="46" ry="9" stroke="currentColor" strokeOpacity="0.04" strokeWidth="0.5" className="bfg-meridian" />
+          <ellipse cx="332" cy="148" rx="20" ry="52" stroke="currentColor" strokeOpacity="0.08" strokeWidth="0.75" className="bfg-meridian bfg-meridian-1" />
+          <ellipse cx="332" cy="148" rx="38" ry="52" stroke="currentColor" strokeOpacity="0.05" strokeWidth="0.5" className="bfg-meridian bfg-meridian-2" />
+          <ellipse cx="332" cy="126" rx="46" ry="9" stroke="currentColor" strokeOpacity="0.04" strokeWidth="0.5" className="bfg-meridian bfg-meridian-3" />
+          <ellipse cx="332" cy="148" rx="52" ry="16" stroke="currentColor" strokeOpacity="0.07" strokeWidth="0.75" className="bfg-meridian bfg-meridian-4" />
+          <ellipse cx="332" cy="170" rx="46" ry="9" stroke="currentColor" strokeOpacity="0.04" strokeWidth="0.5" className="bfg-meridian bfg-meridian-5" />
           {/* Continent masks — bg-colored fills to hide meridian lines */}
           {/* North America mask */}
-          <path d="M299,110 C302,108 306,107 310,108 C314,109 318,108 321,110 C323,112 322,115 320,117 C318,119 316,122 314,126 C312,130 310,134 307,137 C305,139 303,142 302,145 C301,147 299,146 298,144 C297,141 296,137 295,133 C294,129 294,125 294,121 C294,117 296,113 299,110Z" className="bfg-continent-mask" />
+          <path d="M299,110 C302,108 306,107 310,108 C314,109 318,108 321,110 C323,112 322,115 320,117 C318,119 316,122 314,126 C312,130 310,134 307,137 C305,139 303,142 302,145 C301,147 299,146 298,144 C297,141 296,137 295,133 C294,129 294,125 294,121 C294,117 296,113 299,110Z" className="bfg-continent-mask bfg-continent-mask-1" />
           {/* Greenland mask */}
-          <path d="M316,102 C319,101 322,102 323,105 C323,107 321,108 319,108 C317,108 316,106 315,104 C315,103 315,102 316,102Z" className="bfg-continent-mask" />
+          <path d="M316,102 C319,101 322,102 323,105 C323,107 321,108 319,108 C317,108 316,106 315,104 C315,103 315,102 316,102Z" className="bfg-continent-mask bfg-continent-mask-2" />
           {/* Central America mask */}
-          <path d="M302,147 C303,149 304,152 304,154 C304,156 303,157 302,155 C301,153 301,150 301,148Z" className="bfg-continent-mask" />
+          <path d="M302,147 C303,149 304,152 304,154 C304,156 303,157 302,155 C301,153 301,150 301,148Z" className="bfg-continent-mask bfg-continent-mask-3" />
           {/* South America mask */}
-          <path d="M304,157 C308,156 312,158 315,161 C317,164 318,168 318,172 C317,176 315,180 313,184 C311,187 308,189 306,190 C304,191 303,189 302,186 C301,183 302,179 303,175 C304,171 304,167 303,163 C302,160 303,158 304,157Z" className="bfg-continent-mask" />
+          <path d="M304,157 C308,156 312,158 315,161 C317,164 318,168 318,172 C317,176 315,180 313,184 C311,187 308,189 306,190 C304,191 303,189 302,186 C301,183 302,179 303,175 C304,171 304,167 303,163 C302,160 303,158 304,157Z" className="bfg-continent-mask bfg-continent-mask-4" />
           {/* British Isles mask */}
-          <path d="M332,113 C333,112 335,112 335,114 C335,116 333,116 332,115Z" className="bfg-continent-mask" />
+          <path d="M332,113 C333,112 335,112 335,114 C335,116 333,116 332,115Z" className="bfg-continent-mask bfg-continent-mask-5" />
           {/* Afro-Eurasia mask — Mediterranean notch separates Europe from Africa
               visually; Asia bridges them on the right via a narrow Sinai neck */}
-          <path d="M344,105 C351,103 360,106 366,112 C372,118 377,126 380,136 C382,144 381,150 379,154 C377,157 374,155 371,153 C369,152 367,153 365,155 C361,158 358,162 355,168 C351,174 348,182 345,188 C343,192 340,192 338,190 C336,186 334,178 333,170 C332,162 331,154 331,148 C330,142 331,136 333,133 C338,131 344,131 350,132 C352,129 350,126 347,124 C342,122 337,122 334,123 C333,120 335,116 338,112 C341,109 343,106 344,105Z" className="bfg-continent-mask" />
+          <path d="M344,105 C351,103 360,106 366,112 C372,118 377,126 380,136 C382,144 381,150 379,154 C377,157 374,155 371,153 C369,152 367,153 365,155 C361,158 358,162 355,168 C351,174 348,182 345,188 C343,192 340,192 338,190 C336,186 334,178 333,170 C332,162 331,154 331,148 C330,142 331,136 333,133 C338,131 344,131 350,132 C352,129 350,126 347,124 C342,122 337,122 334,123 C333,120 335,116 338,112 C341,109 343,106 344,105Z" className="bfg-continent-mask bfg-continent-mask-6" />
 
           {/* Continent fills — visible landmasses */}
           {/* North America */}
@@ -267,24 +267,24 @@ export function BeautifulFutureGraphic({ className = "" }) {
                    C312,130 310,134 307,137 C305,139 303,142 302,145
                    C301,147 299,146 298,144 C297,141 296,137 295,133
                    C294,129 294,125 294,121 C294,117 296,113 299,110Z"
-            fill="currentColor" fillOpacity="0.09" className="bfg-continent" />
+            fill="currentColor" fillOpacity="0.09" className="bfg-continent bfg-continent-1" />
           {/* Greenland */}
           <path d="M316,102 C319,101 322,102 323,105 C323,107 321,108 319,108
                    C317,108 316,106 315,104 C315,103 315,102 316,102Z"
-            fill="currentColor" fillOpacity="0.06" className="bfg-continent" />
+            fill="currentColor" fillOpacity="0.06" className="bfg-continent bfg-continent-2" />
           {/* Central America */}
           <path d="M302,147 C303,149 304,152 304,154 C304,156 303,157 302,155
                    C301,153 301,150 301,148Z"
-            fill="currentColor" fillOpacity="0.07" className="bfg-continent" />
+            fill="currentColor" fillOpacity="0.07" className="bfg-continent bfg-continent-3" />
           {/* South America */}
           <path d="M304,157 C308,156 312,158 315,161 C317,164 318,168 318,172
                    C317,176 315,180 313,184 C311,187 308,189 306,190
                    C304,191 303,189 302,186 C301,183 302,179 303,175
                    C304,171 304,167 303,163 C302,160 303,158 304,157Z"
-            fill="currentColor" fillOpacity="0.08" className="bfg-continent" />
+            fill="currentColor" fillOpacity="0.08" className="bfg-continent bfg-continent-4" />
           {/* British Isles */}
           <path d="M332,113 C333,112 335,112 335,114 C335,116 333,116 332,115Z"
-            fill="currentColor" fillOpacity="0.05" className="bfg-continent" />
+            fill="currentColor" fillOpacity="0.05" className="bfg-continent bfg-continent-5" />
           {/* Afro-Eurasia — Mediterranean notch on the left, narrow Sinai
               bridge on the right. Shifted down 4px, Africa to ~y=192. */}
           <path d="M344,105
@@ -304,7 +304,7 @@ export function BeautifulFutureGraphic({ className = "" }) {
                    C342,122 337,122 334,123
                    C333,120 335,116 338,112
                    C341,109 343,106 344,105Z"
-            fill="currentColor" fillOpacity="0.08" className="bfg-continent" />
+            fill="currentColor" fillOpacity="0.08" className="bfg-continent bfg-continent-6" />
         </g>
 
         {/* Sparkles (ambient twinkle only) */}

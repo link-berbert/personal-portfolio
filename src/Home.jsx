@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
 import { WORK_LOGOS, logoMarqueeCellClass } from "./workLogos.js";
 import {
@@ -46,8 +46,36 @@ function useReveal() {
   }, []);
 }
 
+function useOneShotViewportReveal(ref, { threshold = 0.35, rootMargin = "0px 0px -22% 0px" } = {}) {
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    if (revealed || !ref.current) return;
+    const node = ref.current;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry) return;
+        if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
+          setRevealed(true);
+          io.unobserve(node);
+        }
+      },
+      { threshold, rootMargin },
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, [revealed, ref, rootMargin, threshold]);
+
+  return revealed;
+}
+
 export default function Home({ setRoute }) {
   useReveal();
+  const section2Ref = useRef(null);
+  const section3Ref = useRef(null);
+  const showSection2Graphic = useOneShotViewportReveal(section2Ref);
+  const showSection3Graphic = useOneShotViewportReveal(section3Ref);
 
   return (
     <main>
@@ -212,6 +240,7 @@ export default function Home({ setRoute }) {
 
       {/* LightWrk feature */}
       <section
+        ref={section2Ref}
         className="home-surface-ink"
         style={{
         /* Padding, ink-pad vars, and the wider-viewport bleed live in shell.css so a
@@ -224,7 +253,7 @@ export default function Home({ setRoute }) {
         {/* Decorative graphic — sits in the whitespace at the left edge of the
             body cell. Hidden on viewports too narrow for it to coexist with
             the right-pinned body cluster (see shell.css). */}
-        <FunctionalFutureGraphic />
+        <FunctionalFutureGraphic className={showSection2Graphic ? "is-revealed" : ""} />
         <div
           className="page-section--split"
           style={{
@@ -295,6 +324,7 @@ export default function Home({ setRoute }) {
 
       {/* Creative feature (mirrored rail vs § II) */}
       <section
+        ref={section3Ref}
         className="page-section--split page-section--split--mirror"
         style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
@@ -307,7 +337,7 @@ export default function Home({ setRoute }) {
       >
         {/* Decorative graphic — sits in the whitespace to the right of the
             left-aligned body cluster, just before the right-rail label. */}
-        <BeautifulFutureGraphic />
+        <BeautifulFutureGraphic className={showSection3Graphic ? "is-revealed" : ""} />
         <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ III · Creative</div>
         <div className="min-w-0">
           <h2 data-reveal className="headline-measure" style={{
