@@ -1084,6 +1084,53 @@ html.is-resizing .grain {
   }
 }
 
+/* Tablet portrait / narrow tablet: use one clear mode (stacked), matching
+   mobile flow so graphics sit under section labels instead of hybrid side-fit. */
+@media (min-width: 641px) and (max-width: 980px) {
+  .home-surface-ink .page-section--split,
+  .home-creative-split {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .home-surface-ink .page-section--split .page-section__label,
+  .home-creative-split .page-section__label {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    text-align: left !important;
+    padding-top: 0 !important;
+  }
+
+  .home-surface-ink .page-section--split > .min-w-0,
+  .home-creative-split > .min-w-0 {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    justify-self: stretch !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .home-surface-ink .home-section-graphic,
+  .home-creative-split .home-section-graphic {
+    display: block;
+    position: static;
+    top: auto;
+    left: auto;
+    width: min(100%, 220px);
+    height: auto;
+    transform: none;
+    margin: 2px auto 10px;
+    pointer-events: none;
+  }
+
+  .home-creative-split .home-section-graphic--beautiful {
+    width: min(100%, 200px);
+    transform: translateX(-14px);
+  }
+}
+
 @media (max-width: 767.98px) {
   .home-section-graphic {
     display: block;

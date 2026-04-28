@@ -330,7 +330,7 @@ export default function Home({ setRoute }) {
       {/* Creative feature (mirrored rail vs § II) */}
       <section
         ref={section3Ref}
-        className="page-section--split page-section--split--mirror"
+        className="page-section--split page-section--split--mirror home-creative-split"
         style={{
         padding: 'clamp(64px, 8vw, 140px) clamp(20px, 5vw, 80px)',
         borderTop: '1px solid var(--rule)',

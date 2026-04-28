@@ -135,7 +135,7 @@ export default function About({ setRoute }) {
             ].map(({ label, body }) => (
               <div key={label} style={{ borderTop: '1px solid var(--rule)', paddingTop: 24 }}>
                 <div className="t-caption" style={{ marginBottom: 12 }}>{label}</div>
-                <p className="t-small" style={{ color: 'var(--fg-secondary)', lineHeight: 1.65 }}>{body}</p>
+                <p className="t-body" style={{ color: 'var(--fg-secondary)', lineHeight: 1.7 }}>{body}</p>
               </div>
             ))}
           </div>
