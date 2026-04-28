@@ -890,6 +890,7 @@ html.is-resizing .grain {
 .home-surface-ink {
   /* Shared with wide-screen bleed math: must match horizontal padding tokens. */
   --home-ink-pad-x: clamp(20px, 5vw, 80px);
+  --home-ink-body-edge-offset: 0px;
   padding: clamp(64px, 8vw, 120px) var(--home-ink-pad-x);
 }
 
@@ -901,6 +902,10 @@ html.is-resizing .grain {
 }
 
 @media (min-width: 1280px) {
+  .home-surface-ink {
+    --home-ink-body-edge-offset: 8px;
+  }
+
   .home-surface-ink .page-section--split > .min-w-0 {
     /* One additional step left after zeroing prior negative offset. */
     margin-right: 8px;
@@ -908,6 +913,10 @@ html.is-resizing .grain {
 }
 
 @media (min-width: 1024px) and (max-width: 1279.98px) {
+  .home-surface-ink {
+    --home-ink-body-edge-offset: calc(8px * clamp(0, (100vw - 1024px) / 256px, 1));
+  }
+
   .home-surface-ink .page-section--split > .min-w-0 {
     /* Mirror the desktop left shift and taper it out toward 1024. */
     --home-ink-bleed-target: 8px;
@@ -925,6 +934,510 @@ html.is-resizing .grain {
   grid-column: 2;
   grid-row: 1;
   text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   Home § II / § III — decorative system graphics.
+   Centered in the whitespace between the real section edge and the body text.
+   The label rail is ignored — the graphic may overlap it.
+   Hidden on phones (<768px); reduced opacity on tablets (<1280px).
+   -------------------------------------------------------------------------- */
+:root {
+  --home-graphic-size: clamp(180px, 26vw, 400px);
+  --home-beautiful-graphic-size: clamp(150px, 22vw, 340px);
+  --home-graphic-page-pad-x: clamp(20px, 5vw, 80px);
+  --home-functional-body-width: 56ch;
+  --home-beautiful-body-width: 52ch;
+  --home-functional-graphic-nudge: clamp(24px, 4vw, 56px);
+  --home-beautiful-graphic-nudge: clamp(6px, 1.2vw, 18px);
+  --home-beautiful-graphic-y-nudge: clamp(6px, 1vw, 14px);
+  --home-graphic-edge-inset: 12px;
+  --home-beautiful-visual-left-bleed: calc(var(--home-beautiful-graphic-size) * 0.08);
+  --home-beautiful-visual-right-bleed: calc(var(--home-beautiful-graphic-size) * 0.28);
+}
+
+.home-section-graphic {
+  position: absolute;
+  top: 50%;
+  width: var(--home-graphic-size);
+  height: var(--home-graphic-size);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  color: currentColor;
+  overflow: visible;
+}
+
+.home-section-graphic__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* § II — centered between left page edge and the 56ch body text. */
+.home-surface-ink {
+  position: relative;
+}
+
+.home-section-graphic--functional {
+  left: clamp(
+    calc((var(--home-graphic-size) / 2) + var(--home-graphic-edge-inset)),
+    calc(
+      ((100% - var(--home-graphic-page-pad-x) - var(--home-functional-body-width) - var(--home-ink-body-edge-offset)) / 2)
+      - var(--home-functional-graphic-nudge)
+    ),
+    calc(100% - (var(--home-graphic-size) / 2) - var(--home-graphic-edge-inset))
+  );
+}
+
+/* § III — centered between the 52ch body text and the right page edge. */
+.page-section--split.page-section--split--mirror {
+  position: relative;
+}
+
+.home-section-graphic--beautiful {
+  width: var(--home-beautiful-graphic-size);
+  height: var(--home-beautiful-graphic-size);
+  top: calc(50% + var(--home-beautiful-graphic-y-nudge));
+  left: clamp(
+    calc((var(--home-beautiful-graphic-size) / 2) + var(--home-beautiful-visual-left-bleed) + var(--home-graphic-edge-inset)),
+    calc(
+      ((100% + var(--home-graphic-page-pad-x) + var(--home-beautiful-body-width)) / 2)
+      + var(--home-beautiful-graphic-nudge)
+    ),
+    calc(100% - (var(--home-beautiful-graphic-size) / 2) - var(--home-beautiful-visual-right-bleed) - var(--home-graphic-edge-inset))
+  );
+}
+
+/* Medium screens: no opacity reduction — individual SVG elements are already
+   at low enough opacity that overlap with the label rail is barely visible. */
+
+@media (max-width: 1100px) {
+  :root {
+    --home-graphic-size: clamp(150px, 22vw, 240px);
+    --home-beautiful-graphic-size: clamp(120px, 18vw, 190px);
+    --home-functional-graphic-nudge: clamp(12px, 2vw, 24px);
+    --home-beautiful-graphic-nudge: 0px;
+    --home-beautiful-graphic-y-nudge: clamp(4px, 0.8vw, 8px);
+    --home-graphic-edge-inset: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --home-graphic-size: clamp(128px, 20vw, 180px);
+    --home-beautiful-graphic-size: clamp(96px, 14vw, 128px);
+    --home-functional-graphic-nudge: 0px;
+    --home-beautiful-graphic-nudge: 0px;
+    --home-beautiful-graphic-y-nudge: 4px;
+    --home-graphic-edge-inset: 20px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .home-section-graphic {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   § II · Functional Future — hover interactions + animations
+   ═══════════════════════════════════════════════════════════ */
+
+.ffg-die {
+  pointer-events: auto;
+}
+
+.ffg-die-core {
+  opacity: 0.55;
+  transition: opacity 500ms var(--ease);
+}
+
+.ffg-die:hover .ffg-die-core {
+  opacity: 1;
+}
+
+.ffg-trace {
+  pointer-events: auto;
+}
+
+.ffg-trace-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-opacity: 0.25;
+  animation: ffg-draw-in 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition: stroke-opacity 500ms var(--ease);
+}
+
+.ffg-trace:hover .ffg-trace-line {
+  stroke-opacity: 0.7;
+}
+
+.ffg-trace-pulse {
+  stroke-dasharray: 0.05 0.95;
+  opacity: 0;
+  will-change: stroke-dashoffset;
+  animation:
+    ffg-pulse-reveal 1s ease forwards,
+    ffg-pulse-flow 6s linear infinite;
+}
+
+.ffg-endpoint-ring {
+  opacity: 0;
+  animation: ffg-node-in 1s ease forwards;
+  transition: stroke-opacity 400ms var(--ease), fill-opacity 400ms var(--ease);
+}
+
+.ffg-endpoint-dot {
+  opacity: 0;
+  animation: ffg-node-in 1s ease forwards;
+  transition: fill-opacity 400ms var(--ease), filter 400ms var(--ease);
+}
+
+.ffg-trace:hover .ffg-endpoint-ring {
+  stroke-opacity: 0.35;
+  fill-opacity: 0.08;
+}
+
+.ffg-trace:hover .ffg-endpoint-dot {
+  fill-opacity: 0.75;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+@keyframes ffg-draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ffg-pulse-reveal {
+  to {
+    opacity: 0.18;
+  }
+}
+
+@keyframes ffg-pulse-flow {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ffg-node-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Die-hover burst — fires a single bright pulse down every trace at once */
+.ffg-trace-burst {
+  stroke-dasharray: 0.08 0.92;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.home-section-graphic--functional:has(.ffg-die:hover) .ffg-trace-burst {
+  opacity: 0.55;
+  animation: ffg-burst-flow 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.home-section-graphic--functional:has(.ffg-die:hover) .ffg-trace-line {
+  stroke-opacity: 0.7;
+}
+
+.home-section-graphic--functional:has(.ffg-die:hover) .ffg-endpoint-ring {
+  stroke-opacity: 0.35;
+  fill-opacity: 0.08;
+}
+
+.home-section-graphic--functional:has(.ffg-die:hover) .ffg-endpoint-dot {
+  fill-opacity: 0.85;
+  filter: drop-shadow(0 0 5px currentColor);
+  transition: fill-opacity 0.15s ease 0.55s, filter 0.15s ease 0.55s;
+}
+
+@keyframes ffg-burst-flow {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Dark mode — push graphic to true black on the light band */
+[data-theme="dark"] .home-section-graphic--functional {
+  color: #000;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-trace-line {
+  stroke-opacity: 0.48;
+  stroke-width: 1.1;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-trace:hover .ffg-trace-line {
+  stroke-opacity: 1;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-die-core {
+  opacity: 0.5;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-die:hover .ffg-die-core {
+  opacity: 1;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-die rect:not(.ffg-die-core) {
+  stroke-opacity: 0.85;
+  fill-opacity: 0.04;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-die line {
+  stroke-opacity: 0.65;
+  stroke-width: 0.75;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-endpoint-ring {
+  stroke-opacity: 0.26;
+  fill-opacity: 0.035;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-endpoint-dot {
+  fill-opacity: 0.42;
+}
+
+[data-theme="dark"] .home-section-graphic--functional .ffg-trace-pulse {
+  animation:
+    ffg-pulse-reveal-dark 1s ease forwards,
+    ffg-pulse-flow 6s linear infinite;
+}
+
+[data-theme="dark"] .home-section-graphic--functional:has(.ffg-die:hover) .ffg-trace-burst {
+  opacity: 0.9;
+}
+
+[data-theme="dark"] .home-section-graphic--functional:has(.ffg-die:hover) .ffg-trace-line {
+  stroke-opacity: 1;
+}
+
+[data-theme="dark"] .home-section-graphic--functional:has(.ffg-die:hover) .ffg-endpoint-ring {
+  stroke-opacity: 0.8;
+  fill-opacity: 0.14;
+}
+
+[data-theme="dark"] .home-section-graphic--functional:has(.ffg-die:hover) .ffg-endpoint-dot {
+  fill-opacity: 1;
+}
+
+@keyframes ffg-pulse-reveal-dark {
+  to {
+    opacity: 0.7;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   § III · Beautiful Future — hover interactions
+   ═══════════════════════════════════════════════════════════ */
+
+/* Staff lines: subtle wiggle on hover — fast displacement, slow spring-back.
+   No brightness or width changes — just the displacement. */
+.bfg-staff-hit {
+  pointer-events: auto;
+}
+
+.bfg-staff {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: bfg-draw 2s ease forwards;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bfg-staff-2 {
+  animation-delay: 0.08s;
+}
+.bfg-staff-3 {
+  animation-delay: 0.16s;
+}
+.bfg-staff-4 {
+  animation-delay: 0.24s;
+}
+.bfg-staff-5 {
+  animation-delay: 0.32s;
+}
+
+.bfg-staff-hit:hover .bfg-staff {
+  transition: transform 140ms cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.bfg-staff-hit--down:hover .bfg-staff {
+  transform: translateY(2px);
+}
+
+.bfg-staff-hit--up:hover .bfg-staff {
+  transform: translateY(-1.5px);
+}
+
+/* Notes: bg-colored mask ellipse hides staff lines behind the note head.
+   Hover brightens via smooth fill-opacity / stroke-opacity transitions. */
+.bfg-note-hit {
+  pointer-events: auto;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 300ms var(--ease), filter 300ms var(--ease);
+}
+
+.bfg-note-hit:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.bfg-note-mask {
+  fill: var(--bg-canvas, #fff);
+}
+
+.bfg-note-hit ellipse {
+  transition: fill-opacity 300ms var(--ease), stroke-opacity 300ms var(--ease);
+}
+
+.bfg-note-hit line {
+  transition: stroke-opacity 300ms var(--ease);
+}
+
+.bfg-note-hit:hover ellipse {
+  fill-opacity: 0.9;
+  stroke-opacity: 0.85;
+}
+
+.bfg-note-hit:hover line {
+  stroke-opacity: 0.75;
+}
+
+/* Note fade-in on first load */
+.bfg-note {
+  opacity: 0;
+  animation: bfg-note-in 0.5s ease forwards;
+}
+
+.bfg-note-1 {
+  animation-delay: 0.6s;
+}
+.bfg-note-2 {
+  animation-delay: 0.8s;
+}
+.bfg-note-3 {
+  animation-delay: 1s;
+}
+.bfg-note-4 {
+  animation-delay: 1.2s;
+}
+.bfg-note-5 {
+  animation-delay: 1.4s;
+}
+
+/* (connecting-flow paths removed) */
+.bfg-connect {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: bfg-draw 1.5s ease forwards 1.2s;
+}
+
+/* Globe: hover reveals detail */
+.bfg-globe-hit {
+  pointer-events: auto;
+}
+
+.bfg-globe-ring {
+  stroke-opacity: 0.7;
+  transition: stroke-opacity 400ms var(--ease);
+}
+
+.bfg-globe-hit:hover .bfg-globe-ring {
+  stroke-opacity: 1;
+}
+
+.bfg-meridian {
+  transition: stroke-opacity 400ms var(--ease);
+}
+
+.bfg-globe-hit:hover .bfg-meridian {
+  stroke-opacity: 0.18;
+}
+
+.bfg-continent-mask {
+  fill: var(--bg-canvas, #fff);
+}
+
+.bfg-continent {
+  transition: fill-opacity 400ms var(--ease);
+}
+
+.bfg-globe-hit:hover .bfg-continent {
+  fill-opacity: 0.2;
+}
+
+/* Sparkle twinkle (only ambient loop) */
+.bfg-sparkle {
+  animation: bfg-sparkle-twinkle 3.5s ease-in-out infinite;
+}
+
+.bfg-sparkle-2 {
+  animation-delay: 1.2s;
+}
+.bfg-sparkle-3 {
+  animation-delay: 2.4s;
+}
+
+/* ═══ Keyframes ═══ */
+@keyframes bfg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes bfg-note-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bfg-sparkle-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ffg-trace-line,
+  .ffg-trace-pulse,
+  .ffg-trace-burst,
+  .ffg-endpoint-ring,
+  .ffg-endpoint-dot,
+  .bfg-staff,
+  .bfg-note,
+  .bfg-connect,
+  .bfg-sparkle {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+    opacity: 1 !important;
+  }
+
+  .ffg-trace-line,
+  .ffg-trace-pulse,
+  .ffg-trace-burst,
+  .ffg-endpoint-ring,
+  .ffg-endpoint-dot,
+  .ffg-die-core,
+  .bfg-staff,
+  .bfg-note-hit,
+  .bfg-globe-ring,
+  .bfg-meridian,
+  .bfg-continent,
+  .bfg-note-hit ellipse,
+  .bfg-note-hit line {
+    transition: none !important;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1117,9 +1630,8 @@ html.is-resizing .grain {
     margin-top: 0;
   }
 
-  /* About: 2×2 cards + background columns */
-  .about-connection-grid,
-  .about-bg-grid {
+  /* About: 2×2 cards */
+  .about-connection-grid {
     grid-template-columns: 1fr !important;
     max-width: none !important;
   }

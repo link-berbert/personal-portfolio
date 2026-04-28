@@ -1,5 +1,20 @@
 export default function About({ setRoute }) {
   const pm = 'clamp(20px, 5vw, 80px)';
+  const aboutContentCol = { maxWidth: 900, width: '100%' };
+  const bioP = {
+    marginBottom: 22,
+    color: 'var(--fg-secondary)',
+    lineHeight: 1.7,
+  };
+  const aboutSubheadStyle = {
+    fontFamily: 'var(--font-display)',
+    fontSize: 'clamp(24px, 3vw, 40px)',
+    lineHeight: 1.2,
+    letterSpacing: '-0.022em',
+    maxWidth: '100%',
+    marginBottom: 48,
+  };
+  const aboutSubheadItalic = { fontStyle: 'italic', color: 'var(--fg-secondary)' };
 
   return (
     <main>
@@ -36,29 +51,33 @@ export default function About({ setRoute }) {
         boxSizing: 'border-box',
       }}>
         <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ I · Bio</div>
-        <div className="min-w-0" style={{ maxWidth: '60ch' }}>
-          <p className="t-body-l" style={{ marginBottom: 28, lineHeight: 1.7 }}>
-            Lincoln Berbert is a multidisciplinary builder. He works on music,
-            physical AI, and long-form worldbuilding — often at the same time.
+        <div className="min-w-0" style={aboutContentCol}>
+          <div className="headline-measure min-w-0" style={aboutSubheadStyle}>
+            Overview of my work {' '}
+            <span style={aboutSubheadItalic}>
+              and background.
+            </span>
+          </div>
+          <p className="t-body" style={bioP}>
+            I work across music, physical AI, and long-horizon worldbuilding. The mediums
+            are different, but the underlying questions stay the same: how does something
+            develop a coherent identity, how do systems improve over time, and what makes a
+            project durable enough to matter years later?
           </p>
-          <p className="t-body" style={{ marginBottom: 22, color: 'var(--fg-secondary)', lineHeight: 1.7 }}>
-            The disciplines are different. The underlying questions are not. How does
-            something develop a coherent identity? How do you build systems that
-            get better over time? What does it mean to build something that lasts?
-            These questions run through music, through brand thinking, through company
-            building, through AI evaluation work.
+          <p className="t-body" style={bioP}>
+            That throughline shows up in different forms. LightWrk is focused on structured
+            human feedback systems for physical AI model improvement. Berby is the main home
+            for my music and creative direction. Other projects explore narrative identity,
+            aesthetic systems, and speculative worlds as long-term creative work.
           </p>
-          <p className="t-body" style={{ marginBottom: 22, color: 'var(--fg-secondary)', lineHeight: 1.7 }}>
-            He is the founder of LightWrk, a company building structured human feedback
-            infrastructure for physical AI model improvement. He records and performs
-            under the name Berby. He has spent years building narrative worlds and
-            identity systems — characters, aesthetics, mythologies — as a form of
-            long-horizon creative practice.
+          <p className="t-body" style={bioP}>
+            What connects them is not a branding exercise. It is a genuine point of view. I
+            care about internal logic, atmosphere, evaluation, and the kinds of structures
+            that let something become both functional and beautiful.
           </p>
-          <p className="t-body" style={{ color: 'var(--fg-tertiary)', lineHeight: 1.7 }}>
-            The connection between these things is not a brand positioning. It is a genuine
-            point of view: worldbuilding is useful whether you are making a record or
-            designing an evaluation rubric for a robot arm.
+          <p className="t-body" style={{ ...bioP, marginBottom: 0 }}>
+            I am less interested in isolated outputs than in coherent worlds and systems that
+            can evolve, compound, and hold their shape over time.
           </p>
         </div>
       </section>
@@ -75,16 +94,11 @@ export default function About({ setRoute }) {
         boxSizing: 'border-box',
       }}>
         <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ II · Connection</div>
-        <div className="min-w-0">
-          <div className="headline-measure min-w-0" style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(24px, 3vw, 40px)',
-            lineHeight: 1.2, letterSpacing: '-0.022em',
-            maxWidth: '28ch', marginBottom: 48,
-          }}>
-            Worldbuilding is a unifying thread.{' '}
-            <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
-              In music and in systems.
+        <div className="min-w-0" style={aboutContentCol}>
+          <div className="headline-measure min-w-0" style={aboutSubheadStyle}>
+            How my work connects across{' '}
+            <span style={aboutSubheadItalic}>
+               different fields.
             </span>
           </div>
 
@@ -92,25 +106,25 @@ export default function About({ setRoute }) {
             className="about-connection-grid"
             style={{
             display: 'grid', gridTemplateColumns: '1fr 1fr',
-            gap: 40, maxWidth: 900,
+            gap: 40,
           }}
           >
             {[
               {
-                label: 'Music · Berby',
-                body: 'Music as a practice in identity and atmosphere. Berby is a world before it is a sound — the sound follows from the world. Years-long projects, not singles. Characters, not songs.',
+                label: 'Music / Identity',
+                body: 'Music is one way I work through identity, atmosphere, and coherence. With Berby and related projects, the goal is not just to make songs, but to build something with its own sound, visual language, and internal logic.',
               },
               {
-                label: 'Creative direction',
-                body: 'Brand thinking, visual logic, narrative structure. The same questions as music, applied to organizations and ideas. Who are you? What do you look like? What is the internal logic?',
+                label: 'Creative Direction',
+                body: 'Creative direction is where aesthetics become systems. Brand thinking, narrative structure, visual logic, and emotional tone all come down to the same question: does this feel coherent enough to hold together over time?',
               },
               {
                 label: 'Physical AI',
-                body: 'LightWrk is building evaluation infrastructure for physical AI — the ontologies, rubrics, and judgment pipelines that make robot behavior trainable. Systems thinking in a technical domain.',
+                body: 'With LightWrk, those same instincts move into a technical domain. Evaluation only works when the system has clear structure. Ontologies, rubrics, and judgment pipelines are still acts of design, just aimed at making intelligence more legible, trainable, and useful in the real world.',
               },
               {
                 label: 'Worldbuilding',
-                body: 'A methodology as much as a medium. The ability to design a coherent world — with its own rules, aesthetics, and internal logic — is useful everywhere. It is the core skill.',
+                body: 'Worldbuilding is the clearest thread running through all of it. Whether I am shaping a character, a company, or a speculative environment, the work starts with rules, identity, and internal consistency. The medium changes. The philosophy does not.',
               },
             ].map(({ label, body }) => (
               <div key={label} style={{ borderTop: '1px solid var(--rule)', paddingTop: 24 }}>
@@ -133,15 +147,19 @@ export default function About({ setRoute }) {
         width: '100%',
         boxSizing: 'border-box',
       }}>
-        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ III · How I work</div>
-        <div className="min-w-0">
+        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ III · Principles</div>
+        <div className="min-w-0" style={aboutContentCol}>
+          <div className="headline-measure min-w-0" style={aboutSubheadStyle}>
+            How the philosophy shows up.{' '}
+            <span style={aboutSubheadItalic}>
+              Three fixed points.
+            </span>
+          </div>
           <ol style={{ padding: 0, margin: 0, listStyle: 'none' }}>
             {[
-              ['01', 'Start with the world, not the deliverable. Everything coherent comes from a set of rules decided before the work begins.'],
-              ['02', 'The interesting work is at the seam between disciplines. If it fits cleanly into one category, it probably isn\'t finished.'],
-              ['03', 'Restraint is productive. The best systems are specific about what they do and ruthless about what they don\'t.'],
-              ['04', 'Long time horizons. Projects worth doing take years. Taste compounds.'],
-              ['05', 'The gap between art and engineering is a bureaucratic fiction. Both are about understanding a system well enough to change it.'],
+              ['01', 'Start with the world. The strongest work comes from a clear set of rules, not from chasing isolated deliverables.'],
+              ['02', 'Build for long horizons. Projects worth doing usually take years to reveal what they are really becoming.'],
+              ['03', 'The line between art and engineering matters less than people think. Both depend on understanding a system well enough to shape it with intention.'],
             ].map(([n, s]) => (
               <li key={n} className="about-philo-row" style={{
                 display: 'grid', gridTemplateColumns: '48px 1fr',
@@ -157,45 +175,6 @@ export default function About({ setRoute }) {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* Background */}
-      <section
-        className="page-section--split"
-        style={{
-        padding: `clamp(48px, 6vw, 96px) ${pm}`,
-        borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: 'var(--page-split-label-width) 1fr',
-        gap: 48,
-        width: '100%',
-        boxSizing: 'border-box',
-      }}>
-        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ IV · Background</div>
-        <div
-          className="about-bg-grid min-w-0"
-          style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr',
-          gap: 32, maxWidth: 800,
-        }}
-        >
-          {[
-            ['Companies', ['LightWrk (founder) · 2024 —']],
-            ['Creative', ['Berby (artist) · 2022 —', 'James Judas · 2023 —']],
-            ['Focus areas', ['Physical AI evaluation', 'Structured human feedback', 'Creative direction', 'Worldbuilding · narrative identity']],
-            ['Interests', ['World models', 'Embodied AI', 'Frontier systems', 'Long-form narrative', 'Aesthetic systems']],
-          ].map(([k, items]) => (
-            <div key={k}>
-              <div className="t-caption" style={{
-                paddingBottom: 12, borderBottom: '1px solid var(--rule)', marginBottom: 12,
-              }}>{k}</div>
-              {items.map(it => (
-                <div key={it} className="t-small" style={{
-                  padding: '5px 0', color: 'var(--fg-primary)', lineHeight: 1.5,
-                }}>{it}</div>
-              ))}
-            </div>
-          ))}
         </div>
       </section>
 

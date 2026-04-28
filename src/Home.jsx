@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
 import { WORK_LOGOS, logoMarqueeCellClass } from "./workLogos.js";
+import {
+  FunctionalFutureGraphic,
+  BeautifulFutureGraphic,
+} from "./homeSectionGraphics.jsx";
 
 /** Shared display scale for home § I / § II / § III primary ledes */
 const homeSectionLedeTypo = {
@@ -217,6 +221,10 @@ export default function Home({ setRoute }) {
         marginTop: 0,
       }}
       >
+        {/* Decorative graphic — sits in the whitespace at the left edge of the
+            body cell. Hidden on viewports too narrow for it to coexist with
+            the right-pinned body cluster (see shell.css). */}
+        <FunctionalFutureGraphic />
         <div
           className="page-section--split"
           style={{
@@ -297,6 +305,9 @@ export default function Home({ setRoute }) {
         boxSizing: 'border-box',
       }}
       >
+        {/* Decorative graphic — sits in the whitespace to the right of the
+            left-aligned body cluster, just before the right-rail label. */}
+        <BeautifulFutureGraphic />
         <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ III · Creative</div>
         <div className="min-w-0">
           <h2 data-reveal className="headline-measure" style={{
