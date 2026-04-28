@@ -66,10 +66,10 @@ export function FunctionalFutureGraphic({ className = "" }) {
         {/* Decorative branch stubs */}
         {branches.map((b, i) => (
           <g key={`br-${i}`}>
-            <path d={b.d} stroke="currentColor" strokeOpacity="0.12"
+            <path d={b.d} pathLength="1" className="ffg-branch-line" stroke="currentColor" strokeOpacity="0.12"
               strokeWidth="0.75" strokeLinecap="square" />
             <circle cx={b.ex} cy={b.ey} r="1.5"
-              fill="currentColor" fillOpacity="0.18" />
+              fill="currentColor" fillOpacity="0.18" className="ffg-branch-endpoint" />
           </g>
         ))}
 
@@ -102,10 +102,10 @@ export function FunctionalFutureGraphic({ className = "" }) {
         <g className="ffg-die">
           <rect x="118" y="118" width="84" height="84" fill="transparent"
             style={{ pointerEvents: "fill" }} />
-          <rect x="126" y="126" width="68" height="68" rx="3"
+          <rect className="ffg-die-outline ffg-die-outline--outer" x="126" y="126" width="68" height="68" rx="3"
             fill="currentColor" fillOpacity="0.02"
             stroke="currentColor" strokeOpacity="0.35" strokeWidth="0.75" />
-          <rect x="140" y="140" width="40" height="40" rx="2"
+          <rect className="ffg-die-outline ffg-die-outline--inner" x="140" y="140" width="40" height="40" rx="2"
             stroke="currentColor" strokeOpacity="0.15" strokeWidth="0.5" />
           <image id="ffg-die-logo-mask-source" className="ffg-die-logo-source"
             href="data:image/png;base64,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"

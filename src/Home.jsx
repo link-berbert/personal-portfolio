@@ -74,8 +74,14 @@ export default function Home({ setRoute }) {
   useReveal();
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
-  const showSection2Graphic = useOneShotViewportReveal(section2Ref);
-  const showSection3Graphic = useOneShotViewportReveal(section3Ref);
+  const showSection2Graphic = useOneShotViewportReveal(section2Ref, {
+    threshold: 0.16,
+    rootMargin: "0px 0px -10% 0px",
+  });
+  const showSection3Graphic = useOneShotViewportReveal(section3Ref, {
+    threshold: 0.16,
+    rootMargin: "0px 0px -10% 0px",
+  });
 
   return (
     <main>
@@ -250,10 +256,6 @@ export default function Home({ setRoute }) {
         marginTop: 0,
       }}
       >
-        {/* Decorative graphic — sits in the whitespace at the left edge of the
-            body cell. Hidden on viewports too narrow for it to coexist with
-            the right-pinned body cluster (see shell.css). */}
-        <FunctionalFutureGraphic className={showSection2Graphic ? "is-revealed" : ""} />
         <div
           className="page-section--split"
           style={{
@@ -273,6 +275,9 @@ export default function Home({ setRoute }) {
           >
             § II · AI / Companies
           </div>
+          {/* Decorative graphic — desktop: anchored in section whitespace;
+              mobile: in-flow beneath section label. */}
+          <FunctionalFutureGraphic className={showSection2Graphic ? "is-revealed" : ""} />
           <div className="min-w-0">
             <h2 data-reveal className="headline-measure" style={{
               ...homeSectionLedeTypo,
@@ -335,10 +340,10 @@ export default function Home({ setRoute }) {
         boxSizing: 'border-box',
       }}
       >
-        {/* Decorative graphic — sits in the whitespace to the right of the
-            left-aligned body cluster, just before the right-rail label. */}
-        <BeautifulFutureGraphic className={showSection3Graphic ? "is-revealed" : ""} />
         <div className="t-caption page-section__label" style={{ paddingTop: 6 }}>§ III · Creative</div>
+        {/* Decorative graphic — desktop: anchored in section whitespace;
+            mobile: in-flow beneath section label. */}
+        <BeautifulFutureGraphic className={showSection3Graphic ? "is-revealed" : ""} />
         <div className="min-w-0">
           <h2 data-reveal className="headline-measure" style={{
             ...homeSectionLedeTypo,
