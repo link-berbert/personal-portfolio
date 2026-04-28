@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { CREATIVE_WORK, AI_WORK } from "./data.js";
 import { getWorkLogoByProjectId, logoMarqueeCellClass } from "./workLogos.js";
 
 const NE_ARROW = "\u2197";
 
-function readWorkSectionFromHash() {
-  const hash = (window.location.hash || "").toLowerCase();
-  if (hash.includes("ai")) return "ai";
-  if (hash.includes("creative")) return "creative";
-  return "ai";
-}
+const VALID_SECTIONS = new Set(["ai", "creative"]);
+const DEFAULT_SECTION = "ai";
 
-function writeWorkSectionHash(section) {
-  window.location.hash = section === "ai" ? "ai-companies" : "creative-work";
+function readSectionFromParams(params) {
+  const raw = (params.get("cat") || "").toLowerCase();
+  return VALID_SECTIONS.has(raw) ? raw : DEFAULT_SECTION;
 }
 
 /** Role string → same chips as former category tags (split on commas). */
@@ -66,8 +63,9 @@ function WorkPageLogo({ projectId }) {
   );
 }
 
-export default function Work({ setRoute }) {
-  const [section, setSection] = useState(readWorkSectionFromHash); // 'creative' | 'ai'
+export default function Work() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const section = readSectionFromParams(searchParams); // 'creative' | 'ai'
 
   const pm = 'clamp(20px, 5vw, 80px)';
 
@@ -76,11 +74,15 @@ export default function Work({ setRoute }) {
     ['creative', 'Creative Work', 'Music, design, worldbuilding'],
   ];
 
-  useEffect(() => {
-    const onHashChange = () => setSection(readWorkSectionFromHash());
-    window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
-  }, []);
+  /* Switching tabs is intra-page state — use `replace` so the back button
+     still goes to the page the user came from rather than walking through
+     every tab they clicked while on /work. */
+  const selectSection = (next) => {
+    if (next === section) return;
+    const params = new URLSearchParams(searchParams);
+    params.set("cat", next);
+    setSearchParams(params, { replace: true });
+  };
 
   return (
     <main>
@@ -139,10 +141,7 @@ export default function Work({ setRoute }) {
                 aria-selected={active}
                 aria-label={`${label}. ${hint}`}
                 id={`work-tab-${k}`}
-                onClick={() => {
-                  setSection(k);
-                  writeWorkSectionHash(k);
-                }}
+                onClick={() => selectSection(k)}
                 style={{
                   flex: '1 1 0',
                   minWidth: 0,

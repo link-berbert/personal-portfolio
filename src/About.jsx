@@ -1,4 +1,7 @@
-export default function About({ setRoute }) {
+import { useNavigate } from "react-router-dom";
+
+export default function About() {
+  const navigate = useNavigate();
   const pm = 'clamp(20px, 5vw, 80px)';
   const aboutContentCol = { maxWidth: 900, width: '100%' };
   const bioP = {
@@ -218,7 +221,7 @@ export default function About({ setRoute }) {
         </div>
         <button
           type="button"
-          onClick={() => { setRoute('contact'); window.scrollTo(0,0); }}
+          onClick={() => navigate('/contact')}
           style={{
             fontFamily: 'var(--font-body)', fontSize: 14,
             padding: '14px 28px',

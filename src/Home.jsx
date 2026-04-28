@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HERO_PROFILE_PIC_SRC } from "./heroProfilePic.js";
 import { WORK_LOGOS, logoMarqueeCellClass } from "./workLogos.js";
 import {
@@ -70,7 +71,8 @@ function useOneShotViewportReveal(ref, { threshold = 0.35, rootMargin = "0px 0px
   return revealed;
 }
 
-export default function Home({ setRoute }) {
+export default function Home() {
+  const navigate = useNavigate();
   useReveal();
   const section2Ref = useRef(null);
   const section3Ref = useRef(null);
@@ -156,7 +158,7 @@ export default function Home({ setRoute }) {
           </div>
           <button
             type="button"
-            onClick={() => { setRoute('work'); window.scrollTo(0, 0); }}
+            onClick={() => navigate('/work')}
             className="nav-item home-my-work__cta"
             style={{
               fontFamily: 'var(--font-mono)',
@@ -304,11 +306,7 @@ export default function Home({ setRoute }) {
                 <span className="home-mobile-link-label">functional future:</span>
                 <button
                   className="home-inline-link home-inline-link--inverse"
-                  onClick={() => {
-                    window.location.hash = "ai-companies";
-                    setRoute('work');
-                    window.scrollTo(0, 0);
-                  }}
+                  onClick={() => navigate('/work?cat=ai')}
                   style={{
                     fontFamily: 'var(--font-mono)', fontSize: 12,
                     letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -366,11 +364,7 @@ export default function Home({ setRoute }) {
                <span className="home-mobile-link-label">beautiful future:</span>
                <button
                  className="home-inline-link home-inline-link--default"
-                 onClick={() => {
-                   window.location.hash = "creative-work";
-                   setRoute('work');
-                   window.scrollTo(0, 0);
-                 }}
+                 onClick={() => navigate('/work?cat=creative')}
                  style={{
                    fontFamily: 'var(--font-mono)', fontSize: 12,
                    letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -417,7 +411,7 @@ export default function Home({ setRoute }) {
         </div>
         <button
           type="button"
-          onClick={() => { setRoute('contact'); window.scrollTo(0,0); }}
+          onClick={() => navigate('/contact')}
           style={{
             fontFamily: 'var(--font-body)', fontSize: 14,
             padding: '14px 28px',

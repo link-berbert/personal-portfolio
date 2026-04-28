@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/((?!assets/|favicon\\.ico|favicon-32\\.png|apple-touch-icon\\.png|lightwrk-logo-black\\.png|lightwrk-logo-white\\.png).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

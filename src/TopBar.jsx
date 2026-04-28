@@ -1,10 +1,27 @@
 import { useCallback, useEffect, useRef, useLayoutEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const TOP_REVEAL = 64;
 /** Min upward delta (px) before snapping the bar back in (unchanged from prior behavior) */
 const SCROLL_UP_SHOW = 4;
 
-export default function TopBar({ route, setRoute }) {
+const NAV_ITEMS = [
+  ["/", "Index"],
+  ["/work", "Work"],
+  ["/about", "About"],
+  ["/contact", "Contact"],
+];
+
+/** True when the top bar's link should be considered active for the current
+    location. `/` only matches an exact path; everything else also matches
+    deeper paths (none today, but cheap to keep correct). */
+function isPathActive(itemPath, currentPathname) {
+  if (itemPath === "/") return currentPathname === "/";
+  return currentPathname === itemPath || currentPathname.startsWith(`${itemPath}/`);
+}
+
+export default function TopBar() {
+  const location = useLocation();
   const headerRef = useRef(null);
   const headerHeightRef = useRef(0);
   /** Scroll-linked position; kept in refs so scroll never schedules React renders. */
@@ -113,42 +130,34 @@ export default function TopBar({ route, setRoute }) {
     };
   }, [syncHeaderDom]);
 
-  const items = [
-    ["home", "Index"],
-    ["work", "Work"],
-    ["about", "About"],
-    ["contact", "Contact"],
-  ];
-
   return (
     <header ref={headerRef} className="top-bar">
-      <button type="button" className="top-bar__brand" onClick={() => setRoute("home")}>
+      <Link to="/" className="top-bar__brand" style={{ textDecoration: "none" }}>
         <span className="top-bar__brand-mark">L·B</span>
         <span className="top-bar__brand-name">Lincoln Berbert</span>
-      </button>
+      </Link>
 
       <nav className="top-bar__nav" aria-label="Primary">
-        {items.map(([k, label]) => (
-          <button
-            type="button"
-            key={k}
-            onClick={() => {
-              if (k === "work") window.location.hash = "ai-companies";
-              setRoute(k);
-              window.scrollTo(0, 0);
-            }}
-            className="nav-item"
-            aria-current={route === k ? "page" : undefined}
-            style={{
-              fontFamily: "var(--font-body)",
-              cursor: "pointer",
-              color: route === k ? "var(--fg-primary)" : "var(--fg-secondary)",
-              transition: "color var(--dur-micro) var(--ease)",
-            }}
-          >
-            {label}
-          </button>
-        ))}
+        {NAV_ITEMS.map(([to, label]) => {
+          const active = isPathActive(to, location.pathname);
+          return (
+            <Link
+              key={to}
+              to={to}
+              className="nav-item"
+              aria-current={active ? "page" : undefined}
+              style={{
+                fontFamily: "var(--font-body)",
+                cursor: "pointer",
+                color: active ? "var(--fg-primary)" : "var(--fg-secondary)",
+                transition: "color var(--dur-micro) var(--ease)",
+                textDecoration: "none",
+              }}
+            >
+              {label}
+            </Link>
+          );
+        })}
       </nav>
     </header>
   );

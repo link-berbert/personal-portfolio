@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function ThemeToggle({ theme, setTheme }) {
   const isDark = theme === "dark";
   return (
@@ -58,16 +60,11 @@ function ThemeToggle({ theme, setTheme }) {
   );
 }
 
-export default function Footer({ setRoute, theme, setTheme }) {
-  const navLink = (route, label) => (
-    <a
-      key={route}
-      href="#"
-      onClick={(e) => {
-        e.preventDefault();
-        setRoute(route);
-        window.scrollTo(0, 0);
-      }}
+export default function Footer({ theme, setTheme }) {
+  const navLink = (to, label) => (
+    <Link
+      key={to}
+      to={to}
       className="t-caption footer-columns__nav"
       style={{
         cursor: "pointer",
@@ -83,7 +80,7 @@ export default function Footer({ setRoute, theme, setTheme }) {
       }}
     >
       {label}
-    </a>
+    </Link>
   );
 
   const extLink = (label, href) => (
@@ -157,13 +154,13 @@ export default function Footer({ setRoute, theme, setTheme }) {
 
         {/* One row per pair: Index|Elsewhere, Work|LightWrk, About|LinkedIn, Contact|Music */}
         <div className="footer-columns">
-          {navLink("home", "Index")}
+          {navLink("/", "Index")}
           <div className="t-caption footer-columns__head">Elsewhere</div>
-          {navLink("work", "Work")}
+          {navLink("/work", "Work")}
           {extLink("LightWrk ↗", "https://lightwrk.ai")}
-          {navLink("about", "About")}
+          {navLink("/about", "About")}
           {extLink("LinkedIn ↗", "https://www.linkedin.com/in/lincoln-berbert/")}
-          {navLink("contact", "Contact")}
+          {navLink("/contact", "Contact")}
           {extLink("Music ↗", "https://beacons.page/berbymusic")}
         </div>
       </div>
