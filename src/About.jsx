@@ -241,7 +241,7 @@ export default function About({ setRoute }) {
             e.currentTarget.style.color = 'var(--bg-canvas)';
           }}
         >
-          Write →
+          Write me →
         </button>
       </section>
     </main>

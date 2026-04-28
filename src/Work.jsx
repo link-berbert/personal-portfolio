@@ -362,6 +362,11 @@ function CreativeRow({ item, isLast }) {
           <p className="t-body min-w-0" style={{
             color: 'var(--fg-secondary)', lineHeight: 1.65,
           }}>{item.summary}</p>
+          {item.bodySubtitle && (
+            <p className="work-entry__body-subtitle min-w-0">
+              {item.bodySubtitle}
+            </p>
+          )}
           {item.externalLink && (
             <WorkExternalLink
               href={item.externalLink.href}

@@ -88,6 +88,7 @@ export default function Contact() {
         </div>
         <h1 className="t-display-l headline-measure" style={{ maxWidth: '20ch' }}>
           Send a note.{' '}
+          <br />
           <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)' }}>
             I read everything.
           </span>

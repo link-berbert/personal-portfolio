@@ -621,6 +621,21 @@ html.is-resizing .grain {
   text-wrap: wrap;
 }
 
+/* Same band as `.work-external-link` under summary: mono scale + vertical offset as outbound links */
+.work-entry__main-text > .work-entry__body-subtitle {
+  display: inline-block;
+  margin-top: calc(10px + 1.5 * var(--fs-small) + 16px);
+  margin-bottom: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--fg-tertiary);
+  max-width: none;
+  text-wrap: wrap;
+}
+
 /* Work page — same logo cells as marquee; per-project horizontal tune (top row beside copy) */
 .work-entry__logo {
   margin-bottom: 0;
