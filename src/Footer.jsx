@@ -141,10 +141,10 @@ export default function Footer({ setRoute, theme, setTheme }) {
           }}
           >
             <div style={{ color: 'var(--fg-primary)', display: 'block' }}>
-              Building worlds you can inhabit.
+              Designing worlds you can inhabit.
             </div>
             <span style={{ fontStyle: 'italic', color: 'var(--fg-secondary)', display: 'block' }}>
-              Designing futures you can feel.
+              Building futures you can feel.
             </span>
           </div>
           <a

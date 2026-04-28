@@ -59,25 +59,31 @@ export default function About({ setRoute }) {
             </span>
           </div>
           <p className="t-body" style={bioP}>
-            I work across music, physical AI, and long-horizon worldbuilding. The mediums
-            are different, but the underlying questions stay the same: how does something
-            develop a coherent identity, how do systems improve over time, and what makes a
-            project durable enough to matter years later?
+            I work across music, physical AI, and long-horizon worldbuilding. On paper,
+            those fields can look unrelated. In practice, they are all ways of asking the
+            same questions: how do you shape something with a real point of view, how do you
+            improve it over time, and how do you build a future that is worth
+            living in?
           </p>
           <p className="t-body" style={bioP}>
-            That throughline shows up in different forms. LightWrk is focused on structured
-            human feedback systems for physical AI model improvement. Berby is the main home
-            for my music and creative direction. Other projects explore narrative identity,
-            aesthetic systems, and speculative worlds as long-term creative work.
+            I am drawn to work that feels internally true to itself. Things with enough structure,
+            taste, and clarity to become timeless. Sometimes that manifests as
+            a music project or narrative identity, other times it's a company, an evaluation
+            framework, or a larger system meant to make intelligence more useful in the real
+            world.
           </p>
           <p className="t-body" style={bioP}>
-            What connects them is not a branding exercise. It is a genuine point of view. I
-            care about internal logic, atmosphere, evaluation, and the kinds of structures
-            that let something become both functional and beautiful.
+            What ties it all together is that I do not think function and beauty should be
+            separated. If machine intelligence is going to shape the future, then that future
+            should not only work. It should also feel considered, coherent, and human. The
+            systems we build should be capable, but they should also reflect judgment, taste,
+            and intention.
           </p>
           <p className="t-body" style={{ ...bioP, marginBottom: 0 }}>
-            I am less interested in isolated outputs than in coherent worlds and systems that
-            can evolve, compound, and hold their shape over time.
+            That is why I build on long horizons. I care less about isolated outputs
+            than about worlds, systems, and identities that can evolve over time and still
+            hold their shape. I want to build a future that is more intelligent, more
+            usable, and more beautiful at the same time.
           </p>
         </div>
       </section>
@@ -93,12 +99,12 @@ export default function About({ setRoute }) {
         width: '100%',
         boxSizing: 'border-box',
       }}>
-        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ II · Connection</div>
+        <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ II · Disciplines</div>
         <div className="min-w-0" style={aboutContentCol}>
           <div className="headline-measure min-w-0" style={aboutSubheadStyle}>
-            How my work connects across{' '}
+            How my pursuits{' '}
             <span style={aboutSubheadItalic}>
-               different fields.
+               connect.
             </span>
           </div>
 
@@ -116,7 +122,7 @@ export default function About({ setRoute }) {
               },
               {
                 label: 'Creative Direction',
-                body: 'Creative direction is where aesthetics become systems. Brand thinking, narrative structure, visual logic, and emotional tone all come down to the same question: does this feel coherent enough to hold together over time?',
+                body: 'Creative direction is where aesthetics become systems. Brand thinking, narrative structure, visual logic, and emotional tone all come down to the same question: does this feel coherent and beautiful enough to hold together over time?',
               },
               {
                 label: 'Physical AI',
@@ -124,7 +130,7 @@ export default function About({ setRoute }) {
               },
               {
                 label: 'Worldbuilding',
-                body: 'Worldbuilding is the clearest thread running through all of it. Whether I am shaping a character, a company, or a speculative environment, the work starts with rules, identity, and internal consistency. The medium changes. The philosophy does not.',
+                body: 'Worldbuilding is the clearest thread running through all of it. Whether I am shaping a character, a company, or a speculative environment, the work starts with rules, identity, and internal consistency. The medium may change but the philosophy does not.',
               },
             ].map(({ label, body }) => (
               <div key={label} style={{ borderTop: '1px solid var(--rule)', paddingTop: 24 }}>
@@ -150,28 +156,39 @@ export default function About({ setRoute }) {
         <div className="t-caption page-section__label" style={{ paddingTop: 4 }}>§ III · Principles</div>
         <div className="min-w-0" style={aboutContentCol}>
           <div className="headline-measure min-w-0" style={aboutSubheadStyle}>
-            How the philosophy shows up.{' '}
+            My{' '}
             <span style={aboutSubheadItalic}>
-              Three fixed points.
+              core principles.
             </span>
           </div>
           <ol style={{ padding: 0, margin: 0, listStyle: 'none' }}>
             {[
-              ['01', 'Start with the world. The strongest work comes from a clear set of rules, not from chasing isolated deliverables.'],
-              ['02', 'Build for long horizons. Projects worth doing usually take years to reveal what they are really becoming.'],
-              ['03', 'The line between art and engineering matters less than people think. Both depend on understanding a system well enough to shape it with intention.'],
-            ].map(([n, s]) => (
+              ['01', 'Stay curious', "Better questions matter more than quick answers."],
+              ['02', 'Edit ruthlessly', "Good work gets sharper through removal. Trust your taste."],
+              ['03', 'Build for long horizons', "All projects worth doing take years. Don't chase the quick win."],
+            ].map(([n, title, s]) => (
               <li key={n} className="about-philo-row" style={{
                 display: 'grid', gridTemplateColumns: '48px 1fr',
                 padding: '24px 0', borderTop: '1px solid var(--rule)',
                 alignItems: 'baseline',
               }}>
                 <span className="t-mono about-philo__num" style={{ color: 'var(--fg-tertiary)' }}>{n}</span>
-                <span className="min-w-0" style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(18px, 2.2vw, 26px)',
-                  letterSpacing: '-0.015em', lineHeight: 1.35,
-                }}>{s}</span>
+                <span className="min-w-0" style={{ display: 'block' }}>
+                  <span style={{
+                    display: 'block',
+                    marginBottom: 10,
+                    color: 'var(--fg-primary)',
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(18px, 2.2vw, 26px)',
+                    letterSpacing: '-0.015em',
+                    lineHeight: 1.35,
+                  }}>
+                    {title}
+                  </span>
+                  <span className="t-body" style={{ color: 'var(--fg-secondary)', lineHeight: 1.7 }}>
+                    {s}
+                  </span>
+                </span>
               </li>
             ))}
           </ol>
