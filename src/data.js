@@ -57,7 +57,7 @@ export const AI_WORK = [
       "LightWrk is a venture-scale company building human-in-the-loop evaluation systems for physical AI and world model labs. Distilling human experience and knowledge into machines creates a theoretically infinite return on investment. This opens the door to expansive, long-horizon projects that are only limited by human imagination. The challenge lies in keeping machines consistently aligned with human values.",
     tags: ["Physical AI", "Evaluation", "Infrastructure"],
     capabilities: [
-      ["Ontology design", "Structured failure taxonomies for embodied AI systems. Definin the vocabulary that makes evaluation possible."],
+      ["Ontology design", "Structured failure taxonomies for embodied AI systems. Defining the vocabulary that makes evaluation possible."],
       ["Evaluation frameworks", "Scored, repeatable judgment frameworks and rubrics. Expert human feedback made measurable and consistent enough to train on."],
     ],
     externalLink: {
