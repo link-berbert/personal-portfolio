@@ -78,7 +78,7 @@ export default function About() {
           <p className="t-body" style={bioP}>
             What ties it all together is that I do not think function and beauty should be
             separated. If machine intelligence is going to shape the future, then that future
-            should not only work. It should also feel considered, coherent, and human. The
+            should not only work, it should also feel considered, coherent, and human. Our
             systems we build should be capable, but they should also reflect judgment, taste,
             and intention.
           </p>
